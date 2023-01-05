@@ -12,6 +12,10 @@
     <h1>Esto es un proyecto de ejemplo de momento</h1>
     <img src="imagen_que_no_existe.png" alt="">
     <p>Esto es una beta que no afecta a el proyecto principal</p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quae voluptatibus est, magni numquam distinc
+    </p>
 </body>
 
 </html>
