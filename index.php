@@ -10,6 +10,7 @@
 
 <body>
     <h1>Esto es un proyecto de ejemplo de momento</h1>
+    <p>Esto es una beta que no afecta a el proyecto principal</p>
 </body>
 
 </html>
