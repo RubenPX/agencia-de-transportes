@@ -10,6 +10,7 @@
 
 <body>
     <h1>Esto es un proyecto de ejemplo de momento</h1>
+    <img src="imagen_que_no_existe.png" alt="">
 </body>
 
 </html>
