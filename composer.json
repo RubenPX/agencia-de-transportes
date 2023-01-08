@@ -1,0 +1,15 @@
+{
+    "name": "dwes2022/agencia-de-transportes",
+    "description": "this is an example of php project using composer and blade template engine",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Ruben Mortagua",
+            "email": "rubenmarchante@gmail.com"
+        },{
+            "name": "Urtzi Arostegui",
+            "email": "urtzi84@gmail.com"
+        }
+    ],
+    "require": {}
+}
