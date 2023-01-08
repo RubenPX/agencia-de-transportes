@@ -1,0 +1,70 @@
+<mxfile host="65bd71144e">
+    <diagram id="dkzZ7dNs5Glgp0zjGsfZ" name="Página-1">
+        <mxGraphModel dx="1455" dy="1089" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-1" value="&lt;div&gt;LOGIN&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;admin/repart&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="530" y="-110" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-2" value="&lt;div&gt;PPAL ADMINISTRADOR&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;menu&lt;/div&gt;&lt;div&gt;boton logout&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="330" y="115" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-3" value="&lt;div&gt;CLIENTES&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;-crud&lt;/div&gt;&lt;div&gt;-borrar solo si activo =0&lt;/div&gt;&lt;div&gt;-nuevo cliente activo=1&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-20" y="250" width="150" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-4" value="&lt;div&gt;POBLACIONES&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;-crud&lt;/div&gt;&lt;div&gt;- si se elimina, se elimina de su repartidor&lt;/div&gt;&lt;div&gt;- Se puede ver, borrar y asignar repartidor&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="140" y="250" width="240" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-5" value="&lt;div&gt;REPARTIDORES&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;-crud&lt;/div&gt;&lt;div&gt;-si se elimina, se elimina su asignación a poblacion&lt;/div&gt;&lt;div&gt;- se le puede asignar o borrar una población&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="390" y="250" width="290" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-6" value="&lt;div&gt;ENVIOS&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;-crd&lt;/div&gt;&lt;div&gt;-busqueda&lt;/div&gt;&lt;div&gt;- borrar si avisos =null&lt;br&gt;&lt;/div&gt;&lt;div&gt;- crear -&amp;gt; estado=recogido&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="250" width="180" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-7" value="&lt;div&gt;PPAL REPARTIDOR&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;-Botón obtener envios -&amp;gt;muestra recogidos o en reparto&lt;/div&gt;&lt;div&gt;cambia a en reparto&lt;/div&gt;&lt;div&gt;- añadir aviso&lt;/div&gt;&lt;div&gt;-modificar estado -&amp;gt; entregado&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="620" y="80" width="330" height="115" as="geometry"/>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-8" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="1joXoVN6xGaV_hzmeyIh-2" target="1joXoVN6xGaV_hzmeyIh-3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="390" y="260" as="sourcePoint"/>
+                        <mxPoint x="440" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-9" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="1joXoVN6xGaV_hzmeyIh-2" target="1joXoVN6xGaV_hzmeyIh-4" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="270" y="210" as="sourcePoint"/>
+                        <mxPoint x="80" y="260" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-10" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="1joXoVN6xGaV_hzmeyIh-2" target="1joXoVN6xGaV_hzmeyIh-5" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="270" y="210" as="sourcePoint"/>
+                        <mxPoint x="90" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-11" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="1joXoVN6xGaV_hzmeyIh-2" target="1joXoVN6xGaV_hzmeyIh-6" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="280" y="210" as="sourcePoint"/>
+                        <mxPoint x="100" y="280" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="1joXoVN6xGaV_hzmeyIh-1" target="1joXoVN6xGaV_hzmeyIh-2" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="310" y="250" as="sourcePoint"/>
+                        <mxPoint x="110" y="290" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-13" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="1joXoVN6xGaV_hzmeyIh-1" target="1joXoVN6xGaV_hzmeyIh-7" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="320" y="260" as="sourcePoint"/>
+                        <mxPoint x="120" y="300" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="1joXoVN6xGaV_hzmeyIh-14" value="&lt;div&gt;PLANTILLA&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- cabecera&lt;/div&gt;&lt;div&gt;- titulo&lt;/div&gt;&lt;div&gt;-contenido&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="190" y="-40" width="120" height="90" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
