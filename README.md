@@ -20,9 +20,10 @@ You can use Github Codespaces
 Access parameters are stored in `.devcontainer/docker-compose.yml` in db service
 
 Actually in developement versión:
-```yaml
-- User: mariadb
-- Password: mariadb
-```
+
+> ```yaml
+> - User: root
+> - Password: mariadb
+> ```
 
 to access to database press `ctrl + shift + p` and type `Ver: Alternar Puertos`. Right click in port 8080 and press `Open in web browser` or `Open Preview`
