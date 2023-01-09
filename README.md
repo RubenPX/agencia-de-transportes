@@ -26,4 +26,10 @@ Actually in developement versión:
 > - Password: mariadb
 > ```
 
-to access to database press `ctrl + shift + p` and type `Ver: Alternar Puertos`. Right click in port 8080 and press `Open in web browser` or `Open Preview`
+To access to database press `ctrl + shift + p` and type `Ver: Alternar Puertos`. Right click in port 8080 and press `Open in web browser` or `Open Preview`
+
+## How to sync database with repository
+
+- To download Mysql dump, run `cd scripts && bash DownloadDB.sh`
+- To import Mysql dump, run `cd scripts && bash ImportDB.sh < example.sql`
+    - Replace `example.sql` by real sql file
