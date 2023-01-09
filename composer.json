@@ -1,7 +1,22 @@
 {
     "name": "dwes2022/agencia-de-transportes",
     "description": "this is an example of php project using composer and blade template engine",
-    "license": "GPL-3.0",
+    "type": "project",
+    "require": {
+        "philo/laravel-blade": "^3.1"
+    },
+        "config": {
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": false
+        }
+    },
+    "license": "GNU",
+    "autoload": {
+        "psr-4": {
+            "Dwes2022\\AgenciaDeTransportes\\": "src/"
+        }
+    },
     "authors": [
         {
             "name": "Ruben Mortagua",
@@ -10,6 +25,5 @@
             "name": "Urtzi Arostegui",
             "email": "urtzi84@gmail.com"
         }
-    ],
-    "require": {}
+    ]
 }
