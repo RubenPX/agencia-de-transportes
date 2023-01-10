@@ -11,9 +11,7 @@
 1. in vscode press ctrl + shift + p
 2. select option: `Dev Containers: Open Folder in Container...`
 
-## Alternative running
-
-You can use Github Codespaces
+### Alternative running: You can use [Github Codespaces](https://github.com/features/codespaces) or [devcontainers using docker](https://code.visualstudio.com/docs/devcontainers/containers)
 
 ## How to access to database
 
@@ -30,8 +28,8 @@ To access to database press `ctrl + shift + p` and type `Ver: Alternar Puertos`.
 
 ## How to sync database with repository
 
-- To download Mysql dump, run `cd scripts && bash DownloadDB.sh`
-- To import Mysql dump, run `cd scripts && bash ImportDB.sh < example.sql`
+- To dump Mysql database: `cd scripts && bash DownloadDB.sh`
+- To import Mysql dump: `cd scripts && bash ImportDB.sh < example.sql`
     - Replace `example.sql` by real sql file
 
 ## How to start stop apache server
