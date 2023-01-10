@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listado de envios</title>
+  <link rel="stylesheet" href="./assets/bootstrap.darkly.min.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Repartos de clientes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <!-- <li class="nav-item">
+                    <a class="nav-link active" href="#">Panel de repartidor</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Features</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Pricing</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">About</a>
+                  </li> -->
+          </ul>
+          <form class="d-flex">
+            <input class="form-control text-center" type="text" disabled value="Usuario">
+            <button class="btn btn-secondary my-2 my-sm-0 mx-2" type="submit" style="white-space: nowrap;">Cerrar Sesión</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="container mt-3">
+
+    <div class="text-center">
+      <div class="h1 fw-light">En reparto</div>
+    </div>
+
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center align-middle">ID</th>
+          <th scope="col" class="text-center align-middle">Fecha de envio</th>
+          <th scope="col" class="text-center align-middle">Cliente</th>
+          <th scope="col" class="text-center align-middle">Telefono cliente</th>
+          <th scope="col" class="text-center align-middle">Dirección</th>
+          <th scope="col" class="text-center align-middle" style="width: 150px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Cliente 1 -->
+        <tr>
+          <th class="align-middle text-center text-center" scope="row">23</th>
+          <th class="align-middle text-center text-center" scope="row">15 / Junio / 2022</th>
+          <td class="align-middle text-center">Jorge Ribas</td>
+          <td class="align-middle text-center">+34 123 123 123</td>
+          <td class="align-middle ">
+            {{ Población }} <br>
+            {{ Calle }} <br>
+            {{ Piso }}
+          </td>
+          <td class="align-middle text-center">
+            <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2" style="white-space: nowrap;">Completar entrega</a>
+          </td>
+        </tr>
+
+        <!-- Cliente 2 -->
+        <tr>
+          <th class="align-middle text-center text-center" scope="row">24</th>
+          <th class="align-middle text-center text-center" scope="row">15 / Junio / 2022</th>
+          <td class="align-middle text-center">Dario Delta</td>
+          <td class="align-middle text-center">+34 123 123 123</td>
+          <td class="align-middle">
+            {{ Población }} <br>
+            {{ Calle }} <br>
+            {{ Piso }}
+          </td>
+          <td class="align-middle text-center">
+            <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2" style="white-space: nowrap;">Completar entrega</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="text-center">
+      <div class="h1 fw-light">Entregado</div>
+    </div>
+
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center align-middle">ID</th>
+          <th scope="col" class="text-center align-middle">Fecha de envio</th>
+          <th scope="col" class="text-center align-middle">Cliente</th>
+          <th scope="col" class="text-center align-middle">Telefono cliente</th>
+          <th scope="col" class="text-center align-middle">Dirección</th>
+          <th scope="col" class="text-center align-middle" style="width: 150px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Cliente 1 -->
+        <tr>
+          <th class="align-middle text-center text-center" scope="row">23</th>
+          <th class="align-middle text-center text-center" scope="row">15 / Junio / 2022</th>
+          <td class="align-middle text-center">Jorge Ribas</td>
+          <td class="align-middle text-center">+34 123 123 123</td>
+          <td class="align-middle ">
+            {{ Población }} <br>
+            {{ Calle }} <br>
+            {{ Piso }}
+          </td>
+          <td class="align-middle text-center">
+            <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2" style="white-space: nowrap;">Establecer "En reparto"</a>
+          </td>
+        </tr>
+
+        <!-- Cliente 2 -->
+        <tr>
+          <th class="align-middle text-center text-center" scope="row">24</th>
+          <th class="align-middle text-center text-center" scope="row">15 / Junio / 2022</th>
+          <td class="align-middle text-center">Dario Delta</td>
+          <td class="align-middle text-center">+34 123 123 123</td>
+          <td class="align-middle ">
+            {{ Población }} <br>
+            {{ Calle }} <br>
+            {{ Piso }}
+          </td>
+          <td class="align-middle text-center">
+            <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2" style="white-space: nowrap;">Establecer "En reparto"</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+
+</html>
