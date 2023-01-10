@@ -47,13 +47,6 @@
             "openClose": true,
             "stash": true
         },
-        "scmItemInline": false,
-        "scmItem": {
-            "clipboard": true,
-            "compare": true,
-            "history": true,
-            "remote": false,
-            "stash": true
-        }
+        "scmItemInline": false
     }
 }
