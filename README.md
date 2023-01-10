@@ -33,3 +33,10 @@ To access to database press `ctrl + shift + p` and type `Ver: Alternar Puertos`.
 - To download Mysql dump, run `cd scripts && bash DownloadDB.sh`
 - To import Mysql dump, run `cd scripts && bash ImportDB.sh < example.sql`
     - Replace `example.sql` by real sql file
+
+## How to start stop apache server
+
+When you start a dev container server, apache automatically starts on post command
+
+Start apache server: `apache2ctl start`
+Stop apacge server: `apache2ctl stop`
