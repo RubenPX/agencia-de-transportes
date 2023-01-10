@@ -1,0 +1,52 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.wrapTabs": true,
+    "git.autofetch": true,
+    "git.fetchOnPull": true,
+    "gitlens.showWelcomeOnInstall": false,
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "gitlens.plusFeatures.enabled": false,
+    "gitlens.statusBar.alignment": "right",
+    "gitlens.views.repositories.branches.layout": "tree",
+    "gitlens.graph.statusBar.enabled": false,
+    "gitlens.telemetry.enabled": false,
+    "gitlens.menus": {
+        "editor": {
+            "blame": false,
+            "clipboard": true,
+            "compare": true,
+            "history": false,
+            "remote": false
+        },
+        "editorGroup": {
+            "blame": true,
+            "compare": true
+        },
+        "editorTab": {
+            "clipboard": true,
+            "compare": true,
+            "history": true,
+            "remote": true
+        },
+        "explorer": {
+            "clipboard": true,
+            "compare": true,
+            "history": true,
+            "remote": true
+        },
+        "scm": false,
+        "scmRepositoryInline": false,
+        "scmRepository": {
+            "authors": true,
+            "graph": false
+        },
+        "scmGroupInline": false,
+        "scmGroup": {
+            "compare": true,
+            "openClose": true,
+            "stash": true
+        },
+        "scmItemInline": false
+    }
+}

@@ -1,3 +1,12 @@
+<?php
+
+function say($what)
+{
+    echo $what;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,6 +25,8 @@
     <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quae voluptatibus est, magni numquam distinc
     </p>
+
+    <p> <?php say("Hello from " . php_uname("r")); ?> </p>
 </body>
 
 </html>

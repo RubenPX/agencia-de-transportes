@@ -1,1 +1,4 @@
 /vendor/
+node_modules/
+.phpunit.result.cache
+.devcontainer/logs/**/*.log
