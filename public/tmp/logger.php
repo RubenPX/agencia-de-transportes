@@ -37,9 +37,7 @@
         }
 
         public function wcq(string $str, $any) {
-            $last = str_replace("\n", "\\n", $str);
-            $last = str_replace("'", "\'", $last);
-            $this->WebLogs[] = [ "TYP" => "query", "str" => $last, "any" => $any ];
+            $this->WebLogs[] = [ "TYP" => "query", "str" => $str, "any" => $any ];
         }
 
         public function wcl($str, $any = "''") {
