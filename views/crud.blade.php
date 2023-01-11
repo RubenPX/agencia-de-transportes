@@ -22,14 +22,14 @@
 
                             <form id="contactForm" method="POST">
                                 @foreach ($properties as $key => $value)
-                                    @if ($key == "id")
+                                    @if ($key == "id" || $key == "idPoblacion")
                                         @continue
                                     @endif
                                     <div class="form-group row mb-2">
-                                        <label for="staticEmail" class="col-sm-2 col-form-label text-end">{{ $key }}</label>
-                                        <div class="col-sm-10">
+                                        <label for="staticEmail" class="col-sm-3 col-form-label text-end">{{ $key }}</label>
+                                        <div class="col-sm-9">
                                             @if (gettype($value) == "string")
-                                                @if (isset($readOnly))
+                                                @if ($STATE == "READ")
                                                     <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $value }}">    
                                                 @else
                                                     <input type="text" class="form-control" id="staticEmail" value="{{ $value }}">
@@ -37,13 +37,11 @@
                                             @endif
 
                                             @if (gettype($value) == "boolean")
-                                                @if (isset($readOnly))
-                                                    {{-- <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $value }}">    --}}
+                                                @if ($STATE == "READ")
                                                     <div class="form-check form-switch mt-2">
                                                         <input class="form-check-input" disabled type="checkbox" id="flexSwitchCheckChecked" checked="">
                                                     </div>
                                                 @else
-                                                    {{-- <input type="text" class="form-control" id="staticEmail" value="{{ $value }}"> --}}
                                                     <div class="form-check form-switch mt-2">
                                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked="">
                                                     </div>
@@ -53,12 +51,17 @@
                                     </div>
                                 @endforeach
 
-                                <input id="from" name="from" type="hidden" value="{{ $properties['id'] ?? $properties['DNI'] }}" />
+                                <input id="from" name="from" type="hidden" value="{{ $properties['id'] ?? $properties['DNI'] ?? $properties['DNI'] }}" />
 
                                 <!-- Submit button -->
                                 <div class="d-flex mt-4" style="justify-content: space-between">
-                                    <a class="btn btn-primary btn-lg" href="listadoclientes.php">Cancelar</a>
-                                    <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Guardar</button>
+                                    @if ($STATE == "READ")
+                                        <button class="btn btn-primary btn-lg w-100" id="submitButton" type="submit">Cerrar</button>
+                                    @else
+                                        <a class="btn btn-primary btn-lg" href="listadoclientes.php">Cancelar</a>
+                                        <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Guardar</button>
+                                    @endif
+                                    
                                 </div>
                             </form>
                         </div>

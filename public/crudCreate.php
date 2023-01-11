@@ -1,15 +1,6 @@
 <?php
 require_once "./shared/blade.php";
 
-// unitlity classes
-use Clases\QueryParser;
-
-// Database clases
-use Clases\Cliente;
-use Clases\Poblacion;
-use Clases\Repartidor;
-use Clases\Envio;
-
 // Initialize variables
 $error = "";
 $logedUser = "Jhon Doe";
@@ -21,7 +12,12 @@ if (!isset($_GET["type"])) {
     $error = "No se ha especificado el tipo de consulta";
 }
 
-$STATE = "EDIT";
+// Examples
+// Ver pueblo: http://localhost/crudView.php?type=Pueblo&ID=1
+// Ver cliente: http://localhost/crudView.php?type=Client&Client=98765432A
+
+/* Set read only */
+$STATE = "CREATE";
 
 // Load crud
 require_once "./shared/crud.php";

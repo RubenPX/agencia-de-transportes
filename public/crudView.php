@@ -1,38 +1,32 @@
 <?php
-
 require_once "./shared/blade.php";
-require_once "./tmp/Controller.php";
 
+// Initialize variables
 $error = "";
-
-if (!isset($_GET["type"])) {
-    $error = "No se ha especificado el tipo de consulta";
-}
-
 $logedUser = "Jhon Doe";
 $title = "";
 $properties = [];
 
-require_once "./tmp/crud.php";
+// fail if there is no type parameter
+if (!isset($_GET["type"])) {
+    $error = "No se ha especificado el tipo de consulta";
+}
 
 // Examples
 // Ver pueblo: http://localhost/crudView.php?type=Pueblo&ID=1
 // Ver cliente: http://localhost/crudView.php?type=Client&Client=98765432A
 
-if (isset($_GET["type"]) && $_GET["type"] == "Client") {
-    $properties = getClient();
-}
+/* Set read only */
+$STATE = "READ";
 
-if (isset($_GET["type"]) && $_GET["type"] == "Pueblo") {
-    $properties = getPoblacion();
-}
+// Load crud
+require_once "./shared/crud.php";
+$properties = crudHandler();
 
-/* Client access */
-$readOnly = true;
-
+/* Render php blade file */
 echo $blade
     ->view()
-    ->make('crud', compact("logedUser", "properties", "title", "readOnly", "error"))
+    ->make('crud', compact("logedUser", "properties", "title", "STATE", "error"))
     ->render();
 
 ?>

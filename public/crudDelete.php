@@ -21,7 +21,7 @@ if (!isset($_GET["type"])) {
     $error = "No se ha especificado el tipo de consulta";
 }
 
-$STATE = "EDIT";
+$STATE = "DELETE";
 
 // Load crud
 require_once "./shared/crud.php";
