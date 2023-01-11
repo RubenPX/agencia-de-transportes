@@ -3,7 +3,7 @@
 namespace Clases;
 use stdClass;
 
-class QueryParser {
+class Converters {
     /**
      * Convert stdObject to array
      * @param mixed $data

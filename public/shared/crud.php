@@ -1,7 +1,7 @@
 <?php
 
 // unitlity classes
-use Clases\QueryParser;
+use Clases\Converters;
 
 // Database clases
 use Clases\Cliente;
@@ -52,7 +52,7 @@ function crudHandler()
             return [];
         }
 
-        $properties = QueryParser::objToArray($found[0]);
+        $properties = Converters::objToArray($found[0]);
 
         // Remove protected parameter password
         unset($properties["password"]);
@@ -74,7 +74,7 @@ function crudHandler()
             return [];
         }
 
-        $properties = QueryParser::objToArray($found[0]);
+        $properties = Converters::objToArray($found[0]);
     }
 
     // == Get repartidor from database == //
@@ -90,7 +90,7 @@ function crudHandler()
             return [];
         }
 
-        $properties = QueryParser::objToArray($found[0]);
+        $properties = Converters::objToArray($found[0]);
     }
 
     // == Get repartidores == //
@@ -106,7 +106,7 @@ function crudHandler()
             return [];
         }
 
-        $properties = QueryParser::objToArray($found[0]);
+        $properties = Converters::objToArray($found[0]);
     }
 
     return $properties;
