@@ -3,8 +3,8 @@
 # This file is created to set some VM config
 
 # Link "/var/www/html" to src folder
-echo "> Link /var/www/html to /src"
-sudo chmod a+x "$(pwd)/src/" && sudo rm -rf /var/www/html && sudo ln -s "$(pwd)/src/" /var/www/html
+echo "> Link /var/www/html to /public"
+sudo chmod a+x "$(pwd)/public/" && sudo rm -rf /var/www/html && sudo ln -s "$(pwd)/public/" /var/www/html
 
 echo "> link arror.log & access.log to devcontainer folder"
 sudo chmod a+x "$(pwd)/.devcontainer/logs/apache2/"
