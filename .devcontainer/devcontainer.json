@@ -21,7 +21,8 @@
 				"mhutchie.git-graph",
 				"eamodio.gitlens",
 				"PKief.material-icon-theme",
-				"hediet.vscode-drawio"
+				"hediet.vscode-drawio",
+				"onecentlin.laravel-blade"
 			]
 		}
 	},
