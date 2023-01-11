@@ -1,14 +1,8 @@
 <?php
 session_start();
-require '../vendor/autoload.php';
 
+require_once "./shared/blade.php";
 
-use Philo\Blade\Blade;
-
-$views = '../views';
-$cache = '../cache';
-
-$blade = new Blade($views, $cache);
 if (isset($_SESSION['error'])) {
     $error = $_SESSION['error'];
     echo $blade

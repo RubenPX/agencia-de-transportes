@@ -1,55 +1,62 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!--Fontawesome CDN-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <title>Login</title>
+    <link rel="stylesheet" href="assets/bootstrap.darkly.min.css">
+    <title>Iniciar sesión</title>
 </head>
 
-<body style="background:silver;">
-
-<div class="container mt-5">
-    <div class="d-flex justify-content-center h-100">
-        <div class="card">
-            <div class="card-header">
-                <h3>Login</h3>
-            </div>
-            <div class="card-body">
-                <form name='login' method='POST' action='validar.php'>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+<body>
+    <div class="container px-5 my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 rounded-3 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="text-center pb-3">
+                            <h1 class="h1 fw-light">Iniciar sesión</h1>
                         </div>
-                        <input type="text" class="form-control" placeholder="usuario" name='usuario' required>
 
+                        <form id="contactForm" method="POST" action="validar.php" name='login'>
+
+                            <!-- USER -->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="user" name="user" type="text" />
+                                <label for="user">Usuario</label>
+                            </div>
+
+                            <!-- PASS -->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="pass" name="pass" type="password" />
+                                <label for="pass">Contraseña</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="userType" name="userType">
+                                    <option>administrador</option>
+                                    <option>repartidor</option>
+                                </select>
+                                <label for="userType">Tipo de usuario</label>
+                            </div>
+
+                            <!-- Submit button -->
+                            <div class="text-center">
+                                <button class="btn btn-primary btn-lg" name='login' id="submitButton"
+                                    type="submit">Acceder</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                        </div>
-                        <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Login" class="btn float-right btn-success" name='login'>
-                    </div>
-                </form>
+                </div>
+                @if (isset($error))
+                <div class="alert alert-danger mb-0 mt-3">
+                    <p class="mb-0 text-center">{{ $error }}</p>
+                </div>
+                @endif
             </div>
         </div>
-
     </div>
-    @if (isset($error))
-        <div class="alert alert-danger h-100 mt-3">
-            <p>{{ $error }}</p>
-        </div>
-    @endif
-</div>
-
 </body>
 
 </html>
