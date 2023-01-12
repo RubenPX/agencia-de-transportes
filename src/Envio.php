@@ -38,4 +38,10 @@ class Envio extends Conexion
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    function buscarEnvio()
+    {
+        $resultado = $this->crearConexion();
+        $consulta = $resultado->fetch();
+        $parametroABuscar = $_POST['queBuscar'];
+    }
 }
