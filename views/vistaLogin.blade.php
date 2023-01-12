@@ -43,16 +43,15 @@
 
                             <!-- Submit button -->
                             <div class="text-center">
-                                <button class="btn btn-primary btn-lg" name='login' id="submitButton"
-                                    type="submit">Acceder</button>
+                                <button class="btn btn-primary btn-lg" name='login' id="submitButton" type="submit">Acceder</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 @if (isset($error))
-                <div class="alert alert-danger mb-0 mt-3">
-                    <p class="mb-0 text-center">{{ $error }}</p>
-                </div>
+                    <div class="alert alert-danger mb-0 mt-3">
+                        <p class="mb-0 text-center">{{ $error }}</p>
+                    </div>
                 @endif
             </div>
         </div>

@@ -42,8 +42,7 @@ Panel de envios de Repartidor
                     [[ Piso ]]
                 </td>
                 <td class="align-middle text-center">
-                    <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2"
-                        style="white-space: nowrap;">Completar entrega</a>
+                    <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2" style="white-space: nowrap;">Completar entrega</a>
                 </td>
             </tr>
 
@@ -59,8 +58,7 @@ Panel de envios de Repartidor
                     [[ Piso ]]
                 </td>
                 <td class="align-middle text-center">
-                    <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2"
-                        style="white-space: nowrap;">Completar entrega</a>
+                    <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2" style="white-space: nowrap;">Completar entrega</a>
                 </td>
             </tr>
         </tbody>
@@ -95,8 +93,7 @@ Panel de envios de Repartidor
                     [[ Piso ]]
                 </td>
                 <td class="align-middle text-center">
-                    <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2"
-                        style="white-space: nowrap;">Establecer "En reparto"</a>
+                    <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2" style="white-space: nowrap;">Establecer "En reparto"</a>
                 </td>
             </tr>
 
@@ -112,8 +109,7 @@ Panel de envios de Repartidor
                     [[ Piso ]]
                 </td>
                 <td class="align-middle text-center">
-                    <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2"
-                        style="white-space: nowrap;">Establecer "En reparto"</a>
+                    <a href="#Editar" type="button" class="btn btn-outline-info btn-sm mx-2" style="white-space: nowrap;">Establecer "En reparto"</a>
                 </td>
             </tr>
         </tbody>
