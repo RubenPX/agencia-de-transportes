@@ -6,6 +6,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="me-auto"></ul>
                 <form class="d-flex">
                     <input class="form-control text-center" type="text" disabled value="{{ $logedUser }}">
                     <button class="btn btn-secondary my-2 my-sm-0 mx-2" type="submit" style="white-space: nowrap;">Cerrar Sesión</button>
