@@ -7,12 +7,12 @@ if (isset($_SESSION['error'])) {
     $error = $_SESSION['error'];
     echo $blade
         ->view()
-        ->make('vistaLogin', compact('error'))
+        ->make('login', compact('error'))
         ->render();
     unset($_SESSION['error']);
 } else {
     echo $blade
         ->view()
-        ->make('vistaLogin')
+        ->make('login')
         ->render();
 }
