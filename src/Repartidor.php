@@ -83,7 +83,7 @@ class Repartidor extends Conexion
         }
         if ($consulta == null) { //En caso de que no haya coincidencia en el campo DNI de ningún registro
             try {
-                $stmt = $this->conexion->prepare("INSERT INTO repartidor (DNI, Nombre, Apellidos) VALUES (:DNI, :nombre, :apellidos)
+                $stmt = $this->conexion->prepare("UPDATE repartidor SET DNI=':DNI', Nombre=:nombre, Apellidos=:apellidos
                     WHERE id='$id'");
                 $stmt->bindParam(":DNI", $DNI);    
                 $stmt->bindParam(":nombre", $Nombre);
@@ -97,9 +97,19 @@ class Repartidor extends Conexion
         }
     }
 
-    function asignarPoblacion($id)
+    function asignarPoblacion($idRepartidor, $idPoblacion)
     {
-
+        try {
+            $stmt = $this->conexion->prepare("INSERT INTO reparpoblacion (idRepartidor, idPoblacion)
+                VALUES (:idRepartidor, :idPoblacion)");
+                $stmt->bindParam(":idRepartidor", $idRepartidor);    
+                $stmt->bindParam(":idPoblacion", $idPoblacion);
+            $stmt->execute();
+            return true;           
+        } catch (PDOException $ex) {
+            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
+        }
     }
 
     function borrarPoblacionAsignada($id)

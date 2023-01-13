@@ -59,8 +59,7 @@ class Poblacion extends Conexion
     function actualizarPoblacion($id, $nombre, $cp)
     {
         try {
-            $stmt = $this->conexion->prepare("INSERT INTO poblacion (nombre, cp) VALUES (:nombre, :cp)
-                WHERE id='$id'");
+            $stmt = $this->conexion->prepare("UPDATE poblacion SET nombre=:nombre, cp=:cp WHERE id='$id'");
             $stmt->bindParam(":nombre", $nombre);
             $stmt->bindParam(":apellidos", $cp);
             $stmt->execute();

@@ -78,8 +78,8 @@ class Cliente extends Conexion
     function actualizarCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo)
     {
         try {
-            $stmt = $this->conexion->prepare("INSERT INTO cliente (nombre, apellidos, telefono, mail, password, activo)
-                VALUES (:dni, :nombre, :apellidos, :telefono, :mail, :password, :activo) WHERE DNI='$DNI'");
+            $stmt = $this->conexion->prepare("UPDATE cliente SET nombre=:nombre, apellidos=:apellidos,
+            telefono=:telefono, mail=:mail, password=:password, activo=:activo WHERE DNI='$DNI'");
             $stmt->bindParam(":nombre", $nombre);
             $stmt->bindParam(":apellidos", $apellidos);
             $stmt->bindParam(":telefono", $telefono);

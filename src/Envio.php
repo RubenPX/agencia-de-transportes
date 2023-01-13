@@ -81,9 +81,9 @@ class Envio extends Conexion
         $largo, $alto, $estado, $tarifa)
     {
         try {
-            $stmt = $this->conexion->prepare("INSERT INTO envio (idDestinatario, idRemitente,
-                DNICliente, fecha, peso, ancho, largo, alto estado, tarifa) VALUES (:idDestinatario, :idRemitente,
-                :DNICliente, :fecha, :peso, :ancho, :largo, :alto, :estado, :tarifa) WHERE id=$id");
+            $stmt = $this->conexion->prepare("UPDATE envio SET idDestinatario=:idDestinatario, idRemitente=:idRemitente,
+                DNICliente=:DNICliente, fecha=:fecha, peso=:peso, ancho=:ancho, largo=:largo, alto=:alto estado=:estado,
+                 tarifa=:tarifa WHERE id=$id");
             $stmt->bindParam(":idDestinatario", $idDestinatario);
             $stmt->bindParam(":idRemitente", $idRemitente);
             $stmt->bindParam(":DNICliente", $DNICliente);
@@ -114,7 +114,7 @@ class Envio extends Conexion
         $this->conexion = null;
         return $stmt->fetch();
     }
-    
+
    /*  function buscarEnvio()
     {
         $parametroABuscar = $_POST['queBuscar'];
