@@ -21,6 +21,7 @@ function crudHandler()
     $stateTXT = "";
     if ($STATE == "CREATE") {
         $stateTXT = "Crear ";
+        $_GET["id"] = "1";
     } elseif ($STATE == "DELETE") {
         $stateTXT = "Eliminar ";
     } elseif ($STATE == "EDIT") {
@@ -34,10 +35,14 @@ function crudHandler()
         return [];
     }
 
-    if (!isset($_GET["id"])) {
+    if (!isset($_GET["id"]) && $STATE != "CREATE") {
         $error = "Required param: id";
         return [];
     }
+
+    $deleteValues = function ($v) {
+        return "";
+    };
 
     // == Get clients from database == //
     if ($_GET["type"] == "Client") {
