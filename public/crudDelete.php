@@ -16,16 +16,11 @@ $error = "";
 $title = "";
 $properties = [];
 
-// fail if there is no type parameter
-if (!isset($_GET["type"])) {
-    $error = "No se ha especificado el tipo de consulta";
-}
-
 $STATE = "DELETE";
 
 // Load crud
 require_once "./shared/crud.php";
-$properties = crudHandler();
+$properties = crudView();
 
 /* Render php blade file */
 echo $blade

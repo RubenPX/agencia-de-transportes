@@ -16,7 +16,7 @@ $STATE = "READ";
 
 // Load crud
 require_once "./shared/crud.php";
-$properties = crudHandler();
+$properties = crudView();
 
 /* Render php blade file */
 echo $blade

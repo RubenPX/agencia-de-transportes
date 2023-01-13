@@ -7,11 +7,6 @@ $error = "";
 $title = "";
 $properties = [];
 
-// fail if there is no type parameter
-if (!isset($_GET["type"])) {
-    $error = "No se ha especificado el tipo de consulta";
-}
-
 // Examples
 // Ver pueblo: http://localhost/crudView.php?type=Pueblo&ID=1
 // Ver cliente: http://localhost/crudView.php?type=Client&Client=98765432A
@@ -21,7 +16,7 @@ $STATE = "CREATE";
 
 // Load crud
 require_once "./shared/crud.php";
-$properties = crudHandler();
+$properties = crudView();
 
 /* Render php blade file */
 echo $blade
