@@ -24,7 +24,7 @@ class Poblacion extends Conexion
         try {
             $stmt->execute();
         } catch (PDOException $ex) {
-            die("Error al recuperar poblaciones: " . $ex->getMessage());
+            ("Error al recuperar poblaciones: " . $ex->getMessage());
         }
         $this->conexion = null;
         return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -69,5 +69,18 @@ class Poblacion extends Conexion
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
         }
+    }
+
+    function getPoblacion($id)
+    {
+        $consulta = "select * from poblacion WHERE id='$id'";
+        $stmt = $this->conexion->prepare($consulta);
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            ("Error al recuperar poblacion: " . $ex->getMessage());
+        }
+        $this->conexion = null;
+        return $stmt->fetch();
     }
 }

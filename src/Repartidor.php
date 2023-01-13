@@ -113,4 +113,17 @@ class Repartidor extends Conexion
             return false;
         }
     }
+
+    function getRepartidor($id)
+    {
+        $consulta = "select * from repartidor WHERE id='$id'";
+        $stmt = $this->conexion->prepare($consulta);
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            ("Error al recuperar repartidor: " . $ex->getMessage());
+        }
+        $this->conexion = null;
+        return $stmt->fetch();
+    }
 }

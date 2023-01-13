@@ -32,7 +32,7 @@ class Envio extends Conexion
         try {
             $stmt->execute();
         } catch (PDOException $ex) {
-            die("Error al recuperar envios: " . $ex->getMessage());
+            ("Error al recuperar envios: " . $ex->getMessage());
         }
         $this->conexion = null;
         return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -101,6 +101,20 @@ class Envio extends Conexion
             return false;
         }
     }
+
+    function getEnvio($id)
+    {
+        $consulta = "select * from envio WHERE id='$id'";
+        $stmt = $this->conexion->prepare($consulta);
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            ("Error al recuperar envío: " . $ex->getMessage());
+        }
+        $this->conexion = null;
+        return $stmt->fetch();
+    }
+    
    /*  function buscarEnvio()
     {
         $parametroABuscar = $_POST['queBuscar'];

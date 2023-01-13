@@ -28,7 +28,7 @@ class Cliente extends Conexion
         try {
             $stmt->execute();
         } catch (PDOException $ex) {
-            die("Error al recuperar clientes: " . $ex->getMessage());
+            ("Error al recuperar clientes: " . $ex->getMessage());
         }
         $this->conexion = null;
         return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -94,5 +94,17 @@ class Cliente extends Conexion
         }
     }
 
+    function getCliente($DNI)
+    {
+        $consulta = "select * from cliente WHERE DNI='$DNI'";
+        $stmt = $this->conexion->prepare($consulta);
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            ("Error al recuperar cliente: " . $ex->getMessage());
+        }
+        $this->conexion = null;
+        return $stmt->fetch();
+    }
 
 }
