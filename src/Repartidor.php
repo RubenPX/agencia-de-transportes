@@ -144,7 +144,7 @@ class Repartidor extends Conexion
         /* mezclamos reparpoblacion */
         INNER JOIN `reparpoblacion` ON `repartidor`.id = `reparpoblacion`.idRepartidor
         /* mezclamos poblacion */
-        INNER JOIN `poblacion` ON `reparpoblacion`.`idPoblacion` = `poblacion`.`id`";
+        INNER JOIN `poblacion` ON `reparpoblacion`.`idPoblacion` = `poblacion`.`id` WHERE id='$id'";
         $stmt = $this->conexion->prepare($consulta);
         try {
             $stmt->execute();

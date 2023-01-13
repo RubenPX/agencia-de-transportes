@@ -92,7 +92,16 @@ class Poblacion extends Conexion
     }
     function getPoblacion($id)
     {
-        $consulta = "select * from poblacion WHERE id='$id'";
+        $consulta = "SELECT
+            /* Poblacion */
+            `poblacion`.nombre as nombre,
+            `poblacion`.cp as cp,
+            CONCAT(`repartidor`.Nombre,' ', `repartidor`.Apellidos) as Repartidor,
+            FROM `poblacion`
+            /* mezclamos reparpoblacion */
+            INNER JOIN `reparpoblacion` ON `poblacion`.id = `reparpoblacion`.idPoblacion
+            /* mezclamos repartidor */
+            INNER JOIN `repartidor` ON `reparpoblacion`.`idRepartidor` = `repartidor`.`id` WHERE id='$id'";
         $stmt = $this->conexion->prepare($consulta);
         try {
             $stmt->execute();
