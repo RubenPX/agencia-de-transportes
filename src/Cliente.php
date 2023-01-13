@@ -34,14 +34,15 @@ class Cliente extends Conexion
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function borrarCliente($id)
+    function borrarCliente($DNI)
     {
         try {
-            $stmt = $this->conexion->prepare("DELETE FROM cliente WHERE DNI='$id'");
+            $stmt = $this->conexion->prepare("DELETE FROM cliente WHERE DNI='$DNI'");
             $stmt->execute();
-            echo "<p>EL CLIENTE HA SIDO BORRADO</p>";           
+            return true;           
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
         }
     }
 
@@ -66,11 +67,32 @@ class Cliente extends Conexion
                 $stmt->bindParam(":password", $password);
                 $stmt->bindParam(":activo", $activo);
                 $stmt->execute();
-                echo "<p>EL CLIENTE SE HA AÑADIDO</p>";
+                return true;
             } catch (PDOException $ex) {
                 ("Error al crear, mensaje de error:  " . $ex->getMessage());
+                return false;
             }
         }
     }
+
+    function actualizarCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo)
+    {
+        try {
+            $stmt = $this->conexion->prepare("INSERT INTO cliente (nombre, apellidos, telefono, mail, password, activo)
+                VALUES (:dni, :nombre, :apellidos, :telefono, :mail, :password, :activo) WHERE DNI='$DNI'");
+            $stmt->bindParam(":nombre", $nombre);
+            $stmt->bindParam(":apellidos", $apellidos);
+            $stmt->bindParam(":telefono", $telefono);
+            $stmt->bindParam(":mail", $mail);
+            $stmt->bindParam(":password", $password);
+            $stmt->bindParam(":activo", $activo);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $ex) {
+            ("Error al crear, mensaje de error:  " . $ex->getMessage());
+            return false;
+        }
+    }
+
 
 }

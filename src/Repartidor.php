@@ -29,7 +29,7 @@ class Repartidor extends Conexion
         try {
             $stmt->execute();
         } catch (PDOException $ex) {
-            die("Error al recuperar repartidores: " . $ex->getMessage());
+            ("Error al recuperar repartidores: " . $ex->getMessage());
         }
         $this->conexion = null;
         return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -37,13 +37,16 @@ class Repartidor extends Conexion
 
     function borrarRepartidor($id)
     {
-        try {
+        try { //borramos de la tabla repartidor
             $stmt = $this->conexion->prepare("DELETE FROM repartidor WHERE id='$id'");
             $stmt->execute();
-            echo "<p>EL REPARTIDOR HA SIDO BORRADO</p>";           
+            return true;           
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
         }
+
+    
     }
 
     function crearRepartidor($DNI, $Nombre, $Apellidos)
@@ -62,10 +65,52 @@ class Repartidor extends Conexion
                 $stmt->bindParam(":nombre", $Nombre);
                 $stmt->bindParam(":apellidos", $Apellidos);
                 $stmt->execute();
-                echo "<p>EL REPARTIDOR SE HA AÑADIDO</p>";
+                return true;
             } catch (PDOException $ex) {
                 ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+                return false;
             }
+        }
+    }
+
+    function actualizarRepartidor($id, $DNI, $Nombre, $Apellidos)
+    {
+        try {  //Comprobamos DNI ya que no es UNIQUE
+            $resultadoConsulta = $this->conexion->query("SELECT DNI FROM repartidor WHERE DNI='$DNI'");
+            $consulta = $resultadoConsulta->fetch();
+        } catch (PDOException $ex) {
+            ("Error en la consulta, mensaje de error:  " . $ex->getMessage());
+        }
+        if ($consulta == null) { //En caso de que no haya coincidencia en el campo DNI de ningún registro
+            try {
+                $stmt = $this->conexion->prepare("INSERT INTO repartidor (DNI, Nombre, Apellidos) VALUES (:DNI, :nombre, :apellidos)
+                    WHERE id='$id'");
+                $stmt->bindParam(":DNI", $DNI);    
+                $stmt->bindParam(":nombre", $Nombre);
+                $stmt->bindParam(":apellidos", $Apellidos);
+                $stmt->execute();
+                return true;
+            } catch (PDOException $ex) {
+                ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+                return false;
+            }
+        }
+    }
+
+    function asignarPoblacion($id)
+    {
+
+    }
+
+    function borrarPoblacionAsignada($id)
+    {
+        try {
+            $stmt = $this->conexion->prepare("DELETE FROM reparpoblacion WHERE idRepartidor='$id'");
+            $stmt->execute();
+            return true;           
+        } catch (PDOException $ex) {
+            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
         }
     }
 }

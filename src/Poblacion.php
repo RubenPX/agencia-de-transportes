@@ -35,9 +35,10 @@ class Poblacion extends Conexion
         try {
             $stmt = $this->conexion->prepare("DELETE FROM poblacion WHERE id='$id'");
             $stmt->execute();
-            echo "<p>LA POBLACIÓN HA SIDO BORRADA</p>";           
+            return true;           
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
         }
     }
 
@@ -48,9 +49,25 @@ class Poblacion extends Conexion
             $stmt->bindParam(":nombre", $nombre);
             $stmt->bindParam(":apellidos", $cp);
             $stmt->execute();
-            echo "<p>LA POBLACION SE HA AÑADIDO</p>";
+            return true;
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
+        }
+    }
+
+    function actualizarPoblacion($id, $nombre, $cp)
+    {
+        try {
+            $stmt = $this->conexion->prepare("INSERT INTO poblacion (nombre, cp) VALUES (:nombre, :cp)
+                WHERE id='$id'");
+            $stmt->bindParam(":nombre", $nombre);
+            $stmt->bindParam(":apellidos", $cp);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $ex) {
+            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
         }
     }
 }
