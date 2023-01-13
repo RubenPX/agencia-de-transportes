@@ -27,7 +27,26 @@ class Envio extends Conexion
 
     function recuperarEnvios()
     {
-        $consulta = "select * from envio";
+        $consulta = "SELECT
+        /* Envio */
+        `envio`.id as Envio_ID,
+        /* Remitente */
+        CONCAT(`remitente`.nombre,' ', `remitente`.apellidos) as Remitente,
+        /* Destinatario */
+        CONCAT(`destinatario`.nombre,' ', `destinatario`.apellidos) as Destinatario,
+        /* Fecha */
+        `envio`.fecha as Envio_Fecha,
+        /* Estado */
+        `estado`.tipo as Estado
+        /* FROM */
+        FROM `envio`
+        /* mezclamos el destinatario */
+        INNER JOIN `destinatario` ON `envio`.idDestinatario = `destinatario`.id
+        /* mezclamos el remitente */
+        INNER JOIN `remitente` ON `envio`.`idRemitente` = `remitente`.`id`
+        /* Mezclamos el estado de envio */
+        INNER JOIN `estado` ON `envio`.estado = `estado`.id";
+
         $stmt = $this->conexion->prepare($consulta);
         try {
             $stmt->execute();
@@ -37,6 +56,72 @@ class Envio extends Conexion
         $this->conexion = null;
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    function detallesEnvio($id)
+    {
+        $envio = $this->conexion->runQuery("SELECT
+    /* Envio */
+    `envio`.id as Envio_ID,
+    `envio`.fecha as Envio_Fecha,
+    `envio`.peso as Envio_Peso,
+    `envio`.ancho as Envio_Ancho,
+    `envio`.largo as Envio_Largo,
+    `envio`.alto as Envio_Alto,
+    `envio`.tarifa as Envio_Tarifa,
+    
+    /* Remitente */
+    `remitente`.nombre as Re_Nombre, 
+    `remitente`.apellidos as Re_Apellidos,
+    `remitente`.correo as Re_Correo,
+    `remitente`.telefono as Re_Telefono,
+    `remitente`.calle as Re_Calle,
+    `Re_Pob`.nombre as Re_Ciudad,
+    `Re_Pob`.cp as Re_CP,
+    
+    /* Destinatario */
+    `destinatario`.nombre as Dest_Nombre, 
+    `destinatario`.apellidos as Dest_Apellidos,
+    `destinatario`.correo as Dest_Correo,
+    `destinatario`.telefono as Dest_Telefono,
+    `destinatario`.calle as Dest_Calle,
+    `Dest_Pob`.nombre as Dest_Ciudad,
+    `Dest_Pob`.cp as Dest_CP,
+
+    /* Cliente */
+    `cliente`.DNI as Cli_DNI,
+    `cliente`.nombre as Cli_Nombre,
+    `cliente`.apellidos as Cli_Apellidos,
+    `cliente`.telefono as Cli_Telefono,
+    `cliente`.mail as Cli_Mail,
+    `cliente`.activo as Cli_Activo,
+    
+    /* Estado */
+    `estado`.tipo as Estado_Tipo
+
+    /* FROM */
+    FROM `envio`
+    
+    /* mezclamos el destinatario */
+    INNER JOIN `destinatario` ON `envio`.idDestinatario = `destinatario`.id
+    
+    /* mezclamos el remitente */
+    INNER JOIN `remitente` ON `envio`.`idRemitente` = `remitente`.`id`
+    
+    /* Mezclamos el estado de envio */
+    INNER JOIN `estado` ON `envio`.estado = `estado`.id
+
+    /* Mezclamos las poblaciones */
+    INNER JOIN poblacion as Re_Pob ON `Re_Pob`.`id` = `destinatario`.`idPoblacion`
+    INNER JOIN poblacion as Dest_Pob ON `Dest_Pob`.`id` = `remitente`.`idPoblacion`
+
+    /* Mezclamos el cliente */
+    INNER JOIN cliente ON `cliente`.`DNI` = `envio`.DNICliente
+    
+    WHERE `envio`.id = " . $_GET["id"]);
+
+        return $envio;
+    }
+   
 
     function borrarEnvio($id)
     {
