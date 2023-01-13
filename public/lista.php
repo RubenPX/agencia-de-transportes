@@ -1,5 +1,6 @@
 <?php
 require_once "./shared/blade.php";
+require_once "./shared/SessionLogin.php";
 
 // unitlity classes
 use Clases\Converters;

@@ -1,8 +1,7 @@
 <?php
 
 require_once "./shared/blade.php";
-
-$logedUser = "Jhon Doe";
+require_once "./shared/SessionLogin.php";
 
 echo $blade
     ->view()

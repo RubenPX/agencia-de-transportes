@@ -1,9 +1,9 @@
 <?php
 require_once "./shared/blade.php";
+require_once "./shared/SessionLogin.php";
 
 // Initialize variables
 $error = "";
-$logedUser = "Jhon Doe";
 $title = "";
 $properties = [];
 

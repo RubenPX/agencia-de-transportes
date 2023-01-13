@@ -1,5 +1,6 @@
 <?php
 require_once "./shared/blade.php";
+require_once "./shared/SessionLogin.php";
 
 // unitlity classes
 use Clases\QueryParser;
@@ -12,7 +13,6 @@ use Clases\Envio;
 
 // Initialize variables
 $error = "";
-$logedUser = "Jhon Doe";
 $title = "";
 $properties = [];
 

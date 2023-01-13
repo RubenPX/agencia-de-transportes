@@ -19,7 +19,7 @@
                             <h1 class="h1 fw-light">Iniciar sesión</h1>
                         </div>
 
-                        <form id="contactForm" method="POST" action="validar.php" name='login'>
+                        <form id="contactForm" method="POST" name='login'>
 
                             <!-- USER -->
                             <div class="form-floating mb-3">
@@ -35,8 +35,8 @@
 
                             <div class="form-floating mb-3">
                                 <select class="form-select" id="userType" name="userType">
-                                    <option>administrador</option>
-                                    <option>repartidor</option>
+                                    <option value="ADMIN">administrador</option>
+                                    <option value="REPAR">repartidor</option>
                                 </select>
                                 <label for="userType">Tipo de usuario</label>
                             </div>
@@ -48,7 +48,7 @@
                         </form>
                     </div>
                 </div>
-                @if (isset($error))
+                @if ($error != "")
                     <div class="alert alert-danger mb-0 mt-3">
                         <p class="mb-0 text-center">{{ $error }}</p>
                     </div>
