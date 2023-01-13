@@ -44,15 +44,14 @@ function crudHandler()
         $title = $stateTXT . "cliente";
         $cliente = new Cliente();
 
-        // todo: @RubenPX Refactor using recuperarCliente with parameter $_GET["id"]
-        $found = $cliente->recuperarClientes();
+        $found = $cliente->getCliente($_GET["id"]);
 
-        if (count($found) == 0) {
-            $error = "Pueblo no encontrado";
+        if (!$found) {
+            $error = "Cliente no encontrado";
             return [];
         }
 
-        $properties = Converters::objToArray($found[0]);
+        $properties = Converters::objToArray($found);
 
         // Remove protected parameter password
         unset($properties["password"]);
@@ -66,15 +65,12 @@ function crudHandler()
         $title = $stateTXT . "pueblo";
         $poblacion = new Poblacion();
 
-        // todo: @RubenPX Refactor using recuperarPoblacion with parameter $_GET["id"]
-        $found = $poblacion->recuperarPoblaciones();
+        $found = $poblacion->getPoblacion($_GET["id"]);
 
-        if (count($found) == 0) {
+        if (!$found) {
             $error = "Pueblo no encontrado";
             return [];
         }
-
-        $properties = Converters::objToArray($found[0]);
     }
 
     // == Get repartidor from database == //
@@ -82,15 +78,12 @@ function crudHandler()
         $title = $stateTXT . "repartidor";
         $repartidor = new Repartidor();
 
-        // todo: @RubenPX Refactor using recuperarRepartidor with parameter $_GET["id"]
-        $found = $repartidor->recuperarRepartidores();
+        $found = $repartidor->getRepartidor($_GET["id"]);
 
-        if (count($found) == 0) {
+        if (!$found) {
             $error = "Repartidor no encontrado";
             return [];
         }
-
-        $properties = Converters::objToArray($found[0]);
     }
 
     // == Get repartidores == //
@@ -98,17 +91,15 @@ function crudHandler()
         $title = $stateTXT . "envio";
         $envio = new Envio();
 
-        // todo: @RubenPX Refactor using recuperarRepartidor with parameter $_GET["id"]
-        $found = $envio->recuperarEnvios();
+        $found = $envio->getEnvio($_GET["id"]);
 
-        if (count($found) == 0) {
+        if (!$found) {
             $error = "Envio no encontrado";
             return [];
         }
-
-        $properties = Converters::objToArray($found[0]);
     }
 
+    $properties = Converters::objToArray($found);
     return $properties;
 }
 
