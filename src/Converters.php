@@ -9,7 +9,10 @@ class Converters {
      * @param mixed $data
      * @return array
      */
-    public static function objToArray(stdClass $data): array {
+    public static function objToArray($data): array {
+        if (gettype($data) == "array") {
+            return $data;
+        }
         return json_decode(json_encode($data), true);
     }
 
