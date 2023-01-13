@@ -133,7 +133,18 @@ class Repartidor extends Conexion
 
     function getRepartidor($id)
     {
-        $consulta = "select * from repartidor WHERE id='$id'";
+        $consulta = "SELECT
+        /* Repartidor */
+        `repartidor`.id as idRepartidor,
+        `repartidor`.DNI as DNIRepartidor,
+        `repartidor`.Nombre as Nombre,
+        `repartidor`.Apellidos as Apellidos,
+        `poblacion`.nombre as Poblacion
+        FROM `repartidor`
+        /* mezclamos reparpoblacion */
+        INNER JOIN `reparpoblacion` ON `repartidor`.id = `reparpoblacion`.idRepartidor
+        /* mezclamos poblacion */
+        INNER JOIN `poblacion` ON `reparpoblacion`.`idPoblacion` = `poblacion`.`id`";
         $stmt = $this->conexion->prepare($consulta);
         try {
             $stmt->execute();
@@ -141,6 +152,6 @@ class Repartidor extends Conexion
             ("Error al recuperar repartidor: " . $ex->getMessage());
         }
         $this->conexion = null;
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        return $stmt->fetch();
     }
 }
