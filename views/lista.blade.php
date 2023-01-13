@@ -1,7 +1,7 @@
 @extends('_partials.base')
 
 @section('titulo')
-Panel de administrador
+{{ $title }}
 @endsection
 
 @section('content')

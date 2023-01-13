@@ -13,6 +13,7 @@ use Clases\Envio;
 
 $error = "";
 $properties = [];
+$title = "Lista de ";
 
 if (!isset($_GET["type"])) {
     $error = "Required parameter: type";
@@ -23,8 +24,11 @@ if (!isset($_GET["type"])) {
     die();
 }
 
+$type = $_GET["type"];
+
 /* == Get clientes from DB == */
-if($_GET["type"] == "Clientes") {
+if ($type == "Client") {
+    $title .= "clientes";
     $clientes = (new Cliente())->recuperarClientes();
     $properties = Converters::objsToArray($clientes);
 
@@ -38,31 +42,31 @@ if($_GET["type"] == "Clientes") {
     };
 
     $properties = array_map($processArrItem, $properties);
-} elseif($_GET["type"] == "Poblacion") {
+} elseif ($type == "Pueblo") {
+    $title .= "pueblos";
     $poblacion = (new Poblacion())->recuperarPoblaciones();
     $properties = Converters::objsToArray($poblacion);
-} elseif($_GET["type"] == "Repartidores") {
+} elseif ($type == "Repartidor") {
+    $title .= "repartidores";
     $repartidores = (new Repartidor())->recuperarRepartidores();
     $properties = Converters::objsToArray($repartidores);
-} elseif($_GET["type"] == "Envios") {
+} elseif ($type == "Envio") {
+    $title .= "envios";
     $envios = (new Envio)->recuperarEnvios();
     $properties = Converters::objsToArray($envios);
-
-    // todo: @RubenPX cambiar los ids y el estado a string en vez de numeros
 } else {
     $error = "Parameter type must be Clientes, Poblacion, Repartidores or Envios";
+    $title = "Lista no encontrada";
     echo $blade
         ->view()
-        ->make('lista', compact("logedUser", "error"))
+        ->make('lista', compact("logedUser", "error", "title"))
         ->render();
     die();
 }
 
-$logedUser = "Jhon Doe";
-
 echo $blade
     ->view()
-    ->make('lista', compact("logedUser", "properties"))
+    ->make('lista', compact("logedUser", "properties", "title", "type"))
     ->render();
 
 ?>
