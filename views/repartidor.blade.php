@@ -59,7 +59,7 @@ Panel de repartidor
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-info w-100 mt-2">Ver repartos</button>
+                    <a href="/envios.php" type="button" class="btn btn-info w-100 mt-2">Ver repartos</a>
                 </div>
             </div>
         </div>
