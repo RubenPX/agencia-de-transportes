@@ -24,8 +24,7 @@ class Envio extends Conexion
         parent::__construct();
     }
 
-
-    function recuperarEnvios()
+    function recuperarEnvios($keyword=false)
     {
         $consulta = "SELECT
         /* Envio */
@@ -46,6 +45,16 @@ class Envio extends Conexion
         INNER JOIN `remitente` ON `envio`.`idRemitente` = `remitente`.`id`
         /* Mezclamos el estado de envio */
         INNER JOIN `estado` ON `envio`.estado = `estado`.id";
+
+        if($keyword){
+            $consulta .= "WHERE `envio`.id LIKE '%" . $keyword . "%' ";
+            $consulta .= "OR `remitente`.nombre LIKE '%" . $keyword . "%' ";
+            $consulta .= "OR `remitente`.apellidos LIKE '%" . $keyword . "%' ";
+            $consulta .= "OR `destinatario`.nombre LIKE '%" . $keyword . "%' ";
+            $consulta .= "OR `destinatario`.apellidos LIKE '%" . $keyword . "%' ";
+            $consulta .= "OR `envio`.fecha LIKE '%" . $keyword . "%' ";
+            $consulta .= "OR `estado`.tipo LIKE '%" . $keyword . "%' ";
+        }
 
         $stmt = $this->conexion->prepare($consulta);
         try {
