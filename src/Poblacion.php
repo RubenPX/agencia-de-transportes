@@ -34,12 +34,21 @@ class Poblacion extends Conexion
     {
         try {
             $stmt = $this->conexion->prepare("DELETE FROM poblacion WHERE id='$id'");
-            $stmt->execute();
-            return true;           
+            $stmt->execute();         
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
         }
+
+        try { //borramos de la tabla reparpoblacion
+            $this->borrarRepartidorAsignado($id);
+      
+        } catch (PDOException $ex) {
+            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     function crearPoblacion($nombre, $cp)
@@ -70,6 +79,17 @@ class Poblacion extends Conexion
         }
     }
 
+    public function borrarRepartidorAsignado($id)
+    {
+        try {
+            $stmt = $this->conexion->prepare("DELETE FROM reparpoblacion WHERE idPoblacion='$id'");
+            $stmt->execute();
+            return true;           
+        } catch (PDOException $ex) {
+            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
+        }
+    }
     function getPoblacion($id)
     {
         $consulta = "select * from poblacion WHERE id='$id'";

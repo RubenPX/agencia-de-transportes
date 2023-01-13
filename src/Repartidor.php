@@ -39,14 +39,21 @@ class Repartidor extends Conexion
     {
         try { //borramos de la tabla repartidor
             $stmt = $this->conexion->prepare("DELETE FROM repartidor WHERE id='$id'");
-            $stmt->execute();
-            return true;           
+            $stmt->execute();           
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
         }
 
-    
+        try { //borramos de la tabla reparpoblacion
+            $this->borrarPoblacionAsignada($id);
+      
+        } catch (PDOException $ex) {
+            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     function crearRepartidor($DNI, $Nombre, $Apellidos)
@@ -112,7 +119,7 @@ class Repartidor extends Conexion
         }
     }
 
-    function borrarPoblacionAsignada($id)
+    public function borrarPoblacionAsignada($id)
     {
         try {
             $stmt = $this->conexion->prepare("DELETE FROM reparpoblacion WHERE idRepartidor='$id'");
