@@ -38,12 +38,13 @@ class Cliente extends Conexion
     {
         try {
             $stmt = $this->conexion->prepare("DELETE FROM cliente WHERE DNI='$DNI'");
-            $stmt->execute();
-            return true;           
+            $stmt->execute();         
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
         }
+        $this->conexion = null;
+        return true;
     }
 
     function crearCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo)
@@ -67,11 +68,13 @@ class Cliente extends Conexion
                 $stmt->bindParam(":password", $password);
                 $stmt->bindParam(":activo", $activo);
                 $stmt->execute();
-                return true;
+
             } catch (PDOException $ex) {
                 ("Error al crear, mensaje de error:  " . $ex->getMessage());
                 return false;
             }
+            $this->conexion = null;
+            return true;
         }
     }
 
@@ -87,11 +90,12 @@ class Cliente extends Conexion
             $stmt->bindParam(":password", $password);
             $stmt->bindParam(":activo", $activo);
             $stmt->execute();
-            return true;
         } catch (PDOException $ex) {
             ("Error al crear, mensaje de error:  " . $ex->getMessage());
             return false;
         }
+        $this->conexion = null;
+        return true;
     }
 
     function getCliente($DNI)
@@ -104,7 +108,7 @@ class Cliente extends Conexion
             ("Error al recuperar cliente: " . $ex->getMessage());
         }
         $this->conexion = null;
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        return $stmt->fetch();
     }
 
 }

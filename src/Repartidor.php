@@ -47,13 +47,13 @@ class Repartidor extends Conexion
 
         try { //borramos de la tabla reparpoblacion
             $this->borrarPoblacionAsignada($id);
-      
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
         }
-
+        $this->conexion = null;
         return true;
+        
     }
 
     function crearRepartidor($DNI, $Nombre, $Apellidos)
@@ -63,6 +63,7 @@ class Repartidor extends Conexion
             $consulta = $resultadoConsulta->fetch();
         } catch (PDOException $ex) {
             ("Error en la consulta, mensaje de error:  " . $ex->getMessage());
+            return false;
         }
 
         if ($consulta == null) { //En caso de que no haya coincidencia en el campo DNI de ningún registro
@@ -72,12 +73,13 @@ class Repartidor extends Conexion
                 $stmt->bindParam(":nombre", $Nombre);
                 $stmt->bindParam(":apellidos", $Apellidos);
                 $stmt->execute();
-                return true;
             } catch (PDOException $ex) {
                 ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
                 return false;
             }
         }
+        $this->conexion = null;
+        return true;
     }
 
     function actualizarRepartidor($id, $DNI, $Nombre, $Apellidos)
@@ -102,6 +104,8 @@ class Repartidor extends Conexion
                 return false;
             }
         }
+        $this->conexion = null;
+        return true;
     }
 
     function asignarPoblacion($idRepartidor, $idPoblacion)
@@ -111,24 +115,26 @@ class Repartidor extends Conexion
                 VALUES (:idRepartidor, :idPoblacion)");
                 $stmt->bindParam(":idRepartidor", $idRepartidor);    
                 $stmt->bindParam(":idPoblacion", $idPoblacion);
-            $stmt->execute();
-            return true;           
+            $stmt->execute();         
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
         }
+        $this->conexion = null;
+        return true;
     }
 
     public function borrarPoblacionAsignada($id)
     {
         try {
             $stmt = $this->conexion->prepare("DELETE FROM reparpoblacion WHERE idRepartidor='$id'");
-            $stmt->execute();
-            return true;           
+            $stmt->execute();           
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
         }
+        $this->conexion = null;
+        return true;
     }
 
     function getRepartidor($id)
@@ -150,6 +156,7 @@ class Repartidor extends Conexion
             $stmt->execute();
         } catch (PDOException $ex) {
             ("Error al recuperar repartidor: " . $ex->getMessage());
+            return false;
         }
         $this->conexion = null;
         return $stmt->fetch();

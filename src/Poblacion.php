@@ -72,24 +72,27 @@ class Poblacion extends Conexion
             $stmt->bindParam(":nombre", $nombre);
             $stmt->bindParam(":apellidos", $cp);
             $stmt->execute();
-            return true;
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
         }
+        $this->conexion = null;
+        return true;
     }
 
     public function borrarRepartidorAsignado($id)
     {
         try {
             $stmt = $this->conexion->prepare("DELETE FROM reparpoblacion WHERE idPoblacion='$id'");
-            $stmt->execute();
-            return true;           
+            $stmt->execute();          
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
         }
+        $this->conexion = null;
+        return true;
     }
+
     function getPoblacion($id)
     {
         $consulta = "SELECT
@@ -109,6 +112,6 @@ class Poblacion extends Conexion
             ("Error al recuperar poblacion: " . $ex->getMessage());
         }
         $this->conexion = null;
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        return $stmt->fetch();
     }
 }
