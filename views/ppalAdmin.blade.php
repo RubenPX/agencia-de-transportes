@@ -13,25 +13,25 @@ Panel de administrador
         <div class="card border-primary col m-2">
             <div class="card-body">
                 <h3 class="card-title text-center">Clientes</h3>
-                <button type="button" class="btn btn-info w-100">Acceder</button>
+                <a href="/lista.php?type=Client" type="button" class="btn btn-info w-100">Acceder</a>
             </div>
         </div>
         <div class="card border-primary col m-2">
             <div class="card-body">
                 <h3 class="card-title text-center">Repartidores</h3>
-                <button type="button" class="btn btn-info w-100">Acceder</button>
+                <a href="/lista.php?type=Repartidor" type="button" class="btn btn-info w-100">Acceder</a>
             </div>
         </div>
         <div class="card border-primary col m-2">
             <div class="card-body">
                 <h3 class="card-title text-center">Envíos</h3>
-                <button type="button" class="btn btn-info w-100">Acceder</button>
+                <a href="/lista.php?type=Envio" type="button" class="btn btn-info w-100">Acceder</a>
             </div>
         </div>
         <div class="card border-primary col m-2">
             <div class="card-body">
                 <h3 class="card-title text-center">Poblaciones</h3>
-                <button type="button" class="btn btn-info w-100">Acceder</button>
+                <a href="/lista.php?type=Pueblo" type="button" class="btn btn-info w-100">Acceder</a>
             </div>
         </div>
     </div>
