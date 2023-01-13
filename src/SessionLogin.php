@@ -4,6 +4,7 @@ namespace Clases;
 
 /**
  * This is a temporal login implementation
+ * todo: @RubenPX Implementar bien las funciones
  */
 Class SessionLogin {
 
