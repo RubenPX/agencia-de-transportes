@@ -112,7 +112,7 @@ class Envio extends Conexion
             ("Error al recuperar envío: " . $ex->getMessage());
         }
         $this->conexion = null;
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
    /*  function buscarEnvio()

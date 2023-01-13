@@ -80,6 +80,6 @@ class Poblacion extends Conexion
             ("Error al recuperar poblacion: " . $ex->getMessage());
         }
         $this->conexion = null;
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }
