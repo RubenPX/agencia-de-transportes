@@ -5,8 +5,7 @@ namespace Clases;
 use PDO;
 use PDOException;
 
-class Cliente extends Conexion
-{
+class Cliente extends Conexion {
     private $DNI;
     private $nombre;
     private $apellidos;
@@ -15,14 +14,12 @@ class Cliente extends Conexion
     private $password;
     private $activo;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
 
-    function recuperarClientes()
-    {
+    function recuperarClientes() {
         $consulta = "select * from cliente order by nombre";
         $stmt = $this->conexion->prepare($consulta);
         try {
@@ -34,11 +31,10 @@ class Cliente extends Conexion
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function borrarCliente($DNI)
-    {
+    function borrarCliente($DNI) {
         try {
             $stmt = $this->conexion->prepare("DELETE FROM cliente WHERE DNI='$DNI'");
-            $stmt->execute();         
+            $stmt->execute();
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
@@ -47,8 +43,7 @@ class Cliente extends Conexion
         return true;
     }
 
-    function crearCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo)
-    {
+    function crearCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo) {
         try {
             $resultadoConsulta = $this->conexion->query("SELECT DNI FROM cliente WHERE DNI='$DNI'");
             $consulta = $resultadoConsulta->fetch();
@@ -78,8 +73,7 @@ class Cliente extends Conexion
         }
     }
 
-    function actualizarCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo)
-    {
+    function actualizarCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo) {
         try {
             $stmt = $this->conexion->prepare("UPDATE cliente SET nombre=:nombre, apellidos=:apellidos,
             telefono=:telefono, mail=:mail, password=:password, activo=:activo WHERE DNI='$DNI'");
@@ -98,8 +92,7 @@ class Cliente extends Conexion
         return true;
     }
 
-    function getCliente($DNI)
-    {
+    function getCliente($DNI) {
         $consulta = "select * from cliente WHERE DNI='$DNI'";
         $stmt = $this->conexion->prepare($consulta);
         try {

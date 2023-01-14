@@ -5,8 +5,7 @@ namespace Clases;
 use PDO;
 use PDOException;
 
-class Envio extends Conexion
-{
+class Envio extends Conexion {
     public $id;
     private $idDestinatario;
     private $idRemitente;
@@ -19,13 +18,11 @@ class Envio extends Conexion
     private $estado;
     private $tarifa;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
-    function recuperarEnvios($keyword=false)
-    {
+    function recuperarEnvios($keyword = false) {
         $consulta = "SELECT
         /* Envio */
         `envio`.id as Envio_ID,
@@ -46,7 +43,7 @@ class Envio extends Conexion
         /* Mezclamos el estado de envio */
         INNER JOIN `estado` ON `envio`.estado = `estado`.id";
 
-        if($keyword){
+        if ($keyword) {
             $consulta .= "WHERE `envio`.id LIKE '%" . $keyword . "%' ";
             $consulta .= "OR `remitente`.nombre LIKE '%" . $keyword . "%' ";
             $consulta .= "OR `remitente`.apellidos LIKE '%" . $keyword . "%' ";
@@ -80,8 +77,6 @@ class Envio extends Conexion
         
         /* Remitente */
         `remitente`.nombre as Re_Nombre, 
-                `remitente`.nombre as Re_Nombre, 
-        `remitente`.nombre as Re_Nombre, 
         `remitente`.apellidos as Re_Apellidos,
         `remitente`.correo as Re_Correo,
         `remitente`.telefono as Re_Telefono,
@@ -90,8 +85,6 @@ class Envio extends Conexion
         `Re_Pob`.cp as Re_CP,
         
         /* Destinatario */
-        `destinatario`.nombre as Dest_Nombre, 
-                `destinatario`.nombre as Dest_Nombre, 
         `destinatario`.nombre as Dest_Nombre, 
         `destinatario`.apellidos as Dest_Apellidos,
         `destinatario`.correo as Dest_Correo,
@@ -131,7 +124,7 @@ class Envio extends Conexion
         INNER JOIN cliente ON `cliente`.`DNI` = `envio`.DNICliente
         
         WHERE `envio`.id = :id";
-        
+
         try {
             $stmt = $this->conexion->prepare($consulta);
             $stmt->bindParam(":id", $id);
@@ -145,11 +138,10 @@ class Envio extends Conexion
     }
 
 
-    function borrarEnvio($id)
-    {
+    function borrarEnvio($id) {
         try {
             $stmt = $this->conexion->prepare("DELETE FROM envio WHERE id='$id'");
-            $stmt->execute();         
+            $stmt->execute();
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
@@ -159,8 +151,7 @@ class Envio extends Conexion
     }
 
     function crearEnvio($idDestinatario, $idRemitente, $DNICliente, $fecha, $peso, $ancho,
-        $largo, $alto, $tarifa)
-    {
+        $largo, $alto, $tarifa) {
         try {
             $estado = 'entregado';
             $stmt = $this->conexion->prepare("INSERT INTO envio (idDestinatario, idRemitente,
@@ -184,11 +175,10 @@ class Envio extends Conexion
         $this->conexion = null;
         return true;
     }
-    
+
 
     function actualizarEnvio($id, $idDestinatario, $idRemitente, $DNICliente, $fecha, $peso, $ancho,
-        $largo, $alto, $estado, $tarifa)
-    {
+        $largo, $alto, $estado, $tarifa) {
         try {
             $stmt = $this->conexion->prepare("UPDATE envio SET idDestinatario=:idDestinatario, idRemitente=:idRemitente,
                 DNICliente=:DNICliente, fecha=:fecha, peso=:peso, ancho=:ancho, largo=:largo, alto=:alto estado=:estado,
@@ -212,8 +202,7 @@ class Envio extends Conexion
         return true;
     }
 
-    function getEnvio($id)
-    {
+    function getEnvio($id) {
         $consulta = "select * from envio WHERE id='$id'";
         $stmt = $this->conexion->prepare($consulta);
         try {
@@ -222,15 +211,14 @@ class Envio extends Conexion
             ("Error al recuperar envío: " . $ex->getMessage());
         }
         $this->conexion = null;
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
-   /*  function buscarEnvio()
-    {
-        $parametroABuscar = $_POST['queBuscar'];
-        $consulta = "select * form envio where $id or $idDestinatario or $idRemitente or 
-        $DNICliente or $fecha or $peso or $ancho or $largo or $alto or $estado or $tarifa
-        LIKE $parametroABuscar";
-        
-    } */
+/*  function buscarEnvio()
+{
+$parametroABuscar = $_POST['queBuscar'];
+$consulta = "select * form envio where $id or $idDestinatario or $idRemitente or 
+$DNICliente or $fecha or $peso or $ancho or $largo or $alto or $estado or $tarifa
+LIKE $parametroABuscar";
+} */
 }

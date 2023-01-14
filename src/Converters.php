@@ -1,6 +1,7 @@
 <?php
 
 namespace Clases;
+
 use stdClass;
 
 class Converters {
