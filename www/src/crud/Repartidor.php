@@ -8,13 +8,19 @@ use Clases\Repartidor as Repartidores;
 class Repartidor extends CRUDBase {
     public function get(string $id): array {
         $repartidor = new Repartidores();
-        $found = $repartidor->getRepartidor($id);
 
-        if (!$found) {
-            throw new CRUDException("No se ha encontrado el repartidor con el id " . $id);
+        if ($id == "-1") {
+            $found = $repartidor->recuperarRepartidores();
+            $found = Converters::objToArray($found[0]);
+        } else {
+            $found = $repartidor->getRepartidor($id);
+
+            if (!$found) {
+                throw new CRUDException("No se ha encontrado el repartidor con el id " . $id);
+            }
+    
+            $found = Converters::objToArray($found);
         }
-
-        $found = Converters::objToArray($found);
 
         unset($found["password"]);
 

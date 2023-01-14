@@ -8,13 +8,18 @@ use Clases\Poblacion;
 class Pueblo extends CRUDBase {
     public function get(string $id): array {
         $poblacion = new Poblacion();
-        $found = $poblacion->getPoblacion($id);
+        if ($id == "-1") {
+            $found = $poblacion->recuperarPoblaciones();
+            return Converters::objToArray($found[0]);
+        } else {
+            $found = $poblacion->getPoblacion($id);
 
-        if (!$found) {
-            throw new CRUDException("No se ha encontrado el pueblo con el id " . $id);
+            if (!$found) {
+                throw new CRUDException("No se ha encontrado el pueblo con el id " . $id);
+            }
+
+            return Converters::objToArray($found);
         }
-
-        return Converters::objToArray($found);
     }
 
     public function update(array $data): array {

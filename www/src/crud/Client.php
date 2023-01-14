@@ -8,14 +8,20 @@ use Clases\Cliente;
 class Client extends CRUDBase {
     public function get(string $id): array {
         $cliente = new Cliente();
-        $found = $cliente->getCliente($id);
 
-        if (!$found) {
-            throw new CRUDException("No se ha encontrado el cliente con el id " . $id);
+        if ($id == "-1") {
+            $found = $cliente->recuperarClientes();
+            $found = Converters::objToArray($found[0]);
+        } else {
+            $found = $cliente->getCliente($id);
+
+            if (!$found) {
+                throw new CRUDException("No se ha encontrado el cliente con el id " . $id);
+            }
+    
+            $found = Converters::objToArray($found);
         }
-
-        $found = Converters::objToArray($found);
-
+        
         unset($found["password"]);
         $found["activo"] = $found["activo"] == 1 ? true : false;
 

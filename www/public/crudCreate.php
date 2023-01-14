@@ -13,9 +13,9 @@ $properties = [];
 $STATE = "CREATE";
 $crud = new CRUD();
 
-// todo: This in future will be a bug (Fix in progress)
-// todo: This will fail if there has not values in table
-$properties = $crud->handle($_GET["type"], $STATE, ["GET_ID" => 1]);
+// todo: @bug This in future will be a bug (Fix in progress)
+// todo: @bug This will fail if there has not values in table
+$properties = $crud->handle($_GET["type"], $STATE, ["GET_ID" => "-1"]);
 
 // Detect if has error
 if (isset($properties["!ERROR"])) {
