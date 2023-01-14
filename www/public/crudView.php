@@ -39,10 +39,12 @@ switch ($_GET["type"]) {
 }
 $type = $_GET["type"];
 
+$id = $_GET["id"];
+
 /* Render php blade file */
 echo $blade
     ->view()
-    ->make('crud', compact("logedUser", "properties", "STATE", "type", "title", "error"))
+    ->make('crud', compact("logedUser", "properties", "STATE", "type", "title", "error", "id"))
     ->render();
 
 ?>

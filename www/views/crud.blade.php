@@ -56,16 +56,17 @@
                             <!-- Submit button -->
                             <div class="d-flex mt-4" style="justify-content: space-between">
                                 @if ($STATE == "VIEW")
-                                    <a class="btn btn-primary btn-lg w-100" id="submitButton" href="lista.php?type={{ $type }}">Cerrar</a>
+                                    <a class="btn btn-primary btn-lg" href="lista.php?type={{ $type }}">Cerrar</a>
+                                    <a class="btn btn-primary btn-lg" href="crudEdit.php?type={{ $type }}&id={{ $id }}">Editar</a>
                                 @elseif ($STATE == "CREATE")
                                     <a class="btn btn-primary btn-lg" href="lista.php?type={{ $type }}">Cancelar</a>
-                                    <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Crear</button>
+                                    <button class="btn btn-primary btn-lg" name="CREATE" id="submitButton" type="submit">Crear</button>
                                 @elseif ($STATE == "DELETE")
                                     <a class="btn btn-primary btn-lg" href="lista.php?type={{ $type }}">Cancelar</a>
                                     <button class="btn btn-primary btn-lg" name="DELETE" id="submitButton" type="submit">Eliminar</button>
                                 @else
                                     <a class="btn btn-primary btn-lg" href="lista.php?type={{ $type }}">Cancelar</a>
-                                    <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Guardar</button>
+                                    <button class="btn btn-primary btn-lg" name="EDIT" id="submitButton" type="submit">Guardar</button>
                                 @endif
                             </div>
                         </form>
