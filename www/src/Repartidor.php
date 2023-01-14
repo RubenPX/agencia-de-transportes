@@ -55,7 +55,7 @@ class Repartidor extends Conexion {
     function crearRepartidor($DNI, $Nombre, $Apellidos) {
         try {
             $resultadoConsulta = $this->conexion->query("SELECT DNI FROM repartidor WHERE DNI='$DNI'");
-            $consulta = $resultadoConsulta->fetch();
+            $consulta = $resultadoConsulta->fetch(PDO::FETCH_OBJ);
         } catch (PDOException $ex) {
             ("Error en la consulta, mensaje de error:  " . $ex->getMessage());
             return false;
@@ -80,7 +80,7 @@ class Repartidor extends Conexion {
     function actualizarRepartidor($id, $DNI, $Nombre, $Apellidos) {
         try { //Comprobamos DNI ya que no es UNIQUE
             $resultadoConsulta = $this->conexion->query("SELECT DNI FROM repartidor WHERE DNI='$DNI'");
-            $consulta = $resultadoConsulta->fetch();
+            $consulta = $resultadoConsulta->fetch(PDO::FETCH_OBJ);
         } catch (PDOException $ex) {
             ("Error en la consulta, mensaje de error:  " . $ex->getMessage());
         }
@@ -150,6 +150,6 @@ class Repartidor extends Conexion {
             return false;
         }
         $this->conexion = null;
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }

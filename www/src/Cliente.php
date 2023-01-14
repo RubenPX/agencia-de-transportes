@@ -46,7 +46,7 @@ class Cliente extends Conexion {
     function crearCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo) {
         try {
             $resultadoConsulta = $this->conexion->query("SELECT DNI FROM cliente WHERE DNI='$DNI'");
-            $consulta = $resultadoConsulta->fetch();
+            $consulta = $resultadoConsulta->fetch(PDO::FETCH_OBJ);
         } catch (PDOException $ex) {
             ("Error en la consulta, mensaje de error:  " . $ex->getMessage());
         }
@@ -101,7 +101,7 @@ class Cliente extends Conexion {
             ("Error al recuperar cliente: " . $ex->getMessage());
         }
         $this->conexion = null;
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
 }
