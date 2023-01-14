@@ -1,18 +1,21 @@
 <?php
-session_start();
-
 require_once "./shared/blade.php";
+use Clases\SessionLogin;
 
-if (isset($_SESSION['error'])) {
-    $error = $_SESSION['error'];
-    echo $blade
-        ->view()
-        ->make('vistaLogin', compact('error'))
-        ->render();
-    unset($_SESSION['error']);
-} else {
-    echo $blade
-        ->view()
-        ->make('vistaLogin')
-        ->render();
+$error = "";
+
+if (isset($_POST["login"])) {
+    if (isset($_POST["user"]) && isset($_POST["pass"]) && isset($_POST["userType"])) {
+        $sLogin = new SessionLogin();
+        if (!$sLogin->tryCreateSession(trim($_POST["user"]), trim($_POST["pass"]), trim($_POST["userType"]))) {
+            $error = "Fallo al iniciar sesión";
+        }
+    } else {
+        $error = "Asegurate de completar los campos necesarios";
+    }
 }
+
+echo $blade
+    ->view()
+    ->make('login', compact('error'))
+    ->render();

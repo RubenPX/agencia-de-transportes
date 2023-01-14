@@ -6,13 +6,20 @@ require_once "./shared/SessionLogin.php";
 
 // Initialize variables
 $error = "";
-$title = "Ver ";
+$title = "Eliminar ";
 $properties = [];
 
 // Load state
-$STATE = "VIEW";
+$STATE = "DELETE";
 $crud = new CRUD();
-$properties = $crud->handle($_GET["type"], $STATE, ["GET_ID" => $_GET["id"]]);
+
+if (isset($_POST["DELETE"])) {
+    $properties = $crud->handle($_GET["type"], $STATE, ["DELETE_ID" => $_GET["id"]]);
+} else {
+    $properties = $crud->handle($_GET["type"], $STATE, ["GET_ID" => $_GET["id"]]);
+}
+
+
 
 // Detect if has error
 if (isset($properties["!ERROR"])) {

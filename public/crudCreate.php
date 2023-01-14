@@ -10,9 +10,12 @@ $title = "Ver ";
 $properties = [];
 
 // Load state
-$STATE = "VIEW";
+$STATE = "CREATE";
 $crud = new CRUD();
-$properties = $crud->handle($_GET["type"], $STATE, ["GET_ID" => $_GET["id"]]);
+
+// todo: This in future will be a bug (Fix in progress)
+// todo: This will fail if there has not values in table
+$properties = $crud->handle($_GET["type"], $STATE, ["GET_ID" => 1]);
 
 // Detect if has error
 if (isset($properties["!ERROR"])) {
@@ -38,6 +41,12 @@ switch ($_GET["type"]) {
         break;
 }
 $type = $_GET["type"];
+
+// Elimina cualquier valor
+$removeValues = function($i) {
+    return "";
+};
+$properties = array_map($removeValues, $properties);
 
 /* Render php blade file */
 echo $blade

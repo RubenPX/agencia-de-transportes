@@ -5,7 +5,7 @@ require_once "./shared/SessionLogin.php";
 
 echo $blade
     ->view()
-    ->make('ppalAdmin', compact("logedUser"))
+    ->make('repartidor', compact("logedUser"))
     ->render();
 
 ?>

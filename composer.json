@@ -14,7 +14,9 @@
     "license": "GNU",
     "autoload": {
         "psr-4": {
-            "Dwes2022\\AgenciaDeTransportes\\": "src/"
+            "Clases\\": "src",
+            "Crud\\": "src/crud",
+            "List\\": "src/list"
         }
     },
     "authors": [

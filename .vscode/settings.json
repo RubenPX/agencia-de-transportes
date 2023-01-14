@@ -48,5 +48,8 @@
             "stash": true
         },
         "scmItemInline": false
-    }
+    },
+    "php.validate.enable": true,
+    "php.suggest.basic": true,
+    "php.format.codeStyle": "K&R"
 }
