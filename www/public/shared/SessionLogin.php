@@ -2,8 +2,13 @@
 
 // Session login
 use Clases\SessionLogin;
+
 $sessionL = new SessionLogin();
+
 if (!$sessionL->verifySession()) {
-    $sessionL->tryDeleteSession();
+    if ($sessionL->tryDeleteSession()) {
+        die();
+    }
 }
+
 $logedUser = $sessionL->userName;
