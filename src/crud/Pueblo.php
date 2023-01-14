@@ -4,7 +4,6 @@ namespace Crud;
 
 use Clases\Converters;
 use Clases\Poblacion;
-use Error;
 
 class Pueblo extends CRUDBase {
     public function get(string $id): array {

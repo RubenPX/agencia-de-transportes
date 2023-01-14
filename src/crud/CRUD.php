@@ -1,7 +1,6 @@
 <?php
 
 namespace Crud;
-use Error;
 
 class CRUD {
     private CRUDBase $base;

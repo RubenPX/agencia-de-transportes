@@ -2,8 +2,6 @@
 
 namespace Crud;
 
-use Error;
-
 abstract class CRUDBase {
     /**
      * Summary of handle
