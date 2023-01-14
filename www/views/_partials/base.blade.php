@@ -10,5 +10,6 @@
 <body>
     @include('_partials.header')
     @yield('content')
+    <script src="assets/bootstrap.bundle.min.js"></script>
 </body>
 </html>
