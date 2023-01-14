@@ -48,6 +48,7 @@ class Lista {
 
         $processArr = function ($n) {
             unset($n["password"]);
+            return $n;
         };
 
         return array_map($processArr, $found);
