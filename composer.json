@@ -16,7 +16,7 @@
         "psr-4": {
             "Clases\\": "www/src",
             "Crud\\": "www/src/crud",
-            "List\\": "www/src/list"
+            "Lista\\": "www/src/list"
         }
     },
     "authors": [
