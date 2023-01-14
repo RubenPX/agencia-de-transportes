@@ -31,9 +31,9 @@
                             <td class="align-middle text-center">{{ $value }}</td>
                         @endforeach
                         <td class="align-middle text-center d-flex">
-                            <a href="/crudView.php?type={{ $type }}&id={{ $item["id"] ?? $item["DNI"] }}" type="button" class="btn btn-outline-info btn-sm" style="white-space: nowrap;">Ver</a>
-                            <a href="/crudEdit.php?type={{ $type }}&id={{ $item["id"] ?? $item["DNI"] }}" type="button" class="btn btn-outline-info btn-sm ms-2" style="white-space: nowrap;">Editar</a>
-                            <a href="/crudDelete.php?type={{ $type }}&id={{ $item["id"] ?? $item["DNI"] }}" type="button" class="btn btn-outline-info btn-sm ms-2" style="white-space: nowrap;">Borrar</a>
+                            <a href="/crudView.php?type={{ $type }}&id={{ $item["id"] ?? $item["Envio_ID"] ?? $item["DNI"] }}" type="button" class="btn btn-outline-info btn-sm" style="white-space: nowrap;">Ver</a>
+                            <a href="/crudEdit.php?type={{ $type }}&id={{ $item["id"] ?? $item["Envio_ID"] ?? $item["DNI"] }}" type="button" class="btn btn-outline-info btn-sm ms-2" style="white-space: nowrap;">Editar</a>
+                            <a href="/crudDelete.php?type={{ $type }}&id={{ $item["id"] ?? $item["Envio_ID"] ?? $item["DNI"] }}" type="button" class="btn btn-outline-info btn-sm ms-2" style="white-space: nowrap;">Borrar</a>
                         </td>
                     </tr>
                     @endforeach

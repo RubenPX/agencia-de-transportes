@@ -1,27 +1,57 @@
 <?php
+use Crud\CRUD;
+
 require_once "./shared/blade.php";
 require_once "./shared/SessionLogin.php";
 
 // Initialize variables
 $error = "";
-$title = "";
+$title = "Ver ";
 $properties = [];
 
-// Examples
-// Ver pueblo: http://localhost/crudView.php?type=Pueblo&ID=1
-// Ver cliente: http://localhost/crudView.php?type=Client&Client=98765432A
-
-/* Set read only */
+// Load state
 $STATE = "CREATE";
+$crud = new CRUD();
 
-// Load crud
-require_once "./shared/crud.php";
-$properties = crudView();
+// todo: This in future will be a bug (Fix in progress)
+// todo: This will fail if there has not values in table
+$properties = $crud->handle($_GET["type"], $STATE, ["GET_ID" => 1]);
+
+// Detect if has error
+if (isset($properties["!ERROR"])) {
+    $error = $properties["!ERROR"];
+}
+
+// Set title
+switch ($_GET["type"]) {
+    case "Client":
+        $title .= "cliente";
+        break;
+    case "Repartidor":
+        $title .= "repartidor";
+        break;
+    case "Envio":
+        $title .= "envio";
+        break;
+    case "Pueblo":
+        $title .= "pueblo";
+        break;
+    default:
+        $title = "Tipo desconocido";
+        break;
+}
+$type = $_GET["type"];
+
+// Elimina cualquier valor
+$removeValues = function($i) {
+    return "";
+};
+$properties = array_map($removeValues, $properties);
 
 /* Render php blade file */
 echo $blade
     ->view()
-    ->make('crud', compact("logedUser", "properties", "title", "STATE", "error"))
+    ->make('crud', compact("logedUser", "properties", "STATE", "type", "title", "error"))
     ->render();
 
 ?>
