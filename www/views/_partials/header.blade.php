@@ -7,7 +7,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="me-auto"></ul>
-                <form class="d-flex" action="/" method="GET">
+                <form class="d-flex" action="/public/" method="GET">
                     <input class="form-control text-center" type="text" disabled value="{{ $logedUser }}">
                     <button class="btn btn-secondary my-2 my-sm-0 mx-2" name="LogOut" type="submit" style="white-space: nowrap;">Cerrar Sesión</button>
                 </form>

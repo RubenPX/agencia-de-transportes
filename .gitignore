@@ -2,4 +2,4 @@
 node_modules/
 .phpunit.result.cache
 .devcontainer/logs/**/*.log
-cache/*.php
+www/cache/*.php

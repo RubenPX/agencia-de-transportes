@@ -13,14 +13,14 @@ if (isset($_GET["LogOut"])) {
 
 if ($sessionL->verifySession()) {
     if ($sessionL->userType == "REPAR") {
-        header('Location: /Repartidor.php');
+        header('Location: /public/Repartidor.php');
     }
 
     if ($sessionL->userType == "ADMIN") {
-        header('Location: /admin.php');
+        header('Location: /public/admin.php');
     }
 
     die();
 }
 
-header('Location: /login.php');
+header('Location: /public/login.php');
