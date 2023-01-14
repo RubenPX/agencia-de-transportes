@@ -99,19 +99,19 @@ class Poblacion extends Conexion
             /* Poblacion */
             `poblacion`.nombre as nombre,
             `poblacion`.cp as cp,
-            CONCAT(`repartidor`.Nombre,' ', `repartidor`.Apellidos) as Repartidor,
+            CONCAT(`repartidor`.Nombre,' ', `repartidor`.Apellidos) as Repartidor
             FROM `poblacion`
             /* mezclamos reparpoblacion */
             INNER JOIN `reparpoblacion` ON `poblacion`.id = `reparpoblacion`.idPoblacion
             /* mezclamos repartidor */
-            INNER JOIN `repartidor` ON `reparpoblacion`.`idRepartidor` = `repartidor`.`id` WHERE id='$id'";
-        $stmt = $this->conexion->prepare($consulta);
+            INNER JOIN `repartidor` ON `reparpoblacion`.`idRepartidor` = `repartidor`.`id` WHERE `poblacion`.id='$id'";
         try {
+            $stmt = $this->conexion->prepare($consulta);
             $stmt->execute();
         } catch (PDOException $ex) {
             ("Error al recuperar poblacion: " . $ex->getMessage());
         }
         $this->conexion = null;
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }
