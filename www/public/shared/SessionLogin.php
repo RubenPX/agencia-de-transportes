@@ -12,3 +12,4 @@ if (!$sessionL->verifySession()) {
 }
 
 $logedUser = $sessionL->userName;
+$userType = $sessionL->userType;

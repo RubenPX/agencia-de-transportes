@@ -44,7 +44,7 @@ if (isset($properties["!ERROR"])) {
 
 echo $blade
     ->view()
-    ->make('lista', compact("logedUser", "properties", "title", "type", "error"))
+    ->make('lista', compact("logedUser", "userType", "properties", "title", "type", "error"))
     ->render();
 
 ?>
