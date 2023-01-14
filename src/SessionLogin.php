@@ -6,7 +6,7 @@ namespace Clases;
  * This is a temporal login implementation
  * todo: @RubenPX Implementar bien las funciones
  */
-Class SessionLogin {
+class SessionLogin {
 
     public string $userName; // User Name
     public string $UID; // Repartidor ID | User DNI

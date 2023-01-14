@@ -5,20 +5,17 @@ namespace Clases;
 use PDO;
 use PDOException;
 
-class Poblacion extends Conexion
-{
+class Poblacion extends Conexion {
     private $id;
     private $nombre;
     private $cp;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
 
-    function recuperarPoblaciones()
-    {
+    function recuperarPoblaciones() {
         $consulta = "select * from poblacion";
         $stmt = $this->conexion->prepare($consulta);
         try {
@@ -30,11 +27,10 @@ class Poblacion extends Conexion
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function borrarPoblacion($id)
-    {
+    function borrarPoblacion($id) {
         try {
             $stmt = $this->conexion->prepare("DELETE FROM poblacion WHERE id='$id'");
-            $stmt->execute();         
+            $stmt->execute();
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
@@ -42,7 +38,7 @@ class Poblacion extends Conexion
 
         try { //borramos de la tabla reparpoblacion
             $this->borrarRepartidorAsignado($id);
-      
+
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
@@ -51,8 +47,7 @@ class Poblacion extends Conexion
         return true;
     }
 
-    function crearPoblacion($nombre, $cp)
-    {
+    function crearPoblacion($nombre, $cp) {
         try {
             $stmt = $this->conexion->prepare("INSERT INTO poblacion (nombre, cp) VALUES (:nombre, :cp)");
             $stmt->bindParam(":nombre", $nombre);
@@ -65,8 +60,7 @@ class Poblacion extends Conexion
         }
     }
 
-    function actualizarPoblacion($id, $nombre, $cp)
-    {
+    function actualizarPoblacion($id, $nombre, $cp) {
         try {
             $stmt = $this->conexion->prepare("UPDATE poblacion SET nombre=:nombre, cp=:cp WHERE id='$id'");
             $stmt->bindParam(":nombre", $nombre);
@@ -80,11 +74,10 @@ class Poblacion extends Conexion
         return true;
     }
 
-    public function borrarRepartidorAsignado($id)
-    {
+    public function borrarRepartidorAsignado($id) {
         try {
             $stmt = $this->conexion->prepare("DELETE FROM reparpoblacion WHERE idPoblacion='$id'");
-            $stmt->execute();          
+            $stmt->execute();
         } catch (PDOException $ex) {
             ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
             return false;
@@ -93,25 +86,24 @@ class Poblacion extends Conexion
         return true;
     }
 
-    function getPoblacion($id)
-    {
+    function getPoblacion($id) {
         $consulta = "SELECT
             /* Poblacion */
             `poblacion`.nombre as nombre,
             `poblacion`.cp as cp,
-            CONCAT(`repartidor`.Nombre,' ', `repartidor`.Apellidos) as Repartidor,
+            CONCAT(`repartidor`.Nombre,' ', `repartidor`.Apellidos) as Repartidor
             FROM `poblacion`
             /* mezclamos reparpoblacion */
             INNER JOIN `reparpoblacion` ON `poblacion`.id = `reparpoblacion`.idPoblacion
             /* mezclamos repartidor */
-            INNER JOIN `repartidor` ON `reparpoblacion`.`idRepartidor` = `repartidor`.`id` WHERE id='$id'";
-        $stmt = $this->conexion->prepare($consulta);
+            INNER JOIN `repartidor` ON `reparpoblacion`.`idRepartidor` = `repartidor`.`id` WHERE `poblacion`.id='$id'";
         try {
+            $stmt = $this->conexion->prepare($consulta);
             $stmt->execute();
         } catch (PDOException $ex) {
             ("Error al recuperar poblacion: " . $ex->getMessage());
         }
         $this->conexion = null;
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }

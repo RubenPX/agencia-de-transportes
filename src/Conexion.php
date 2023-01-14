@@ -5,8 +5,7 @@ namespace Clases;
 use PDO;
 use PDOException;
 
-class Conexion
-{
+class Conexion {
     private $host;
     private $db;
     private $user;
@@ -14,8 +13,7 @@ class Conexion
     private $dsn;
     protected $conexion;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->host = "db";
         $this->db = "agencia";
         $this->user = "agencia";
@@ -24,8 +22,7 @@ class Conexion
         $this->crearConexion();
     }
 
-    public function crearConexion()
-    {
+    public function crearConexion() {
         try {
             $this->conexion = new PDO($this->dsn, $this->user, $this->pass);
             $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
