@@ -37,6 +37,14 @@ class Client extends CRUDBase {
     }
 
     public function create(array $data): array {
+        $cliente = new Cliente();
 
+        $pass = hash("sha256", $data["password"]);
+
+        if (!$cliente->crearCliente($data["DNI"], $data["nombre"], $data["apellidos"], $data["telefono"], $data["mail"], $pass, 0)) {
+            return ["!ERROR" => "Fallo al crear el cliente"];
+        }
+
+        return ["!OK" => "Cliente creado"];
     }
 }
