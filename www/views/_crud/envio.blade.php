@@ -56,8 +56,8 @@
 @endforeach
 
 @include("components.forms.input", [
-    "key" => "estado",
+    "key" => "tarifa",
     "value" => $properties["tarifa"],
-    "CTitle" => "Estado",
+    "CTitle" => "Tarifa",
     "readOnly" => $STATE == "VIEW" || $STATE == "DELETE"
 ])
