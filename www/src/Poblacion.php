@@ -24,16 +24,16 @@ class Poblacion extends Conexion {
     function borrarPoblacion($id) {
         $this->prepareStatement("DELETE FROM poblacion WHERE id=:id");
         $this->setParam(":id", $id);
-        $this->borrarRepartidorAsignado($id);
+        if (!$this->borrarRepartidorAsignado($id)) {
+            return false;
+        }
         return $this->runStatement();
-
     }
 
     function crearPoblacion($nombre, $cp) {
         $this->prepareStatement("INSERT INTO poblacion (nombre, cp) VALUES (:nombre, :cp)");
         $this->setParam(":nombre", $nombre);
         $this->setParam(":apellidos", $cp);
-      
         return $this->runStatement();
     }
 
@@ -42,14 +42,13 @@ class Poblacion extends Conexion {
         $this->setParam(":id", $id);
         $this->setParam(":nombre", $nombre);
         $this->setParam(":cp", $cp);
-        
-        $this->runStatement();
+        return $this->runStatement();
     }
 
     public function borrarRepartidorAsignado($id) {
         $this->prepareStatement("DELETE FROM reparpoblacion WHERE idPoblacion=:id");
         $this->setParam(":id", $id);
-        $this->runStatement();
+        return $this->runStatement();
     }
 
     function getPoblacion($id) {

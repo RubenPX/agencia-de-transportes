@@ -119,11 +119,10 @@ class Envio extends Conexion {
         
         WHERE `envio`.id = :id";
 
-       
-            $this->prepareStatement($consulta);
-            $this->setParam(":id", $id);
-            $this->runStatement();
-            return $this->fetch();
+        $this->prepareStatement($consulta);
+        $this->setParam(":id", $id);
+        $this->runStatement();
+        return $this->fetch();
     }
 
 
@@ -135,44 +134,44 @@ class Envio extends Conexion {
 
     function crearEnvio($idDestinatario, $idRemitente, $DNICliente, $fecha, $peso, $ancho,
         $largo, $alto, $tarifa) {
-        
-            $estado = 'entregado';
-            $stmt = $this->conexion->prepare("INSERT INTO envio (idDestinatario, idRemitente,
+
+        $estado = 'entregado';
+        $stmt = $this->conexion->prepare("INSERT INTO envio (idDestinatario, idRemitente,
                 DNICliente, fecha, peso, ancho, largo, alto, estado, tarifa) VALUES (:idDestinatario, :idRemitente,
                 :DNICliente, :fecha, :peso, :ancho, :largo, :alto, :estado, :tarifa)");
-            $this->setParam(":idDestinatario", $idDestinatario);
-            $this->setParam(":idRemitente", $idRemitente);
-            $this->setParam(":DNICliente", $DNICliente);
-            $this->setParam(":fecha", $fecha);
-            $this->setParam(":peso", $peso);
-            $this->setParam(":ancho", $ancho);
-            $this->setParam(":largo", $largo);
-            $this->setParam(":alto", $alto);
-            $this->setParam(":estado", $estado);
-            $this->setParam(":tarifa", $tarifa);
-        
-            $this->runStatement();
+        $this->setParam(":idDestinatario", $idDestinatario);
+        $this->setParam(":idRemitente", $idRemitente);
+        $this->setParam(":DNICliente", $DNICliente);
+        $this->setParam(":fecha", $fecha);
+        $this->setParam(":peso", $peso);
+        $this->setParam(":ancho", $ancho);
+        $this->setParam(":largo", $largo);
+        $this->setParam(":alto", $alto);
+        $this->setParam(":estado", $estado);
+        $this->setParam(":tarifa", $tarifa);
+
+        return $this->runStatement();
     }
 
 
     function actualizarEnvio($id, $idDestinatario, $idRemitente, $DNICliente, $fecha, $peso, $ancho,
         $largo, $alto, $estado, $tarifa) {
-            $this->prepareStatement("UPDATE envio SET idDestinatario=:idDestinatario, idRemitente=:idRemitente,
+        $this->prepareStatement("UPDATE envio SET idDestinatario=:idDestinatario, idRemitente=:idRemitente,
                 DNICliente=:DNICliente, fecha=:fecha, peso=:peso, ancho=:ancho, largo=:largo, alto=:alto estado=:estado,
                 tarifa=:tarifa WHERE id=$id");
-                
-            $this->setParam(":idDestinatario", $idDestinatario);
-            $this->setParam(":idRemitente", $idRemitente);
-            $this->setParam(":DNICliente", $DNICliente);
-            $this->setParam(":fecha", $fecha);
-            $this->setParam(":peso", $peso);
-            $this->setParam(":ancho", $ancho);
-            $this->setParam(":largo", $largo);
-            $this->setParam(":alto", $alto);
-            $this->setParam(":estado", $estado);
-            $this->setParam(":tarifa", $tarifa);
 
-            $this->runStatement();
+        $this->setParam(":idDestinatario", $idDestinatario);
+        $this->setParam(":idRemitente", $idRemitente);
+        $this->setParam(":DNICliente", $DNICliente);
+        $this->setParam(":fecha", $fecha);
+        $this->setParam(":peso", $peso);
+        $this->setParam(":ancho", $ancho);
+        $this->setParam(":largo", $largo);
+        $this->setParam(":alto", $alto);
+        $this->setParam(":estado", $estado);
+        $this->setParam(":tarifa", $tarifa);
+
+        return $this->runStatement();
     }
 
     function getEnvio($id) {

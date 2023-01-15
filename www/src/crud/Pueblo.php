@@ -41,7 +41,7 @@ class Pueblo extends CRUDBase {
         if (!$poblacion->borrarPoblacion($id)) {
             return ["!ERROR" => "Fallo al borrar el pueblo"];
         }
-        return ["!OK" => "Delete recived"];
+        return ["!OK" => "Pueblo borrado"];
 
     }
 

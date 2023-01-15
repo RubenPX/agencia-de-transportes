@@ -45,7 +45,6 @@ class Destinatario extends Conexion {
         $this->setParam(":idPoblacion", $idPoblacion);
 
         return $this->runStatement();
-        
     }
 
     function actualizarDestinatario($id, $nombre, $apellidos, $correo, $telefono, $calle, $piso, $idPoblacion) {
@@ -61,7 +60,7 @@ class Destinatario extends Conexion {
         $this->setParam(":piso", $piso);
         $this->setParam(":idPoblacion", $idPoblacion);
         
-        $this->runStatement();
+        return $this->runStatement();
     }
 
     function getDestinatario($id) {

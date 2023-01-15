@@ -62,7 +62,7 @@ class Remitente extends Conexion {
         $this->setParam(":piso", $piso);
         $this->setParam(":idPoblacion", $idPoblacion);
         
-        $this->runStatement();
+        return $this->runStatement();
     }
 
     function getRemitente($id) {

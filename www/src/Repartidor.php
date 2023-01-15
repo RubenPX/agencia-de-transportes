@@ -30,10 +30,10 @@ class Repartidor extends Conexion {
     function borrarRepartidor($id) {
         $this->prepareStatement("DELETE FROM repartidor WHERE id=:id");
         $this->setParam(":id", $id);
-        $this->borrarPoblacionAsignada($id);
+        if (!$this->borrarPoblacionAsignada($id)) {
+            return false;
+        }
         return $this->runStatement();
-
-
     }
 
     function crearRepartidor($DNI, $Nombre, $Apellidos) {
@@ -52,6 +52,7 @@ class Repartidor extends Conexion {
             
             return $this->runStatement();
         }
+
         return false;
     }
 
@@ -72,6 +73,7 @@ class Repartidor extends Conexion {
 
             $this->runStatement();
         }
+
         return false;
     }
 
@@ -82,13 +84,13 @@ class Repartidor extends Conexion {
         $this->setParam(":idRepartidor", $idRepartidor);
         $this->setParam(":idPoblacion", $idPoblacion);
     
-        $this->runStatement();
+        return $this->runStatement();
     }
 
     function borrarPoblacionAsignada($id) {
         $this->prepareStatement("DELETE FROM reparpoblacion WHERE idRepartidor=:id");
         $this->setParam(":id", $id);
-        $this->runStatement();
+        return $this->runStatement();
     }
 
     function getRepartidor($id) {

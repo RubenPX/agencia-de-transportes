@@ -41,7 +41,6 @@ class Aviso extends Conexion {
         $this->setParam(":idEnvio", $idEnvio);
         $this->setParam(":fecha", $fecha);
         $this->setParam(":idRepartidor", $idRepartidor);
-
         return $this->runStatement();
     }
 

@@ -55,23 +55,19 @@ class Cliente extends Conexion {
     function actualizarCliente($DNI, $nombre, $apellidos, $telefono, $mail, $activo) {
         $this->prepareStatement("UPDATE cliente SET nombre=:nombre, apellidos=:apellidos,
         telefono=:telefono, mail=:mail, activo=:activo WHERE DNI=:DNI");
-
         $this->setParam(":DNI", $DNI);
         $this->setParam(":nombre", $nombre);
         $this->setParam(":apellidos", $apellidos);
         $this->setParam(":telefono", $telefono);
         $this->setParam(":mail", $mail);
         $this->setParam(":activo", $activo);
-
-        $this->runStatement();
+        return $this->runStatement();
     }
 
     function getCliente($DNI) {
         $this->prepareStatement("SELECT * FROM cliente WHERE DNI=:DNI");
         $this->setParam(":DNI", $DNI);
-
         $this->runStatement();
-
         return $this->fetch();
     }
 
