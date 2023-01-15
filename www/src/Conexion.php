@@ -17,7 +17,7 @@ class STMT {
         try {
             $this->stmt = $Conex->prepare($query);
             $this->params = [];
-            webConsoleLog("PREPARE QUERY: " . $this->stmt->queryString);
+            
         } catch (PDOException $ex) {
             throw new PDOException("Error al preparar la query");
         }
@@ -27,9 +27,16 @@ class STMT {
         try {
             $this->stmt->bindParam($key, $value);
             $this->params[$key] = $value;
-            webConsoleLog("> PARAM: " . $key . " => " . $value);
+            
         } catch (PDOException $ex) {
             throw new PDOException("Error al añadir un parametro");
+        }
+    }
+
+    private function preDebugQuery() {
+        webConsoleLog("QUERY: " . $this->stmt->queryString);
+        foreach ($this->params as $key => $value) {
+            webConsoleLog("> PARAM: " . $key . " => " . $value);
         }
     }
 
@@ -40,6 +47,7 @@ class STMT {
 
     public function runStatement() {
         try {
+            $this->preDebugQuery();
             $result = $this->stmt->execute();
             $this->debugRunQuery($this->stmt->rowCount());
             return $result;

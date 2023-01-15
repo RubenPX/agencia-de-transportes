@@ -36,10 +36,12 @@ class LOGGER {
     }
 
     public function wcq(string $str, $any) {
+        $str = str_replace("\n", "\\n ", $str);
         $this->WebLogs[] = ["TYP" => "query", "str" => $str, "any" => $any];
     }
 
     public function wcl($str, $any = "''") {
+        $str = str_replace("\n", "\\n ", $str);
         $this->WebLogs[] = ["TYP" => "log", "str" => $str, "any" => $any];
     }
 
