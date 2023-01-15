@@ -33,7 +33,13 @@ class Client extends CRUDBase {
     }
 
     public function delete(string $id): array {
+        $cliente = new Cliente();
 
+        if (!$cliente->borrarCliente($id)) {
+            return ["!ERROR" => "Error al borrar el cliente"];
+        }
+
+        return ["!OK" => "Eliminación completada"];
     }
 
     public function create(array $data): array {
