@@ -141,9 +141,10 @@ class Repartidor extends Conexion {
         /* mezclamos reparpoblacion */
         INNER JOIN `reparpoblacion` ON `repartidor`.id = `reparpoblacion`.idRepartidor
         /* mezclamos poblacion */
-        INNER JOIN `poblacion` ON `reparpoblacion`.`idPoblacion` = `poblacion`.`id` WHERE id='$id'";
-        $stmt = $this->conexion->prepare($consulta);
+        INNER JOIN `poblacion` ON `reparpoblacion`.`idPoblacion` = `poblacion`.`id` WHERE `repartidor`.id=:idRepartidor";
         try {
+            $stmt = $this->conexion->prepare($consulta);
+            $stmt->bindParam(":idRepartidor", $id);
             $stmt->execute();
         } catch (PDOException $ex) {
             ("Error al recuperar repartidor: " . $ex->getMessage());
