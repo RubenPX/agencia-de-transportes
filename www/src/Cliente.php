@@ -18,90 +18,64 @@ class Cliente extends Conexion {
         parent::__construct();
     }
 
-
     function recuperarClientes() {
-        $consulta = "select * from cliente order by nombre";
-        $stmt = $this->conexion->prepare($consulta);
-        try {
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar clientes: " . $ex->getMessage());
-        }
-        $this->conexion = null;
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        $this->prepareStatement("SELECT * from cliente order by nombre");
+        $this->runStatement();
+        return $this->fetchAll();
     }
 
     function borrarCliente($DNI) {
-        try {
-            $stmt = $this->conexion->prepare("DELETE FROM cliente WHERE DNI='$DNI'");
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
+        $this->prepareStatement("DELETE FROM cliente WHERE DNI=:DNI");
+        $this->setParam(":DNI", $DNI);
+        return $this->runStatement();
     }
 
     function crearCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo) {
-        try {
-            $resultadoConsulta = $this->conexion->query("SELECT DNI FROM cliente WHERE DNI='$DNI'");
-            $consulta = $resultadoConsulta->fetch(PDO::FETCH_OBJ);
-        } catch (PDOException $ex) {
-            ("Error en la consulta, mensaje de error:  " . $ex->getMessage());
-        }
+        $this->prepareStatement("SELECT DNI FROM cliente WHERE DNI=:DNI");
+        $this->setParam(":DNI", $DNI);
+        $this->runStatement();
+
+        $consulta = $this->fetch();
 
         if ($consulta == null) { //En caso de que no haya coincidencia en el campo DNI de ningún registro
-            try {
-                $stmt = $this->conexion->prepare('INSERT INTO cliente (DNI, nombre, apellidos, telefono, mail, password, activo)
-                    VALUES (:dni, :nombre, :apellidos, :telefono, :mail, :password, :activo)');
-                $stmt->bindParam(":dni", $DNI);
-                $stmt->bindParam(":nombre", $nombre);
-                $stmt->bindParam(":apellidos", $apellidos);
-                $stmt->bindParam(":telefono", $telefono);
-                $stmt->bindParam(":mail", $mail);
-                $stmt->bindParam(":password", $password);
-                $stmt->bindParam(":activo", $activo);
-                $stmt->execute();
+            $this->prepareStatement('INSERT INTO cliente (DNI, nombre, apellidos, telefono, mail, password, activo)
+            VALUES (:dni, :nombre, :apellidos, :telefono, :mail, :password, :activo)');
 
-            } catch (PDOException $ex) {
-                ("Error al crear, mensaje de error:  " . $ex->getMessage());
-                return false;
-            }
-            $this->conexion = null;
-            return true;
+            $this->setParam(":dni", $DNI);
+            $this->setParam(":nombre", $nombre);
+            $this->setParam(":apellidos", $apellidos);
+            $this->setParam(":telefono", $telefono);
+            $this->setParam(":mail", $mail);
+            $this->setParam(":password", $password);
+            $this->setParam(":activo", $activo);
+
+            return $this->runStatement();
         }
+
+        return false;
     }
 
     function actualizarCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo) {
-        try {
-            $stmt = $this->conexion->prepare("UPDATE cliente SET nombre=:nombre, apellidos=:apellidos,
-            telefono=:telefono, mail=:mail, password=:password, activo=:activo WHERE DNI='$DNI'");
-            $stmt->bindParam(":nombre", $nombre);
-            $stmt->bindParam(":apellidos", $apellidos);
-            $stmt->bindParam(":telefono", $telefono);
-            $stmt->bindParam(":mail", $mail);
-            $stmt->bindParam(":password", $password);
-            $stmt->bindParam(":activo", $activo);
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al crear, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
+        $this->prepareStatement("UPDATE cliente SET nombre=:nombre, apellidos=:apellidos,
+        telefono=:telefono, mail=:mail, password=:password, activo=:activo WHERE DNI=:DNI");
+
+        $this->setParam(":nombre", $nombre);
+        $this->setParam(":apellidos", $apellidos);
+        $this->setParam(":telefono", $telefono);
+        $this->setParam(":mail", $mail);
+        $this->setParam(":password", $password);
+        $this->setParam(":activo", $activo);
+
+        $this->runStatement();
     }
 
     function getCliente($DNI) {
-        $consulta = "select * from cliente WHERE DNI='$DNI'";
-        $stmt = $this->conexion->prepare($consulta);
-        try {
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar cliente: " . $ex->getMessage());
-        }
-        $this->conexion = null;
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        $this->prepareStatement("SELECT * FROM cliente WHERE DNI=:DNI");
+        $this->setParam(":DNI", $DNI);
+
+        $this->runStatement();
+
+        return $this->fetch();
     }
 
 }

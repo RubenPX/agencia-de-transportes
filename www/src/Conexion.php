@@ -4,6 +4,7 @@ namespace Clases;
 
 use PDO;
 use PDOException;
+use PDOStatement;
 
 class Conexion {
     private $host;
@@ -11,7 +12,8 @@ class Conexion {
     private $user;
     private $pass;
     private $dsn;
-    protected $conexion;
+    protected PDO $conexion;
+    protected PDOStatement $stmt;
 
     public function __construct() {
         $this->host = "db";
@@ -22,7 +24,11 @@ class Conexion {
         $this->crearConexion();
     }
 
-    public function crearConexion() {
+    public function __destruct() {
+        // $this->conexion;
+    }
+
+    public function crearConexion(): PDO {
         try {
             $this->conexion = new PDO($this->dsn, $this->user, $this->pass);
             $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -30,5 +36,45 @@ class Conexion {
             die("Error en la conexión: mensaje: " . $ex->getMessage());
         }
         return $this->conexion;
+    }
+
+    public function prepareStatement(string $query) {
+        try {
+            $this->stmt = $this->conexion->prepare($query);
+        } catch (PDOException $ex) {
+            throw new PDOException("Error al preparar la query");
+        }
+    }
+
+    public function setParam(string $key, string $value) {
+        try {
+            $this->stmt->bindParam($key, $value);
+        } catch (PDOException $ex) {
+            throw new PDOException("Error al añadir un parametro");
+        }
+    }
+
+    public function runStatement(): bool {
+        try {
+            return $this->stmt->execute();
+        } catch (PDOException $ex) {
+            throw new PDOException("Error al añadir un parametro");
+        }
+    }
+
+    public function fetch() {
+        try {
+            return $this->stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            throw new PDOException("Fallo al extraer datos");
+        }
+    }
+
+    public function fetchAll() {
+        try {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            throw new PDOException("Fallo al extraer datos");
+        }
     }
 }
