@@ -55,16 +55,15 @@ class Cliente extends Conexion {
         return false;
     }
 
-    function actualizarCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo) {
+    function actualizarCliente($DNI, $nombre, $apellidos, $telefono, $mail, $activo) {
         $this->prepareStatement("UPDATE cliente SET nombre=:nombre, apellidos=:apellidos,
-        telefono=:telefono, mail=:mail, password=:password, activo=:activo WHERE DNI=:DNI");
+        telefono=:telefono, mail=:mail, activo=:activo WHERE DNI=:DNI");
 
         $this->setParam(":DNI", $DNI);
         $this->setParam(":nombre", $nombre);
         $this->setParam(":apellidos", $apellidos);
         $this->setParam(":telefono", $telefono);
         $this->setParam(":mail", $mail);
-        $this->setParam(":password", $password);
         $this->setParam(":activo", $activo);
 
         $this->runStatement();
@@ -77,6 +76,13 @@ class Cliente extends Conexion {
         $this->runStatement();
 
         return $this->fetch();
+    }
+
+    function cambiarPassword($DNI, $password) {
+        $this->prepareStatement("UPDATE cliente SET password=:password WHERE DNI=:DNI");
+        $this->setParam(":DNI", $DNI);
+        $this->setParam(":password", $password);
+        $this->runStatement();
     }
 
 }
