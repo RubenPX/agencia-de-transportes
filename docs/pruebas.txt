@@ -1,0 +1,41 @@
+PRUEBAS Y CAPTURAS DE PANTALLA(cp) A REALIZAR:
+
+- Página login(cp)
+
+    - Loguearse como admin
+
+        - Página principal admin(cp)
+
+        - Página clientes(cp)
+            - Añadir cliente(cp)  (activo = 1)
+            - Modificar cliente(cp)
+            - Eliminar cliente(cp) (solo si activo = 0)
+        
+        - Página repartidores(cp)
+            - Añadir repartidor(cp)
+            - Modificar repartidor(cp)
+                - Eliminar poblacion asignada(cp)
+                - Asignar poblacion(cp)
+            - Eliminar repartidor(cp) (se elimina de tabla reparpoblacion)
+        
+        - Página poblaciones(cp)
+            - Añadir poblacion(cp)
+            - Modificar poblacion(cp)
+                - Eliminar repartidor asignado(cp)
+                - Asignar repartidor(cp)
+            - Eliminar poblacion(cp) (se elimina de tabla reparpoblacion)
+
+        - Página envios(cp)
+            - Detalles envío(cp)
+            - Añadir envío(cp) (cliente existente, estado = entregado)
+            - Modificar envío(cp)
+            - Eliminar envío(cp)
+
+
+    - Loguearse como repartidor
+
+        - Página principal repartidor(cp)
+
+            - Obtener envios(cp)  (solo recogidos o en reparto, fecha anterior a actual, se modifica de recogido a en reparto)
+                - Añadir aviso (cp)
+                - Modificar estado a entregado (cp)
