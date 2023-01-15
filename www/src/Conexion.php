@@ -58,7 +58,7 @@ class Conexion {
         try {
             return $this->stmt->execute();
         } catch (PDOException $ex) {
-            throw new PDOException("Error al añadir un parametro");
+            throw new PDOException("Error al ejecutar la sentencia");
         }
     }
 
