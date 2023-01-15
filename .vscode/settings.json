@@ -51,5 +51,7 @@
     },
     "php.validate.enable": true,
     "php.suggest.basic": true,
-    "php.format.codeStyle": "K&R"
+    "php.format.codeStyle": "K&R",
+    "php.executables": { "v7.4": "/usr/local/bin/php" },
+    "php.version": "v7.4"
 }
