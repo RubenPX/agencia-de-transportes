@@ -5,7 +5,12 @@
     <label for="{{ $key }}" class="col-sm-4 col-form-label text-end">{{ $title }}</label>
     <div class="col-sm-8">
         @if ($readOnly)
-            <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $items[$value]["value"] }}">
+            @foreach ($items as $item)
+                @if ($item["id"] == $value)
+                    <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $item["value"] }}">        
+                    @break
+                @endif
+            @endforeach
         @else
             <select class="form-select" name="{{ $key }}" id="{{ $key }}" aria-label="Default select example">
                 @foreach ($items as $item)
