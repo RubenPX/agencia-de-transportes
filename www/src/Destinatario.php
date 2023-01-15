@@ -21,81 +21,53 @@ class Destinatario extends Conexion {
 
 
     function recuperarDestinatarios() {
-        $consulta = "select * from destinatario";
-        $stmt = $this->conexion->prepare($consulta);
-        try {
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar destinatarios: " . $ex->getMessage());
-        }
-        $this->conexion = null;
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        $this->prepareStatement("SELECT * from destinatario order by nombre"); 
+        $this->runStatement();
+        return $this->fetchAll();
     }
 
     function borrarDestinatario($id) {
-        try {
-            $stmt = $this->conexion->prepare("DELETE FROM destinatario WHERE id='$id'");
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-
-        return true;
+        $this->prepareStatement("DELETE FROM destinatario WHERE id=:id");
+        $this->setParam(":id", $id);
+        return $this->runStatement();
     }
 
     function crearDestinatario($nombre, $apellidos, $correo, $telefono, $calle, $piso, $idPoblacion) {
-    
-            try {
-                $stmt = $this->conexion->prepare('INSERT INTO destinatario (nombre, apellidos, correo, telefono, calle, piso, idPoblacion)
-                    VALUES (:nombre, :apellidos, :correo, :telefono, :calle, :piso, :idPoblacion)');
-                $stmt->bindParam(":nombre", $nombre);
-                $stmt->bindParam(":apellidos", $apellidos);
-                $stmt->bindParam(":correo", $correo);
-                $stmt->bindParam(":telefono", $telefono);
-                $stmt->bindParam(":calle", $calle);
-                $stmt->bindParam(":piso", $piso);
-                $stmt->bindParam(":idPoblacion", $idPoblacion);
-                $stmt->execute();
+        $this->prepareStatement('INSERT INTO destinatario (nombre, apellidos, correo, telefono, calle, piso, idPoblacion)
+        VALUES (:nombre, :apellidos, :correo, :telefono, :calle, :piso, :idPoblacion)');
 
-            } catch (PDOException $ex) {
-                ("Error al crear, mensaje de error:  " . $ex->getMessage());
-                return false;
-            }
-            $this->conexion = null;
-            return true;
+        $this->setParam(":nombre", $nombre);
+        $this->setParam(":apellidos", $apellidos);
+        $this->setParam(":correo", $correo);
+        $this->setParam(":telefono", $telefono);
+        $this->setParam(":calle", $calle);
+        $this->setParam(":piso", $piso);
+        $this->setParam(":idPoblacion", $idPoblacion);
+
+        return $this->runStatement();
         
     }
 
     function actualizarDestinatario($id, $nombre, $apellidos, $correo, $telefono, $calle, $piso, $idPoblacion) {
-        try {
-            $stmt = $this->conexion->prepare("UPDATE destinatario SET nombre=:nombre, apellidos=:apellidos, correo=:correo
-            telefono=:telefono, calle=:calle, piso=:piso, idPoblacion=:idPoblacion WHERE id='$id'");
-            $stmt->bindParam(":nombre", $nombre);
-            $stmt->bindParam(":apellidos", $apellidos);
-            $stmt->bindParam(":correo", $correo);
-            $stmt->bindParam(":telefono", $telefono);
-            $stmt->bindParam(":calle", $calle);
-            $stmt->bindParam(":piso", $piso);
-            $stmt->bindParam(":idPoblacion", $idPoblacion);
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al crear, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
+        $this->prepareStatement("UPDATE destinatario SET nombre=:nombre, apellidos=:apellidos, correo=:correo
+        telefono=:telefono, calle=:calle, piso=:piso, idPoblacion=:idPoblacion WHERE id=:id");
+
+        $this->setParam(":id", $id);
+        $this->setParam(":nombre", $nombre);
+        $this->setParam(":apellidos", $apellidos);
+        $this->setParam(":correo", $correo);
+        $this->setParam(":telefono", $telefono);
+        $this->setParam(":calle", $calle);
+        $this->setParam(":piso", $piso);
+        $this->setParam(":idPoblacion", $idPoblacion);
+        
+        $this->runStatement();
     }
 
     function getDestinatario($id) {
-        $consulta = "select * from destinatario WHERE id='$id'";
-        $stmt = $this->conexion->prepare($consulta);
-        try {
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar destinatario: " . $ex->getMessage());
-        }
-        $this->conexion = null;
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        $this->prepareStatement("SELECT * FROM destinatario WHERE id=:id");
+        $this->setParam(":id", $id);
+        $this->runStatement();
+        return $this->fetch();
     }
 }

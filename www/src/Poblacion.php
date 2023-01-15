@@ -16,78 +16,44 @@ class Poblacion extends Conexion {
 
 
     function recuperarPoblaciones() {
-        $consulta = "select * from poblacion";
-        $stmt = $this->conexion->prepare($consulta);
-        try {
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar poblaciones: " . $ex->getMessage());
-        }
-        $this->conexion = null;
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        $this->prepareStatement("SELECT * from poblacion order by nombre"); 
+        $this->runStatement();
+        return $this->fetchAll();
     }
 
     function borrarPoblacion($id) {
-        try {
-            $stmt = $this->conexion->prepare("DELETE FROM poblacion WHERE id='$id'");
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
+        $this->prepareStatement("DELETE FROM poblacion WHERE id=:id");
+        $this->setParam(":id", $id);
+        $this->borrarRepartidorAsignado($id);
+        return $this->runStatement();
 
-        try { //borramos de la tabla reparpoblacion
-            $this->borrarRepartidorAsignado($id);
-
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-
-        return true;
     }
 
     function crearPoblacion($nombre, $cp) {
-        try {
-            $stmt = $this->conexion->prepare("INSERT INTO poblacion (nombre, cp) VALUES (:nombre, :cp)");
-            $stmt->bindParam(":nombre", $nombre);
-            $stmt->bindParam(":apellidos", $cp);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
+        $this->prepareStatement("INSERT INTO poblacion (nombre, cp) VALUES (:nombre, :cp)");
+        $this->setParam(":nombre", $nombre);
+        $this->setParam(":apellidos", $cp);
+      
+        return $this->runStatement();
     }
 
     function actualizarPoblacion($id, $nombre, $cp) {
-        try {
-            $stmt = $this->conexion->prepare("UPDATE poblacion SET nombre=:nombre, cp=:cp WHERE id='$id'");
-            $stmt->bindParam(":nombre", $nombre);
-            $stmt->bindParam(":apellidos", $cp);
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
+        $this->prepareStatement("UPDATE poblacion SET nombre=:nombre, cp=:cp WHERE id=:id");
+        $this->setParam(":nombre", $nombre);
+        $this->setParam(":apellidos", $cp);
+        
+        $this->runStatement();
     }
 
     public function borrarRepartidorAsignado($id) {
-        try {
-            $stmt = $this->conexion->prepare("DELETE FROM reparpoblacion WHERE idPoblacion='$id'");
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
+        $this->prepareStatement("DELETE FROM reparpoblacion WHERE idPoblacion=:id");
+        $this->setParam(":id", $id);
+        
+        $this->runStatement();
     }
 
     function getPoblacion($id) {
-        $consulta = "SELECT
+        $this->prepareStatement("SELECT
             /* Poblacion */
             `poblacion`.nombre as nombre,
             `poblacion`.cp as cp,
@@ -96,14 +62,10 @@ class Poblacion extends Conexion {
             /* mezclamos reparpoblacion */
             INNER JOIN `reparpoblacion` ON `poblacion`.id = `reparpoblacion`.idPoblacion
             /* mezclamos repartidor */
-            INNER JOIN `repartidor` ON `reparpoblacion`.`idRepartidor` = `repartidor`.`id` WHERE `poblacion`.id='$id'";
-        try {
-            $stmt = $this->conexion->prepare($consulta);
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar poblacion: " . $ex->getMessage());
-        }
-        $this->conexion = null;
-        return $stmt->fetch(PDO::FETCH_OBJ);
+            INNER JOIN `repartidor` ON `reparpoblacion`.`idRepartidor` = `repartidor`.`id` WHERE `poblacion`.id=:id");
+        
+        $this->setParam(":id", $id);
+        return $this->fetch();
+
     }
 }

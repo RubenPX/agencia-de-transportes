@@ -59,6 +59,7 @@ class Cliente extends Conexion {
         $this->prepareStatement("UPDATE cliente SET nombre=:nombre, apellidos=:apellidos,
         telefono=:telefono, mail=:mail, password=:password, activo=:activo WHERE DNI=:DNI");
 
+        $this->setParam(":DNI", $DNI);
         $this->setParam(":nombre", $nombre);
         $this->setParam(":apellidos", $apellidos);
         $this->setParam(":telefono", $telefono);
