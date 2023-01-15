@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container px-5 my-5">
+    <div class="container-md px-5 my-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="card border-0 rounded-3 shadow-lg">

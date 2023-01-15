@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/bootstrap.darkly.min.css">
     <title>@yield('titulo')</title>
 </head>
-<body>
+<body style="max-width: 100vw">
     @include('_partials.header')
     @yield('content')
     <script src="assets/bootstrap.bundle.min.js"></script>
