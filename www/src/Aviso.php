@@ -17,7 +17,7 @@ class Aviso extends Conexion {
     }
 
     function recuperarAvisos() {
-        $this->prepareStatement("SELECT * from aviso order by nombre"); 
+        $this->prepareStatement("SELECT * from aviso order by nombre");
         $this->runStatement();
         return $this->fetchAll();
     }
@@ -35,15 +35,16 @@ class Aviso extends Conexion {
         $this->setParam(":fecha", $fecha);
         $this->setParam(":idRepartidor", $idRepartidor);
         return $this->runStatement();
+    }
 
     function actualizarAviso($id, $idEnvio, $fecha, $idRepartidor) {
         $this->prepareStatement("UPDATE remitente SET idEnvio=:idEnvio, fecha=:fecha, idRepartidor=:idRepartidor
                 WHERE id=:id");
-        $this->setParam(":id", $id);        
+        $this->setParam(":id", $id);
         $this->setParam(":idEnvio", $idEnvio);
         $this->setParam(":fecha", $fecha);
         $this->setParam(":idRepartidor", $idRepartidor);
-    
+
         return $this->runStatement();
     }
 
@@ -52,5 +53,12 @@ class Aviso extends Conexion {
         $this->setParam(":id", $id);
         $this->runStatement();
         return $this->fetch();
+    }
+
+    function getAvisosByEnvioID($id) {
+        $this->prepareStatement("SELECT * FROM aviso WHERE idEnvio=:id");
+        $this->setParam(":id", $id);
+        $this->runStatement();
+        return $this->fetchAll();
     }
 }
