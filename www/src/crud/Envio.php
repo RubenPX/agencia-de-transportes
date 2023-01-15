@@ -2,7 +2,6 @@
 
 namespace Crud;
 
-use Clases\Converters;
 use Clases\Destinatario;
 use Clases\Envio as Envios;
 use Clases\Remitente;
@@ -12,7 +11,7 @@ class Envio extends CRUDBase {
         $envio = new Envios();
         if ($id == "-1") {
             $found = $envio->recuperarEnvios();
-            return Converters::objToArray($found[0]);
+            return $found[0];
         } else {
             $found = $envio->getEnvio($id);
 
@@ -20,7 +19,7 @@ class Envio extends CRUDBase {
                 throw new CRUDException("No se ha encontrado el envio con el id " . $id);
             }
 
-            $found = Converters::objToArray($found);
+            $found = $found;
 
             unset($found["tipo"]);
 

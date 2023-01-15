@@ -5,7 +5,6 @@ require_once "./shared/SessionLogin.php";
 
 // todo: @RubenPX complete template to use Classes//Envios
 
-use Clases\Converters;
 use Clases\Envio;
 
 $error = "";
@@ -21,7 +20,7 @@ if (!isset($_GET["id"])) {
         $error = "No se ha encontrado el envio con el id " . $_GET["id"];
         $title = $error;
     } else {
-        $properties = Converters::objToArray($found);
+        $properties = $found;
         $title .= $properties["Envio_ID"];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Crud;
 
-use Clases\Converters;
 use Clases\Poblacion;
 use Clases\Repartidor as Repartidores;
 
@@ -11,7 +10,7 @@ class Pueblo extends CRUDBase {
         $poblacion = new Poblacion();
         if ($id == "-1") {
             $found = $poblacion->recuperarPoblaciones();
-            return Converters::objToArray($found[0]);
+            return $found[0];
         } else {
             $found = $poblacion->getPoblacion($id);
 

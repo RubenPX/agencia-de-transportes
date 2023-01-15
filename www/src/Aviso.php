@@ -2,9 +2,6 @@
 
 namespace Clases;
 
-use PDO;
-use PDOException;
-
 class Aviso extends Conexion {
     private $id;
     private $idEnvio;

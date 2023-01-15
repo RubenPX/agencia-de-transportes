@@ -2,9 +2,6 @@
 
 namespace Lista;
 
-// unitlity classes
-use Clases\Converters;
-
 // Database clases
 use Clases\Cliente;
 use Clases\Poblacion;
@@ -38,12 +35,12 @@ class Lista {
 
     public static function getPueblos(): array {
         $poblacion = (new Poblacion())->recuperarPoblaciones();
-        return Converters::objsToArray($poblacion);
+        return $poblacion;
     }
 
     public static function getRepartidores(): array {
         $repartidores = (new Repartidor())->recuperarRepartidores();
-        $found = Converters::objsToArray($repartidores);
+        $found = $repartidores;
 
         $processArr = function ($n) {
             unset($n["password"]);
@@ -55,6 +52,6 @@ class Lista {
 
     public static function getEnvios(): array {
         $envios = (new Envio)->recuperarEnvios();
-        return Converters::objsToArray($envios);
+        return $envios;
     }
 }

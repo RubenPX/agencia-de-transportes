@@ -2,7 +2,6 @@
 
 namespace Crud;
 
-use Clases\Converters;
 use Clases\Poblacion;
 use Clases\Repartidor as Repartidores;
 
@@ -12,7 +11,7 @@ class Repartidor extends CRUDBase {
 
         if ($id == "-1") {
             $found = $repartidor->recuperarRepartidores();
-            $found = Converters::objToArray($found[0]);
+            $found = $found[0];
         } else {
             $found = $repartidor->getRepartidor($id);
 
@@ -29,7 +28,7 @@ class Repartidor extends CRUDBase {
             $found["extra"] = [];
             $found["extra"]["pueblos"] = (new Poblacion())->recuperarPoblaciones();
     
-            $found = Converters::objToArray($found);
+            $found = $found;
         }
 
         unset($found["password"]);

@@ -2,9 +2,6 @@
 
 namespace Clases;
 
-use PDO;
-use PDOException;
-
 class Cliente extends Conexion {
     private $DNI;
     private $nombre;

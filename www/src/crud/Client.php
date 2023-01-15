@@ -2,7 +2,6 @@
 
 namespace Crud;
 
-use Clases\Converters;
 use Clases\Cliente;
 
 class Client extends CRUDBase {
@@ -11,7 +10,7 @@ class Client extends CRUDBase {
 
         if ($id == "-1") {
             $found = $cliente->recuperarClientes();
-            $found = Converters::objToArray($found[0]);
+            $found = $found[0];
         } else {
             $found = $cliente->getCliente($id);
 
@@ -19,7 +18,7 @@ class Client extends CRUDBase {
                 throw new CRUDException("No se ha encontrado el cliente con el id " . $id);
             }
     
-            $found = Converters::objToArray($found);
+            $found = $found;
         }
         
         unset($found["password"]);
