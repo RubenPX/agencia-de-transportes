@@ -48,7 +48,7 @@ class Envio extends CRUDBase {
         if (!$envio->borrarEnvio($id)) {
             return ["!ERROR" => "Fallo al eliminar el envio"];
         }
-        return ["!OK" => "Delete recived"];
+        return ["!OK" => "Envio eliminado"];
     }
 
     public function create(array $data): array {

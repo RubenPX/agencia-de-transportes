@@ -41,7 +41,11 @@ class Repartidor extends CRUDBase {
     }
 
     public function delete(string $id): array {
-        return ["!OK" => "Delete recived"];
+        $repartidor = new Repartidores();
+        if (!$repartidor->borrarRepartidor($id)) {
+            return ["!ERROR" => "Fallo al borrar el repartidor"];
+        }
+        return ["!OK" => "Repartidor borrado"];
     }
 
     public function create(array $data): array {

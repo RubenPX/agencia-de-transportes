@@ -37,7 +37,12 @@ class Pueblo extends CRUDBase {
     }
 
     public function delete(string $id): array {
+        $poblacion = new Poblacion();
+        if (!$poblacion->borrarPoblacion($id)) {
+            return ["!ERROR" => "Fallo al borrar el pueblo"];
+        }
         return ["!OK" => "Delete recived"];
+
     }
 
     public function create(array $data): array {
