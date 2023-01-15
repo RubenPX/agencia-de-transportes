@@ -17,72 +17,40 @@ class Aviso extends Conexion {
     }
 
     function recuperarAvisos() {
-        $consulta = "select * from aviso";
-        $stmt = $this->conexion->prepare($consulta);
-        try {
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar avisoss: " . $ex->getMessage());
-        }
-        $this->conexion = null;
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        $this->prepareStatement("SELECT * from aviso order by nombre"); 
+        $this->runStatement();
+        return $this->fetchAll();
     }
 
     function borrarAviso($id) {
-        try {
-            $stmt = $this->conexion->prepare("DELETE FROM aviso WHERE id='$id'");
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-
-        return true;
+        $this->prepareStatement("DELETE FROM remitente WHERE id=:id");
+        $this->setParam(":id", $id);
+        return $this->runStatement();
     }
 
     function crearAviso($idEnvio, $fecha, $idRepartidor) {
-    
-        try {
-            $stmt = $this->conexion->prepare('INSERT INTO aviso (idEnvio, fecha, idRepartidor)
-                VALUES (:idEnvio, :fecha, :idRepartidor)');
-            $stmt->bindParam(":idEnvio", $idEnvio);
-            $stmt->bindParam(":fecha", $fecha);
-            $stmt->bindParam(":idRepartidor", $idRepartidor);
-            $stmt->execute();
-
-        } catch (PDOException $ex) {
-            ("Error al crear, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
-    }
+        $this->prepareStatement('INSERT INTO aviso (idEnvio, fecha, idRepartidor)
+            VALUES (:idEnvio, :fecha, :idRepartidor)');
+        $this->setParam(":idEnvio", $idEnvio);
+        $this->setParam(":fecha", $fecha);
+        $this->setParam(":idRepartidor", $idRepartidor);
+        return $this->runStatement();
 
     function actualizarAviso($id, $idEnvio, $fecha, $idRepartidor) {
-        try {
-            $stmt = $this->conexion->prepare("UPDATE remitente SET idEnvio=:idEnvio, fecha=:fecha, idRepartidor=:idRepartidor
-                WHERE id='$id'");
-            $stmt->bindParam(":idEnvio", $idEnvio);
-            $stmt->bindParam(":fecha", $fecha);
-            $stmt->bindParam(":idRepartidor", $idRepartidor);
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al crear, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
+        $this->prepareStatement("UPDATE remitente SET idEnvio=:idEnvio, fecha=:fecha, idRepartidor=:idRepartidor
+                WHERE id=:id");
+        $this->setParam(":id", $id);        
+        $this->setParam(":idEnvio", $idEnvio);
+        $this->setParam(":fecha", $fecha);
+        $this->setParam(":idRepartidor", $idRepartidor);
+    
+        return $this->runStatement();
     }
 
     function getAviso($id) {
-        $consulta = "select * from aviso WHERE id='$id'";
-        $stmt = $this->conexion->prepare($consulta);
-        try {
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar aviso: " . $ex->getMessage());
-        }
-        $this->conexion = null;
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        $this->prepareStatement("SELECT * FROM aviso WHERE id=:id");
+        $this->setParam(":id", $id);
+        $this->runStatement();
+        return $this->fetch();
     }
 }

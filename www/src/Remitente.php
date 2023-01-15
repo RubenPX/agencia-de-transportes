@@ -27,7 +27,7 @@ class Remitente extends Conexion {
     }
 
 
-    function borrarCliente($id) {
+    function borrarRemitente($id) {
         $this->prepareStatement("DELETE FROM remitente WHERE id=:id");
         $this->setParam(":id", $id);
         return $this->runStatement();

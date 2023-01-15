@@ -53,15 +53,9 @@ class Envio extends Conexion {
             $consulta .= "OR `estado`.tipo LIKE '%" . $keyword . "%' ";
         }
 
-        $stmt = $this->conexion->prepare($consulta);
-        try {
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar envios: " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        $this->prepareStatement($consulta);
+        $this->runStatement();
+        return $this->fetchAll();
     }
 
     function detallesEnvio($id) {
@@ -125,100 +119,67 @@ class Envio extends Conexion {
         
         WHERE `envio`.id = :id";
 
-        try {
-            $stmt = $this->conexion->prepare($consulta);
-            $stmt->bindParam(":id", $id);
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar envío: " . $ex->getMessage());
-        }
-
-        $this->conexion = null;
-        return $stmt->fetch(PDO::FETCH_OBJ);
+       
+            $this->prepareStatement($consulta);
+            $this->setParam(":id", $id);
+            $this->runStatement();
+            return $this->fetch();
     }
 
 
     function borrarEnvio($id) {
-        try {
-            $stmt = $this->conexion->prepare("DELETE FROM envio WHERE id='$id'");
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
+        $this->prepareStatement("DELETE FROM envio WHERE id=:id");
+        $this->setParam(":id", $id);
+        return $this->runStatement();
     }
 
     function crearEnvio($idDestinatario, $idRemitente, $DNICliente, $fecha, $peso, $ancho,
         $largo, $alto, $tarifa) {
-        try {
+        
             $estado = 'entregado';
             $stmt = $this->conexion->prepare("INSERT INTO envio (idDestinatario, idRemitente,
                 DNICliente, fecha, peso, ancho, largo, alto, estado, tarifa) VALUES (:idDestinatario, :idRemitente,
                 :DNICliente, :fecha, :peso, :ancho, :largo, :alto, :estado, :tarifa)");
-            $stmt->bindParam(":idDestinatario", $idDestinatario);
-            $stmt->bindParam(":idRemitente", $idRemitente);
-            $stmt->bindParam(":DNICliente", $DNICliente);
-            $stmt->bindParam(":fecha", $fecha);
-            $stmt->bindParam(":peso", $peso);
-            $stmt->bindParam(":ancho", $ancho);
-            $stmt->bindParam(":largo", $largo);
-            $stmt->bindParam(":alto", $alto);
-            $stmt->bindParam(":estado", $estado);
-            $stmt->bindParam(":tarifa", $tarifa);
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
+            $this->setParam(":idDestinatario", $idDestinatario);
+            $this->setParam(":idRemitente", $idRemitente);
+            $this->setParam(":DNICliente", $DNICliente);
+            $this->setParam(":fecha", $fecha);
+            $this->setParam(":peso", $peso);
+            $this->setParam(":ancho", $ancho);
+            $this->setParam(":largo", $largo);
+            $this->setParam(":alto", $alto);
+            $this->setParam(":estado", $estado);
+            $this->setParam(":tarifa", $tarifa);
+        
+            $this->runStatement();
     }
 
 
     function actualizarEnvio($id, $idDestinatario, $idRemitente, $DNICliente, $fecha, $peso, $ancho,
         $largo, $alto, $estado, $tarifa) {
-        try {
-            $stmt = $this->conexion->prepare("UPDATE envio SET idDestinatario=:idDestinatario, idRemitente=:idRemitente,
+            $this->prepareStatement("UPDATE envio SET idDestinatario=:idDestinatario, idRemitente=:idRemitente,
                 DNICliente=:DNICliente, fecha=:fecha, peso=:peso, ancho=:ancho, largo=:largo, alto=:alto estado=:estado,
                 tarifa=:tarifa WHERE id=$id");
-            $stmt->bindParam(":idDestinatario", $idDestinatario);
-            $stmt->bindParam(":idRemitente", $idRemitente);
-            $stmt->bindParam(":DNICliente", $DNICliente);
-            $stmt->bindParam(":fecha", $fecha);
-            $stmt->bindParam(":peso", $peso);
-            $stmt->bindParam(":ancho", $ancho);
-            $stmt->bindParam(":largo", $largo);
-            $stmt->bindParam(":alto", $alto);
-            $stmt->bindParam(":estado", $estado);
-            $stmt->bindParam(":tarifa", $tarifa);
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error en el borrado, mensaje de error:  " . $ex->getMessage());
-            return false;
-        }
-        $this->conexion = null;
-        return true;
+                
+            $this->setParam(":idDestinatario", $idDestinatario);
+            $this->setParam(":idRemitente", $idRemitente);
+            $this->setParam(":DNICliente", $DNICliente);
+            $this->setParam(":fecha", $fecha);
+            $this->setParam(":peso", $peso);
+            $this->setParam(":ancho", $ancho);
+            $this->setParam(":largo", $largo);
+            $this->setParam(":alto", $alto);
+            $this->setParam(":estado", $estado);
+            $this->setParam(":tarifa", $tarifa);
+
+            $this->runStatement();
     }
 
     function getEnvio($id) {
-        $consulta = "select * from envio WHERE id='$id'";
-        $stmt = $this->conexion->prepare($consulta);
-        try {
-            $stmt->execute();
-        } catch (PDOException $ex) {
-            ("Error al recuperar envío: " . $ex->getMessage());
-        }
-        $this->conexion = null;
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        $this->prepareStatement("SELECT * FROM envio WHERE id=:id");
+        $this->setParam(":id", $id);
+        $this->runStatement();
+        return $this->fetch();
     }
 
-/*  function buscarEnvio()
-{
-$parametroABuscar = $_POST['queBuscar'];
-$consulta = "select * form envio where $id or $idDestinatario or $idRemitente or 
-$DNICliente or $fecha or $peso or $ancho or $largo or $alto or $estado or $tarifa
-LIKE $parametroABuscar";
-} */
 }
