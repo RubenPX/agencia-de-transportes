@@ -14,47 +14,45 @@ class Aviso extends Conexion {
     }
 
     function recuperarAvisos() {
-        $this->prepareStatement("SELECT * from aviso order by nombre");
-        $this->runStatement();
-        return $this->fetchAll();
+        $stmt = $this->prepareStatement("SELECT * from aviso order by nombre");
+        $stmt->runStatement();
+        return $stmt->fetchAll();
     }
 
     function borrarAviso($id) {
-        $this->prepareStatement("DELETE FROM remitente WHERE id=:id");
-        $this->setParam(":id", $id);
-        return $this->runStatement();
+        $stmt = $this->prepareStatement("DELETE FROM remitente WHERE id=:id");
+        $stmt->setParam(":id", $id);
+        return $stmt->runStatement();
     }
 
     function crearAviso($idEnvio, $fecha, $idRepartidor) {
-        $this->prepareStatement('INSERT INTO aviso (idEnvio, fecha, idRepartidor)
-            VALUES (:idEnvio, :fecha, :idRepartidor)');
-        $this->setParam(":idEnvio", $idEnvio);
-        $this->setParam(":fecha", $fecha);
-        $this->setParam(":idRepartidor", $idRepartidor);
-        return $this->runStatement();
+        $stmt = $this->prepareStatement('INSERT INTO aviso (idEnvio, fecha, idRepartidor) VALUES (:idEnvio, :fecha, :idRepartidor)');
+        $stmt->setParam(":idEnvio", $idEnvio);
+        $stmt->setParam(":fecha", $fecha);
+        $stmt->setParam(":idRepartidor", $idRepartidor);
+        return $stmt->runStatement();
     }
 
     function actualizarAviso($id, $idEnvio, $fecha, $idRepartidor) {
-        $this->prepareStatement("UPDATE remitente SET idEnvio=:idEnvio, fecha=:fecha, idRepartidor=:idRepartidor
-                WHERE id=:id");
-        $this->setParam(":id", $id);
-        $this->setParam(":idEnvio", $idEnvio);
-        $this->setParam(":fecha", $fecha);
-        $this->setParam(":idRepartidor", $idRepartidor);
-        return $this->runStatement();
+        $stmt = $this->prepareStatement("UPDATE remitente SET idEnvio=:idEnvio, fecha=:fecha, idRepartidor=:idRepartidor WHERE id=:id");
+        $stmt->setParam(":id", $id);
+        $stmt->setParam(":idEnvio", $idEnvio);
+        $stmt->setParam(":fecha", $fecha);
+        $stmt->setParam(":idRepartidor", $idRepartidor);
+        return $stmt->runStatement();
     }
 
     function getAviso($id) {
-        $this->prepareStatement("SELECT * FROM aviso WHERE id=:id");
-        $this->setParam(":id", $id);
-        $this->runStatement();
-        return $this->fetch();
+        $stmt = $this->prepareStatement("SELECT * FROM aviso WHERE id=:id");
+        $stmt->setParam(":id", $id);
+        $stmt->runStatement();
+        return $stmt->fetch();
     }
 
     function getAvisosByEnvioID($id) {
-        $this->prepareStatement("SELECT * FROM aviso WHERE idEnvio=:id");
-        $this->setParam(":id", $id);
-        $this->runStatement();
-        return $this->fetchAll();
+        $stmt = $this->prepareStatement("SELECT * FROM aviso WHERE idEnvio=:id");
+        $stmt->setParam(":id", $id);
+        $stmt->runStatement();
+        return $stmt->fetchAll();
     }
 }

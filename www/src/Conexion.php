@@ -6,6 +6,65 @@ use PDO;
 use PDOException;
 use PDOStatement;
 
+require_once "WEBLogger.php";
+
+class STMT {
+    protected PDOStatement $stmt;
+    protected array $params;
+
+    public function __construct(PDO $Conex, string $query) {
+        global $logger;
+        try {
+            $this->stmt = $Conex->prepare($query);
+            $this->params = [];
+            webConsoleLog("PREPARE QUERY: " . $this->stmt->queryString);
+        } catch (PDOException $ex) {
+            throw new PDOException("Error al preparar la query");
+        }
+    }
+
+    public function setParam(string $key, string $value) {
+        try {
+            $this->stmt->bindParam($key, $value);
+            $this->params[$key] = $value;
+            webConsoleLog("> PARAM: " . $key . " => " . $value);
+        } catch (PDOException $ex) {
+            throw new PDOException("Error al añadir un parametro");
+        }
+    }
+
+    private function debugRunQuery(int $rows) {
+        global $logger;
+        webConsoleLog("> Result count: " . $rows);
+    }
+
+    public function runStatement() {
+        try {
+            $result = $this->stmt->execute();
+            $this->debugRunQuery($this->stmt->rowCount());
+            return $result;
+        } catch (PDOException $ex) {
+            throw new PDOException("Error al ejecutar la sentencia");
+        }
+    }
+
+    public function fetch() {
+        try {
+            return $this->stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            throw new PDOException("Fallo al extraer datos");
+        }
+    }
+
+    public function fetchAll() {
+        try {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            throw new PDOException("Fallo al extraer datos");
+        }
+    }
+}
+
 class Conexion {
     private $host;
     private $db;
@@ -13,7 +72,6 @@ class Conexion {
     private $pass;
     private $dsn;
     protected PDO $conexion;
-    protected PDOStatement $stmt;
 
     public function __construct() {
         $this->host = "db";
@@ -39,51 +97,6 @@ class Conexion {
     }
 
     public function prepareStatement(string $query) {
-        try {
-            $this->stmt = $this->conexion->prepare($query);
-        } catch (PDOException $ex) {
-            throw new PDOException("Error al preparar la query");
-        }
-    }
-
-    public function setParam(string $key, string $value) {
-        try {
-            $this->stmt->bindParam($key, $value);
-        } catch (PDOException $ex) {
-            throw new PDOException("Error al añadir un parametro");
-        }
-    }
-
-    // Debug SQL + Params
-    function pdo_debugStrParams($stmt) {
-        ob_start();
-        $stmt->debugDumpParams();
-        $r = ob_get_contents();
-        ob_end_clean();
-        return explode("\n", $r);
-      }
-
-    public function runStatement(): bool {
-        try {
-            return $this->stmt->execute();
-        } catch (PDOException $ex) {
-            throw new PDOException("Error al ejecutar la sentencia");
-        }
-    }
-
-    public function fetch() {
-        try {
-            return $this->stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $ex) {
-            throw new PDOException("Fallo al extraer datos");
-        }
-    }
-
-    public function fetchAll() {
-        try {
-            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $ex) {
-            throw new PDOException("Fallo al extraer datos");
-        }
+        return new STMT($this->conexion, $query);
     }
 }

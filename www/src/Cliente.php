@@ -16,66 +16,66 @@ class Cliente extends Conexion {
     }
 
     function recuperarClientes() {
-        $this->prepareStatement("SELECT * from cliente order by nombre");
-        $this->runStatement();
-        return $this->fetchAll();
+        $stmt = $this->prepareStatement("SELECT * from cliente order by nombre");
+        $stmt->runStatement();
+        return $stmt->fetchAll();
     }
 
     function borrarCliente($DNI) {
-        $this->prepareStatement("DELETE FROM cliente WHERE DNI=:DNI");
-        $this->setParam(":DNI", $DNI);
-        return $this->runStatement();
+        $stmt = $this->prepareStatement("DELETE FROM cliente WHERE DNI=:DNI");
+        $stmt->setParam(":DNI", $DNI);
+        return $stmt->runStatement();
     }
 
     function crearCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo) {
-        $this->prepareStatement("SELECT DNI FROM cliente WHERE DNI=:DNI");
-        $this->setParam(":DNI", $DNI);
-        $this->runStatement();
+        $stmt = $this->prepareStatement("SELECT DNI FROM cliente WHERE DNI=:DNI");
+        $stmt->setParam(":DNI", $DNI);
+        $stmt->runStatement();
 
-        $consulta = $this->fetch();
+        $consulta = $stmt->fetch();
 
         if ($consulta == null) { //En caso de que no haya coincidencia en el campo DNI de ningún registro
-            $this->prepareStatement('INSERT INTO cliente (DNI, nombre, apellidos, telefono, mail, password, activo)
+            $stmt2 = $this->prepareStatement('INSERT INTO cliente (DNI, nombre, apellidos, telefono, mail, password, activo)
             VALUES (:dni, :nombre, :apellidos, :telefono, :mail, :password, :activo)');
 
-            $this->setParam(":dni", $DNI);
-            $this->setParam(":nombre", $nombre);
-            $this->setParam(":apellidos", $apellidos);
-            $this->setParam(":telefono", $telefono);
-            $this->setParam(":mail", $mail);
-            $this->setParam(":password", $password);
-            $this->setParam(":activo", $activo);
+            $stmt2->setParam(":dni", $DNI);
+            $stmt2->setParam(":nombre", $nombre);
+            $stmt2->setParam(":apellidos", $apellidos);
+            $stmt2->setParam(":telefono", $telefono);
+            $stmt2->setParam(":mail", $mail);
+            $stmt2->setParam(":password", $password);
+            $stmt2->setParam(":activo", $activo);
 
-            return $this->runStatement();
+            return $stmt2->runStatement();
         }
 
         return false;
     }
 
     function actualizarCliente($DNI, $nombre, $apellidos, $telefono, $mail, $activo) {
-        $this->prepareStatement("UPDATE cliente SET nombre=:nombre, apellidos=:apellidos,
+        $stmt = $this->prepareStatement("UPDATE cliente SET nombre=:nombre, apellidos=:apellidos,
         telefono=:telefono, mail=:mail, activo=:activo WHERE DNI=:DNI");
-        $this->setParam(":DNI", $DNI);
-        $this->setParam(":nombre", $nombre);
-        $this->setParam(":apellidos", $apellidos);
-        $this->setParam(":telefono", $telefono);
-        $this->setParam(":mail", $mail);
-        $this->setParam(":activo", $activo);
-        return $this->runStatement();
+        $stmt->setParam(":DNI", $DNI);
+        $stmt->setParam(":nombre", $nombre);
+        $stmt->setParam(":apellidos", $apellidos);
+        $stmt->setParam(":telefono", $telefono);
+        $stmt->setParam(":mail", $mail);
+        $stmt->setParam(":activo", $activo);
+        return $stmt->runStatement();
     }
 
     function getCliente($DNI) {
-        $this->prepareStatement("SELECT * FROM cliente WHERE DNI=:DNI");
-        $this->setParam(":DNI", $DNI);
-        $this->runStatement();
-        return $this->fetch();
+        $stmt = $this->prepareStatement("SELECT * FROM cliente WHERE DNI=:DNI");
+        $stmt->setParam(":DNI", $DNI);
+        $stmt->runStatement();
+        return $stmt->fetch();
     }
 
     function cambiarPassword($DNI, $password) {
-        $this->prepareStatement("UPDATE cliente SET password=:password WHERE DNI=:DNI");
-        $this->setParam(":DNI", $DNI);
-        $this->setParam(":password", $password);
-        $this->runStatement();
+        $stmt = $this->prepareStatement("UPDATE cliente SET password=:password WHERE DNI=:DNI");
+        $stmt->setParam(":DNI", $DNI);
+        $stmt->setParam(":password", $password);
+        $stmt->runStatement();
     }
 
 }

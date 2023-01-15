@@ -17,94 +17,92 @@ class Repartidor extends Conexion {
         parent::__construct();
     }
 
-
     function recuperarRepartidores() {
-        $this->prepareStatement("SELECT r.id, r.DNI, r.Nombre, r.Apellidos, p.idPoblacion 
+        $stmt = $this->prepareStatement("SELECT r.id, r.DNI, r.Nombre, r.Apellidos, p.idPoblacion 
             FROM repartidor r,  reparpoblacion p
             WHERE r.id=p.idRepartidor");
-        $this->runStatement();
-        return $this->fetchAll();
+        $stmt->runStatement();
+        return $stmt->fetchAll();
     }
 
-
     function borrarRepartidor($id) {
-        $this->prepareStatement("DELETE FROM repartidor WHERE id=:id");
-        $this->setParam(":id", $id);
+        $stmt = $this->prepareStatement("DELETE FROM repartidor WHERE id=:id");
+        $stmt->setParam(":id", $id);
         if (!$this->borrarPoblacionAsignada($id)) {
             return false;
         }
-        return $this->runStatement();
+        return $stmt->runStatement();
     }
 
     function crearRepartidor($DNI, $Nombre, $Apellidos) {
-        $this->prepareStatement("SELECT DNI FROM repartidor WHERE DNI=:DNI");
-        $this->setParam(":DNI", $DNI);
-        $this->runStatement();
+        $stmt = $this->prepareStatement("SELECT DNI FROM repartidor WHERE DNI=:DNI");
+        $stmt->setParam(":DNI", $DNI);
+        $stmt->runStatement();
 
-        $consulta = $this->fetch();
+        $consulta = $stmt->fetch();
 
         if ($consulta == null) { //En caso de que no haya coincidencia en el campo DNI de ningún registro
-            $this->prepareStatement("INSERT INTO repartidor (DNI, Nombre, Apellidos) VALUES (:dni, :nombre, :apellidos)");
+            $stmt = $this->prepareStatement("INSERT INTO repartidor (DNI, Nombre, Apellidos) VALUES (:dni, :nombre, :apellidos)");
 
-            $this->setParam(":dni", $DNI);
-            $this->setParam(":nombre", $Nombre);
-            $this->setParam(":apellidos", $Apellidos);
+            $stmt->setParam(":dni", $DNI);
+            $stmt->setParam(":nombre", $Nombre);
+            $stmt->setParam(":apellidos", $Apellidos);
             
-            return $this->runStatement();
+            return $stmt->runStatement();
         }
 
         return false;
     }
 
     function actualizarRepartidor($id, $DNI, $Nombre, $Apellidos) {
-        $this->prepareStatement("SELECT DNI FROM repartidor WHERE id=:id");
-        $this->setParam(":id", $id);
-        $this->runStatement();
+        $stmt = $this->prepareStatement("SELECT DNI FROM repartidor WHERE id=:id");
+        $stmt->setParam(":id", $id);
+        $stmt->runStatement();
 
-        $consulta = $this->fetch();
+        $consulta = $stmt->fetch();
 
         if ($consulta == null){
-            $this->prepareStatement("UPDATE repartidor SET DNI=':DNI', Nombre=:nombre, Apellidos=:apellidos WHERE id=:id");
+            $stmt2 = $this->prepareStatement("UPDATE repartidor SET DNI=':DNI', Nombre=:nombre, Apellidos=:apellidos WHERE id=:id");
 
-            $this->setParam(":id", $id);
-            $this->setParam(":DNI", $DNI);
-            $this->setParam(":nombre", $Nombre);
-            $this->setParam(":apellidos", $Apellidos);
+            $stmt2->setParam(":id", $id);
+            $stmt2->setParam(":DNI", $DNI);
+            $stmt2->setParam(":nombre", $Nombre);
+            $stmt2->setParam(":apellidos", $Apellidos);
 
-            $this->runStatement();
+            $stmt2->runStatement();
         }
 
         return false;
     }
 
     function asignarPoblacion($idRepartidor, $idPoblacion) {
-        $this->prepareStatement("INSERT INTO reparpoblacion (idRepartidor, idPoblacion)
+        $stmt = $this->prepareStatement("INSERT INTO reparpoblacion (idRepartidor, idPoblacion)
         VALUES (:idRepartidor, :idPoblacion)");
 
-        $this->setParam(":idRepartidor", $idRepartidor);
-        $this->setParam(":idPoblacion", $idPoblacion);
+        $stmt->setParam(":idRepartidor", $idRepartidor);
+        $stmt->setParam(":idPoblacion", $idPoblacion);
     
-        return $this->runStatement();
+        return $stmt->runStatement();
     }
 
     function borrarPoblacionAsignada($id) {
-        $this->prepareStatement("DELETE FROM reparpoblacion WHERE idRepartidor=:id");
-        $this->setParam(":id", $id);
-        return $this->runStatement();
+        $stmt = $this->prepareStatement("DELETE FROM reparpoblacion WHERE idRepartidor=:id");
+        $stmt->setParam(":id", $id);
+        return $stmt->runStatement();
     }
 
     function getRepartidor($id) {
-        $this->prepareStatement("SELECT * FROM repartidor WHERE id=:id");
-        $this->setParam(":id", $id);
-        $this->runStatement();
-        return $this->fetch();
+        $stmt = $this->prepareStatement("SELECT * FROM repartidor WHERE id=:id");
+        $stmt->setParam(":id", $id);
+        $stmt->runStatement();
+        return $stmt->fetch();
     }
 
     function getAssociatedPubelo($id) {
-        $this->prepareStatement("SELECT idPoblacion FROM reparpoblacion WHERE idRepartidor=:idRepartidor");
-        $this->setParam(":idRepartidor", $id);
-        $this->runStatement();
-        return $this->fetch();
+        $stmt = $this->prepareStatement("SELECT idPoblacion FROM reparpoblacion WHERE idRepartidor=:idRepartidor");
+        $stmt->setParam(":idRepartidor", $id);
+        $stmt->runStatement();
+        return $stmt->fetch();
     }
 
 }

@@ -21,54 +21,55 @@ class Remitente extends Conexion {
 
 
     function recuperarRemitentes() {
-        $this->prepareStatement("SELECT * from remitente order by nombre"); 
-        $this->runStatement();
-        return $this->fetchAll();
+        $stmt = $this->prepareStatement("SELECT * from remitente order by nombre"); 
+        $stmt->runStatement();
+        return $stmt->fetchAll();
     }
 
 
     function borrarRemitente($id) {
-        $this->prepareStatement("DELETE FROM remitente WHERE id=:id");
-        $this->setParam(":id", $id);
-        return $this->runStatement();
+        $stmt = $this->prepareStatement("DELETE FROM remitente WHERE id=:id");
+        $stmt->setParam(":id", $id);
+        return $stmt->runStatement();
     }
 
     function crearRemitente($nombre, $apellidos, $correo, $telefono, $calle, $piso, $idPoblacion) {
-        $this->prepareStatement('INSERT INTO remitente (nombre, apellidos, correo, telefono, calle, piso, idPoblacion)
+        $stmt = $this->prepareStatement('INSERT INTO remitente (nombre, apellidos, correo, telefono, calle, piso, idPoblacion)
         VALUES (:nombre, :apellidos, :correo, :telefono, :calle, :piso, :idPoblacion)');
 
-        $this->setParam(":nombre", $nombre);
-        $this->setParam(":apellidos", $apellidos);
-        $this->setParam(":correo", $correo);
-        $this->setParam(":telefono", $telefono);
-        $this->setParam(":calle", $calle);
-        $this->setParam(":piso", $piso);
-        $this->setParam(":idPoblacion", $idPoblacion);
+        $stmt->setParam(":nombre", $nombre);
+        $stmt->setParam(":apellidos", $apellidos);
+        $stmt->setParam(":correo", $correo);
+        $stmt->setParam(":telefono", $telefono);
+        $stmt->setParam(":calle", $calle);
+        $stmt->setParam(":piso", $piso);
+        $stmt->setParam(":idPoblacion", $idPoblacion);
 
-        return $this->runStatement();
+        return $stmt->runStatement();
         
     }
 
     function actualizarRemitente($id, $nombre, $apellidos, $correo, $telefono, $calle, $piso, $idPoblacion) {
-        $this->prepareStatement("UPDATE remitente SET nombre=:nombre, apellidos=:apellidos, correo=:correo
-        telefono=:telefono, calle=:calle, piso=:piso, idPoblacion=:idPoblacion WHERE id=:id");
+        $stmt = $this->prepareStatement("UPDATE remitente 
+        SET nombre=:nombre, apellidos=:apellidos, correo=:correo telefono=:telefono, calle=:calle, piso=:piso, idPoblacion=:idPoblacion 
+        WHERE id=:id");
 
-        $this->setParam(":id", $id);
-        $this->setParam(":nombre", $nombre);
-        $this->setParam(":apellidos", $apellidos);
-        $this->setParam(":correo", $correo);
-        $this->setParam(":telefono", $telefono);
-        $this->setParam(":calle", $calle);
-        $this->setParam(":piso", $piso);
-        $this->setParam(":idPoblacion", $idPoblacion);
+        $stmt->setParam(":id", $id);
+        $stmt->setParam(":nombre", $nombre);
+        $stmt->setParam(":apellidos", $apellidos);
+        $stmt->setParam(":correo", $correo);
+        $stmt->setParam(":telefono", $telefono);
+        $stmt->setParam(":calle", $calle);
+        $stmt->setParam(":piso", $piso);
+        $stmt->setParam(":idPoblacion", $idPoblacion);
         
-        return $this->runStatement();
+        return $stmt->runStatement();
     }
 
     function getRemitente($id) {
-        $this->prepareStatement("SELECT * FROM remitente WHERE id=:id");
-        $this->setParam(":id", $id);
-        $this->runStatement();
-        return $this->fetch();
+        $stmt = $this->prepareStatement("SELECT * FROM remitente WHERE id=:id");
+        $stmt->setParam(":id", $id);
+        $stmt->runStatement();
+        return $stmt->fetch();
     }
 }
