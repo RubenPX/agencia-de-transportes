@@ -13,6 +13,12 @@
                 <div class="alert alert-danger mb-0 mt-0">
                     <p class="mb-0 text-center">{{ $error }}</p>
                 </div>
+            @elseif (isset($ok) && $ok != "")
+                <div class="alert alert-success mb-0 mt-0">
+                    <p class="mb-0 text-center">{{ $ok }}</p>
+                </div>
+
+                <a class="btn btn-primary btn-lg mt-3 w-100" href="lista.php?type={{ $type }}">Volver</a>
             @else
                 <div class="card border-0 rounded-3 shadow-lg">
                     <div class="card-body p-4">
@@ -21,37 +27,9 @@
                         </div>
 
                         <form id="contactForm" method="POST">
-                            @foreach ($properties as $key => $value)
-                                @if ($key == "id" || $key == "idPoblacion")
-                                    @continue
-                                @endif
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-sm-3 col-form-label text-end">{{ $key }}</label>
-                                    <div class="col-sm-9">
-                                        @if (gettype($value) == "string")
-                                            @if ($STATE == "VIEW")
-                                                <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $value }}">
-                                            @else
-                                                <input type="text" class="form-control" id="staticEmail" value="{{ $value }}">
-                                            @endif
-                                        @endif
+                            @include('_crud.' . strtolower($type))
 
-                                        @if (gettype($value) == "boolean")
-                                            @if ($STATE == "VIEW")
-                                                <div class="form-check form-switch mt-2">
-                                                    <input class="form-check-input" disabled type="checkbox" id="flexSwitchCheckChecked" checked="">
-                                                </div>
-                                            @else
-                                                <div class="form-check form-switch mt-2">
-                                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked="">
-                                                </div>
-                                            @endif
-                                        @endif
-                                    </div>
-                                </div>
-                            @endforeach
-
-                            <input id="from" name="from" type="hidden" value="{{ $properties['id'] ?? $properties['DNI'] ?? $properties['DNI'] }}" />
+                            <input id="from" name="from" type="hidden" value="{{ $properties['id'] ?? $properties['DNI'] }}" />
 
                             <!-- Submit button -->
                             <div class="d-flex mt-4" style="justify-content: space-between">
@@ -64,7 +42,7 @@
                                 @elseif ($STATE == "DELETE")
                                     <a class="btn btn-primary btn-lg" href="lista.php?type={{ $type }}">Cancelar</a>
                                     <button class="btn btn-primary btn-lg" name="DELETE" id="submitButton" type="submit">Eliminar</button>
-                                @else
+                                @elseif ($STATE == "UPDATE")
                                     <a class="btn btn-primary btn-lg" href="lista.php?type={{ $type }}">Cancelar</a>
                                     <button class="btn btn-primary btn-lg" name="EDIT" id="submitButton" type="submit">Guardar</button>
                                 @endif
