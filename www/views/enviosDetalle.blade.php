@@ -25,42 +25,13 @@ Detalles de envio
                                 <div class="text-center pb-2">
                                     <h3 class="h3 fw-light">Datos de envio</h3>
                                 </div>
-        
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Peso</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Envio_Peso"] }} Kg">
-                                    </div>
-                                </div>
 
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Ancho</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Envio_Ancho"] }} cm">
-                                    </div>
-                                </div>
+                                @include("components.forms.input", ["key" => "Peso", "value" => $properties["Envio_Peso"] . " Kg", "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Ancho", "value" => $properties["Envio_Ancho"] . " Cm", "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Largo", "value" => $properties["Envio_Largo"] . " Cm", "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Alto", "value" => $properties["Envio_Alto"] . " Cm", "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Tarifa", "value" => $properties["Envio_Tarifa"], "readOnly" => true])
 
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Largo</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Envio_Largo"] }} cm">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Alto</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Envio_Alto"] }} cm">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Tarifa</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Envio_Tarifa"] }}">
-                                    </div>
-                                </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -71,27 +42,10 @@ Detalles de envio
                                 <div class="text-center pb-2">
                                     <h3 class="h3 fw-light">Datos de cliente</h3>
                                 </div>
-        
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Nombre</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Cli_Nombre"] }} {{ $properties["Cli_Apellidos"] }}">
-                                    </div>
-                                </div>
 
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Correo</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Cli_Mail"] }}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Telefono</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Cli_Telefono"] }}">
-                                    </div>
-                                </div>
+                                @include("components.forms.input", ["key" => "Nombre", "value" => $properties["Cli_Nombre"] . " " . $properties["Cli_Apellidos"], "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Mail", "value" => $properties["Cli_Mail"], "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Telefono", "value" => $properties["Cli_Telefono"], "readOnly" => true])
                                 
                             </div>
                         </div>
@@ -103,35 +57,12 @@ Detalles de envio
                                 <div class="text-center pb-2">
                                     <h3 class="h3 fw-light">Datos de remitente</h3>
                                 </div>
-        
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Nombre</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Re_Nombre"] }}">
-                                    </div>
-                                </div>
 
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Correo</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Re_Correo"] }}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Telefono</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Re_Telefono"] }}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Dirección</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Re_CP"] }} - {{ $properties["Re_Ciudad"] }} {{ $properties["Re_Calle"] }}">
-                                    </div>
-                                </div>
-                                
+                                @include("components.forms.input", ["key" => "Nombre", "value" => $properties["Re_Nombre"], "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Correo", "value" => $properties["Re_Correo"], "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Telefono", "value" => $properties["Re_Telefono"], "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Dirección", "value" => $properties["Re_CP"] . " - " . $properties["Re_Ciudad"] . " " . $properties["Re_Calle"], "readOnly" => true])
+                                                                
                             </div>
                         </div>
                     </div>
@@ -143,49 +74,25 @@ Detalles de envio
                                     <h3 class="h3 fw-light">Datos de destinatario</h3>
                                 </div>
 
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Nombre</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Dest_Nombre"] }}">
-                                    </div>
-                                </div>
+                                @include("components.forms.input", ["key" => "Nombre", "value" => $properties["Dest_Nombre"], "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Correo", "value" => $properties["Dest_Correo"], "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Telefono", "value" => $properties["Dest_Telefono"], "readOnly" => true])
+                                @include("components.forms.input", ["key" => "Dirección", "value" => $properties["Dest_CP"] . " - " . $properties["Dest_Ciudad"] . " " . $properties["Dest_Calle"], "readOnly" => true])
 
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Correo</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Dest_Correo"] }}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Telefono</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Dest_Telefono"] }}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-2">
-                                    <label for="staticEmail" class="col-3 col-form-label text-end">Dirección</label>
-                                    <div class="col-9">
-                                        <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["Dest_CP"] }} - {{ $properties["Dest_Ciudad"] }} {{ $properties["Dest_Calle"] }}">
-                                    </div>
-                                </div>
-                                
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-sm-12 p-2 pb-0">
-                        
                         <div class="input-group mb-3">
                             <select class="form-select" id="exampleSelect1">
                                 <option>no recogido</option>
                                 <option>recogido</option>
                                 <option>en reparto</option>
                                 <option>entregado</option>
-                              </select>
-                            <button class="btn btn-primary btn-lg" type="button" id="button-addon2">Aplicar</button>
-                          </div>
+                            </select>
+                            <button class="btn btn-primary btn-lg" type="button" id="button-addon2">Cambiar estado</button>
+                        </div>
                     </div>
 
                     <div class="col-md-6 col-sm-12 p-2">
