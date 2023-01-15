@@ -1,7 +1,7 @@
 @include("components.forms.select", [
     "readOnly" => $STATE == "VIEW" || $STATE == "DELETE",
     "key" => "idRemitente",
-    "title" => "Remitente",
+    "CTitle" => "Remitente",
     "value" => $properties["idRemitente"],
     "items" => array_map(function($item) {
         return [
@@ -15,7 +15,7 @@
 @include("components.forms.select", [
     "readOnly" => ($STATE == "VIEW" || $STATE == "DELETE"),
     "key" => "idDestinatario",
-    "title" => "Destinatario",
+    "CTitle" => "Destinatario",
     "value" => $properties["idDestinatario"],
     "items" => array_map(function($item) {
         return [
@@ -25,13 +25,17 @@
     }, $properties["extra"]["destinatarios"]),
 ])
 
-@foreach ($properties as $key => $value)
-    @if (!in_array($key, ["DNICliente"]))
-        @continue
-    @endif
-
-    @include("components.forms.input", ["key" => $key, "value" => $value, "readOnly" => $STATE == "VIEW" || $STATE == "DELETE"])
-@endforeach
+@include("components.forms.select", [
+    "readOnly" => ($STATE == "VIEW" || $STATE == "DELETE"),
+    "key" => "DNICliente",
+    "value" => $properties["DNICliente"],
+    "items" => array_map(function($item) {
+        return [
+            "id" => $item["DNI"],
+            "value" => $item["DNI"] . " - " .  $item["nombre"] . " " . $item["apellidos"]
+        ];
+    }, $properties["extra"]["clientes"]),
+])
 
 @include("components.forms.input", [
     "key" => "fecha",
@@ -60,4 +64,17 @@
     "value" => $properties["tarifa"],
     "CTitle" => "Tarifa",
     "readOnly" => $STATE == "VIEW" || $STATE == "DELETE"
+])
+
+@include("components.forms.select", [
+    "readOnly" => ($STATE == "VIEW" || $STATE == "DELETE" || $STATE == "CREATE"),
+    "key" => "estado",
+    "CTitle" => "Estado",
+    "value" => $properties["estado"] == "" ? "6" : $properties["estado"],
+    "items" => array_map(function($item) {
+        return [
+            "id" => $item["id"],
+            "value" => $item["tipo"]
+        ];
+    }, $properties["extra"]["estados"]),
 ])
