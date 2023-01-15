@@ -3,6 +3,7 @@
 namespace Crud;
 
 use Clases\Converters;
+use Clases\Poblacion;
 use Clases\Repartidor as Repartidores;
 
 class Repartidor extends CRUDBase {
@@ -18,6 +19,15 @@ class Repartidor extends CRUDBase {
             if (!$found) {
                 throw new CRUDException("No se ha encontrado el repartidor con el id " . $id);
             }
+
+            $hasAssociatedPueblo = $repartidor->getAssociatedPubelo($id);
+
+            if (!!$hasAssociatedPueblo) {
+                $found["idPoblacion"] = $hasAssociatedPueblo["idPoblacion"];
+            }
+
+            $found["extra"] = [];
+            $found["extra"]["pueblos"] = (new Poblacion())->recuperarPoblaciones();
     
             $found = Converters::objToArray($found);
         }
@@ -28,14 +38,14 @@ class Repartidor extends CRUDBase {
     }
 
     public function update(array $data): array {
-
+        return ["!OK" => "Update recived"];
     }
 
     public function delete(string $id): array {
-
+        return ["!OK" => "Delete recived"];
     }
 
     public function create(array $data): array {
-
+        return ["!OK" => "Create recived"];
     }
 }

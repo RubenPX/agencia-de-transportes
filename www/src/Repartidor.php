@@ -92,23 +92,16 @@ class Repartidor extends Conexion {
     }
 
     function getRepartidor($id) {
-        $this->prepareStatement("SELECT
-        /* Repartidor */
-        `repartidor`.id as idRepartidor,
-        `repartidor`.DNI as DNIRepartidor,
-        `repartidor`.Nombre as Nombre,
-        `repartidor`.Apellidos as Apellidos,
-        `poblacion`.nombre as Poblacion
-        FROM `repartidor`
-        /* mezclamos reparpoblacion */
-        INNER JOIN `reparpoblacion` ON `repartidor`.id = `reparpoblacion`.idRepartidor
-        /* mezclamos poblacion */
-        INNER JOIN `poblacion` ON `reparpoblacion`.`idPoblacion` = `poblacion`.`id` WHERE `repartidor`.id=:idRepartidor");
-
-        $this->setParam(":idRepartidor", $id);
-
+        $this->prepareStatement("SELECT * FROM repartidor WHERE id=:id");
+        $this->setParam(":id", $id);
         $this->runStatement();
+        return $this->fetch();
+    }
 
+    function getAssociatedPubelo($id) {
+        $this->prepareStatement("SELECT idPoblacion FROM reparpoblacion WHERE idRepartidor=:idRepartidor");
+        $this->setParam(":idRepartidor", $id);
+        $this->runStatement();
         return $this->fetch();
     }
 

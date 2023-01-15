@@ -39,8 +39,9 @@ class Poblacion extends Conexion {
 
     function actualizarPoblacion($id, $nombre, $cp) {
         $this->prepareStatement("UPDATE poblacion SET nombre=:nombre, cp=:cp WHERE id=:id");
+        $this->setParam(":id", $id);
         $this->setParam(":nombre", $nombre);
-        $this->setParam(":apellidos", $cp);
+        $this->setParam(":cp", $cp);
         
         $this->runStatement();
     }
@@ -48,24 +49,20 @@ class Poblacion extends Conexion {
     public function borrarRepartidorAsignado($id) {
         $this->prepareStatement("DELETE FROM reparpoblacion WHERE idPoblacion=:id");
         $this->setParam(":id", $id);
-        
         $this->runStatement();
     }
 
     function getPoblacion($id) {
-        $this->prepareStatement("SELECT
-            /* Poblacion */
-            `poblacion`.nombre as nombre,
-            `poblacion`.cp as cp,
-            CONCAT(`repartidor`.Nombre,' ', `repartidor`.Apellidos) as Repartidor
-            FROM `poblacion`
-            /* mezclamos reparpoblacion */
-            INNER JOIN `reparpoblacion` ON `poblacion`.id = `reparpoblacion`.idPoblacion
-            /* mezclamos repartidor */
-            INNER JOIN `repartidor` ON `reparpoblacion`.`idRepartidor` = `repartidor`.`id` WHERE `poblacion`.id=:id");
-        
+        $this->prepareStatement("SELECT * from poblacion WHERE id=:id");
         $this->setParam(":id", $id);
+        $this->runStatement();
         return $this->fetch();
+    }
 
+    function getAssociatedRepartidor($id) {
+        $this->prepareStatement("SELECT idRepartidor from reparpoblacion WHERE idPoblacion=:id");
+        $this->setParam(":id", $id);
+        $this->runStatement();
+        return $this->fetch();
     }
 }

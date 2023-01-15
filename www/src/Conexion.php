@@ -54,6 +54,15 @@ class Conexion {
         }
     }
 
+    // Debug SQL + Params
+    function pdo_debugStrParams($stmt) {
+        ob_start();
+        $stmt->debugDumpParams();
+        $r = ob_get_contents();
+        ob_end_clean();
+        return explode("\n", $r);
+      }
+
     public function runStatement(): bool {
         try {
             return $this->stmt->execute();

@@ -182,4 +182,10 @@ class Envio extends Conexion {
         return $this->fetch();
     }
 
+    function getEstados() {
+        $this->prepareStatement("SELECT * FROM estado");
+        $this->runStatement();
+        return $this->fetchAll();
+    }
+
 }

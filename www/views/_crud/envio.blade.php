@@ -1,65 +1,63 @@
-<div class="form-group row mb-2">
-    <label for="idRemitente" class="col-sm-3 col-form-label text-end">Remitente</label>
-    <div class="col-sm-9">
-        @if ($STATE == "VIEW" || $STATE == "DELETE")
-            <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["idRemitente"] }}">
-        @else
-            <select class="form-select" name="idRemitente" id="idRemitente" aria-label="Default select example">
-                @foreach ($properties["extra"]["remitentes"] as $item)
-                        <option value="{{ $item["id"] }}">{{ $item["nombre"] }}</option>
-                @endforeach
-            </select>
-        @endif
-    </div>
-</div>
+@include("components.forms.select", [
+    "readOnly" => $STATE == "VIEW" || $STATE == "DELETE",
+    "key" => "idRemitente",
+    "title" => "Remitente",
+    "value" => $properties["idRemitente"],
+    "items" => array_map(function($item) {
+        return [
+            "id" => $item["id"],
+            "value" => $item["nombre"] . " " . $item["apellidos"] . $properties["idRemitente"]
+        ];
+    }, $properties["extra"]["remitentes"]),
+])
 
-<div class="form-group row mb-2">
-    <label for="idDestinatario" class="col-sm-3 col-form-label text-end">Destinatario</label>
-    <div class="col-sm-9">
-        @if ($STATE == "VIEW" || $STATE == "DELETE")
-            <input type="text" readonly disabled class="form-control-plaintext" id="staticEmail" value="{{ $properties["idDestinatario"] }}">
-        @else
-            <select class="form-select" name="idDestinatario" id="idDestinatario" aria-label="Default select example">
-                @foreach ($properties["extra"]["destinatarios"] as $item)
-                        <option value="{{ $item["id"] }}">{{ $item["nombre"] }}</option>
-                @endforeach
-            </select>
-        @endif
-    </div>
-</div>
 
-<div class="form-group row mb-2">
-    <label for="fecha" class="col-sm-3 col-form-label text-end">Fecha</label>
-    <div class="col-sm-9">
-        @if ($STATE == "VIEW" || $STATE == "DELETE")
-                <input type="date" readonly disabled class="form-control-plaintext" id="fecha" value="{{ $properties["fecha"] }}">
-            @else
-                <input type="date" class="form-control" id="fecha" name="fecha" value="{{ $properties["fecha"] }}">
-            @endif
-    </div>
-</div>
+@include("components.forms.select", [
+    "readOnly" => ($STATE == "VIEW" || $STATE == "DELETE"),
+    "key" => "idDestinatario",
+    "title" => "Destinatario",
+    "value" => $properties["idDestinatario"],
+    "items" => array_map(function($item) {
+        return [
+            "id" => $item["id"],
+            "value" => $item["nombre"] . " " . $item["apellidos"]
+        ];
+    }, $properties["extra"]["destinatarios"]),
+])
+
+@foreach ($properties as $key => $value)
+    @if (!in_array($key, ["DNICliente"]))
+        @continue
+    @endif
+
+    @include("components.forms.input", ["key" => $key, "value" => $value, "readOnly" => $STATE == "VIEW" || $STATE == "DELETE"])
+@endforeach
+
+@include("components.forms.input", [
+    "key" => "fecha",
+    "value" => $properties["fecha"],
+    "CTitle" => "Fecha",
+    "type" => "date",
+    "readOnly" => $STATE == "VIEW" || $STATE == "DELETE"
+])
 
 @foreach ($properties as $key => $value)
     @if (!in_array($key, ["peso", "ancho", "largo", "alto"]))
         @continue
     @endif
-    <div class="form-group row mb-2">
-        <label for="{{ $key }}" class="col-sm-3 col-form-label text-end">{{ $key }}
-        
-            @if ($key == "peso")
-                (Kg)
-            @else
-                (Cm)
-            @endif
 
-        </label>
-        <div class="col-sm-9">
-            @if ($STATE == "VIEW" || $STATE == "DELETE")
-                <input type="number" readonly disabled class="form-control-plaintext" id="{{ $key }}" value="{{ $value }}">
-            @else
-                <input type="number" class="form-control" id="{{ $key }}" name="{{ $key }}" value="{{ $value }}">
-            @endif
-        </div>
-    </div>
+    @include("components.forms.input", [
+        "key" => $key,
+        "value" => $value,
+        "CTitle" => $key . ( $key == "peso" ? " (Kg)" : " (Cm)" ),
+        "type" => "number",
+        "readOnly" => $STATE == "VIEW" || $STATE == "DELETE"
+    ])
 @endforeach
 
+@include("components.forms.input", [
+    "key" => "estado",
+    "value" => $properties["tarifa"],
+    "CTitle" => "Estado",
+    "readOnly" => $STATE == "VIEW" || $STATE == "DELETE"
+])

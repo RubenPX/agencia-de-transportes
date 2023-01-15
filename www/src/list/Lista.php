@@ -24,7 +24,6 @@ class Lista {
 
     public static function getClientes(): array {
         $clientes = (new Cliente())->recuperarClientes();
-        $found = Converters::objsToArray($clientes);
 
         $processArr = function ($n) {
             unset($n["password"]);
@@ -34,7 +33,7 @@ class Lista {
             return $n;
         };
 
-        return array_map($processArr, $found);
+        return array_map($processArr, $clientes);
     }
 
     public static function getPueblos(): array {

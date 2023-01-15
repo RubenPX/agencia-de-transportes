@@ -29,13 +29,17 @@ class Client extends CRUDBase {
     }
 
     public function update(array $data): array {
-
+        $cliente = new Cliente();
+        // $cliente->actualizarCliente($data["from"], $data["nombre"], $data["apellidos"], $data["telefono"], $data["mail"], "", $data["activo"])
+        return ["!OK" => "Update recived"];
     }
 
     public function delete(string $id): array {
         $cliente = new Cliente();
 
-        if (!$cliente->borrarCliente($id)) {
+        $test = $cliente->borrarCliente($id);
+
+        if (!$test) {
             return ["!ERROR" => "Error al borrar el cliente"];
         }
 
@@ -48,7 +52,7 @@ class Client extends CRUDBase {
         $pass = hash("sha256", $data["password"]);
 
         if (!$cliente->crearCliente($data["DNI"], $data["nombre"], $data["apellidos"], $data["telefono"], $data["mail"], $pass, 0)) {
-            return ["!ERROR" => "Fallo al crear el cliente"];
+            return ["!ERROR" => "Fallo al crear el cliente, este ya existe"];
         }
 
         return ["!OK" => "Cliente creado"];
