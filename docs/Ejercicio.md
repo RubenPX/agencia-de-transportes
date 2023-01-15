@@ -134,7 +134,7 @@ Criterios de evaluación implicados
 | El código está comentado                                                                                               | 1      |
 |                                                                                                                        | __10__ |
 
-- 6. Desarrolla aplicaciones de acceso a almacenes de datos, aplicando medidas para mantener la seguridad y la integridad de la información.
+- RA 6. Desarrolla aplicaciones de acceso a almacenes de datos, aplicando medidas para mantener la seguridad y la integridad de la información.
 
 | Descripción                                                                                                                        | %      |
 | ---------------------------------------------------------------------------------------------------------------------------------- | ------ |
