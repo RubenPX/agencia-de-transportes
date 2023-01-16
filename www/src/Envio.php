@@ -135,7 +135,7 @@ class Envio extends Conexion {
     function crearEnvio($idDestinatario, $idRemitente, $DNICliente, $fecha, $peso, $ancho,
         $largo, $alto, $tarifa) {
 
-        $estado = '6'; // entregado
+        $estado = '1'; // recogido
         $stmt = $this->prepareStatement("INSERT INTO envio (idDestinatario, idRemitente,
                 DNICliente, fecha, peso, ancho, largo, alto, estado, tarifa) VALUES (:idDestinatario, :idRemitente,
                 :DNICliente, :fecha, :peso, :ancho, :largo, :alto, :estado, :tarifa)");
