@@ -29,7 +29,7 @@ class Client extends CRUDBase {
         $cliente = new Cliente();
 
         $activo = $data["activo"] == "on" ? 1 : 0;
-        $result = $cliente->actualizarCliente($data["from"], $data["nombre"], $data["apellidos"], $data["telefono"], $data["mail"], $activo);
+        $result = $cliente->actualizarCliente($data["from"], $data["DNI"], $data["nombre"], $data["apellidos"], $data["telefono"], $data["mail"], $activo);
 
         if (!$result) {
             return ["!ERROR" => "Fallo al actualizar el cliente"];
