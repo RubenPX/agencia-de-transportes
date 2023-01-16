@@ -42,8 +42,6 @@ Panel de repartidor
                             </div>
                         </div>
                     </div>
-
-                    <a type="button" style="position: absolute; bottom: 0; left:0;" class="btn btn-info w-100 mt-auto mb-3" href="#Edit_Profile">Editar perfil</a>
                 </div>
             </div>
             <div class="card border-primary col m-2">
