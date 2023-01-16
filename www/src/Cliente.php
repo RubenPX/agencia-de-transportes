@@ -28,7 +28,7 @@ class Cliente extends Conexion {
 
         $consulta = $stmt->fetch();
 
-        if ($consulta == 0) {
+        if ($consulta["activo"] == 0) {
             $stmt2 = $this->prepareStatement("DELETE FROM cliente WHERE DNI=:DNI");
             $stmt2->setParam(":DNI", $DNI);
             return $stmt->runStatement();
