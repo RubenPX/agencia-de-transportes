@@ -1,6 +1,7 @@
 <?php
 
 namespace Clases;
+
 use PDO;
 
 class Cliente extends Conexion {
@@ -73,6 +74,14 @@ class Cliente extends Conexion {
         $stmt->setParam(":telefono", $telefono);
         $stmt->setParam(":mail", $mail);
         $stmt->setParam(":activo", $activo);
+
+        // Actualizar los envios asociados a este DNI
+        $stmt2 = $this->prepareStatement("UPDATE envio SET DNICliente=:DNICliente WHERE DNICliente=:from");
+        $stmt2->setParam(":DNICliente", $DNI);
+        $stmt2->setParam(":from", $from);
+        $stmt2->runStatement();
+
+
         return $stmt->runStatement();
     }
 
