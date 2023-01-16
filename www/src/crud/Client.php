@@ -41,6 +41,12 @@ class Client extends CRUDBase {
     public function delete(string $id): array {
         $cliente = new Cliente();
 
+        $found = $cliente->getCliente($id);
+
+        if ($found["activo"] == "1") {
+            return ["!ERROR" => "No se puede borrar un cliente activo"];
+        }
+
         if (!$cliente->borrarCliente($id)) {
             return ["!ERROR" => "Error al borrar el cliente"];
         }
