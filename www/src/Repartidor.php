@@ -32,7 +32,7 @@ class Repartidor extends Conexion {
         return $stmt->runStatement();
     }
 
-    function crearRepartidor($DNI, $Nombre, $Apellidos) {
+    function crearRepartidor($DNI, $Nombre, $Apellidos, $password) {
         $stmt = $this->prepareStatement("SELECT DNI FROM repartidor WHERE DNI=:DNI");
         $stmt->setParam(":DNI", $DNI);
         $stmt->runStatement();
@@ -40,11 +40,12 @@ class Repartidor extends Conexion {
         $consulta = $stmt->fetch();
 
         if ($consulta == null) { //En caso de que no haya coincidencia en el campo DNI de ningún registro
-            $stmt = $this->prepareStatement("INSERT INTO repartidor (DNI, Nombre, Apellidos) VALUES (:dni, :nombre, :apellidos)");
+            $stmt = $this->prepareStatement("INSERT INTO repartidor (DNI, Nombre, Apellidos, password) VALUES (:dni, :nombre, :apellidos, :password)");
 
             $stmt->setParam(":dni", $DNI);
             $stmt->setParam(":nombre", $Nombre);
             $stmt->setParam(":apellidos", $Apellidos);
+            $stmt->setParam(":password", $password);
             
             return $stmt->runStatement();
         }
