@@ -57,6 +57,9 @@ $type = $_GET["type"];
 
 // Elimina cualquier valor
 $removeValues = function($i) {
+    if (gettype($i) == "array") {
+        return $i;
+    }
     if (gettype($i) == "boolean") {
         return false;
     }

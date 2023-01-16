@@ -1,0 +1,10 @@
+.form-select:disabled {
+    background-color: transparent;
+    color: white;
+    border-color: transparent;
+}
+
+.form-control-plaintext {
+    padding-left: 12px;
+    padding-right: 12px;
+}

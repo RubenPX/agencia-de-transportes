@@ -9,9 +9,9 @@
 @endforeach
 
 @include("components.forms.select", [
-    "readOnly" => ($STATE == "VIEW" || $STATE == "DELETE"),
+    "readOnly" => $STATE == "VIEW" || $STATE == "DELETE",
     "key" => "idPoblacion",
-    "title" => "Pueblo",
+    "CTitle" => "Pueblo",
     "value" => $properties["idPoblacion"],
     "items" => array_map(function($item) {
         return [

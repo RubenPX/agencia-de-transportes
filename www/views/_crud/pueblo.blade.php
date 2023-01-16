@@ -13,7 +13,7 @@
 @include("components.forms.select", [
     "readOnly" => ($STATE == "VIEW" || $STATE == "DELETE"),
     "key" => "idRepartidor",
-    "title" => "Repartidor",
+    "CTitle" => "Repartidor",
     "value" => $properties["idRepartidor"],
     "items" => array_map(function($item) {
         return [
