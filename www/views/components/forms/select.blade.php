@@ -18,7 +18,7 @@
                 @endforeach
             </select>
         @else
-            <select class="form-select" @if(isset($required) || $required) required @endif name="{{ $key }}" id="{{ $key }}" aria-label="Default select example">
+            <select class="form-select" @if(!(isset($required) || $required)) required @endif name="{{ $key }}" id="{{ $key }}" aria-label="Default select example">
                 @if (isset($value) && $value == "")
                     <option value="" selected></option>
                 @endif
