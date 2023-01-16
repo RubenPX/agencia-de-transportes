@@ -13,7 +13,7 @@ Panel de repartidor
     <div class="row">
         <div class="card border-primary col-12 m-2">
             <div class="card-body">
-                <h3 class="card-title text-center">Pueblo asignada</h3>
+                <h3 class="card-title text-center">Población asignada</h3>
                 <h4 class="card-text text-center">{{ $properties["pueblo"] }}</h4>
             </div>
         </div>
