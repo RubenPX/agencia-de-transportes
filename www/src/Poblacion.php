@@ -33,7 +33,7 @@ class Poblacion extends Conexion {
     function crearPoblacion($nombre, $cp) {
         $stmt = $this->prepareStatement("INSERT INTO poblacion (nombre, cp) VALUES (:nombre, :cp)");
         $stmt->setParam(":nombre", $nombre);
-        $stmt->setParam(":apellidos", $cp);
+        $stmt->setParam(":cp", $cp);
         return $stmt->runStatement();
     }
 
