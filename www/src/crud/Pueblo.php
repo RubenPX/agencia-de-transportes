@@ -9,13 +9,7 @@ class Pueblo extends CRUDBase {
     public function get(string $id): array {
         $poblacion = new Poblacion();
         if ($id == "-1") {
-            $found = $poblacion->recuperarPoblaciones();
-            $found = $found[0];
-
-            $repartidor = new Repartidores();
-            $found["extra"] = [];
-            $found["extra"]["repartidores"] = $repartidor->recuperarRepartidores();
-
+            $found = $poblacion->getColumns();
             return $found;
         } else {
             $found = $poblacion->getPoblacion($id);
@@ -25,7 +19,8 @@ class Pueblo extends CRUDBase {
             }
 
             $hasRepartidor = $poblacion->getAssociatedRepartidor($id);
-
+            
+            $found["idRepartidor"] = "";
             if (!!$hasRepartidor) {
                 $found["idRepartidor"] = $hasRepartidor["idRepartidor"];
             }
@@ -39,6 +34,18 @@ class Pueblo extends CRUDBase {
     }
 
     public function update(array $data): array {
+        $poblacion = new Poblacion();
+        
+        if ($data["idRepartidor"] == "") {
+            $poblacion->borrarRepartidorAsignado($data["from"]);
+        } else {
+            if (!$poblacion->asignarRepartidor($data["from"], $data["idRepartidor"])) {
+                return ["!ERROR" => "Fallo al asignar el repartidor"];
+            }
+        }
+
+        $poblacion->actualizarPoblacion($data["from"], $data["nombre"], $data["cp"]);
+
         return ["!OK" => "Update recived"];
     }
 

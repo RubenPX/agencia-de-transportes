@@ -64,4 +64,35 @@ class Poblacion extends Conexion {
         $stmt->runStatement();
         return $stmt->fetch();
     }
+
+    function asignarRepartidor($idPueblo, $idRepartidor) {
+        $repartidor = new Repartidor();
+        
+        $foundRepartidor = $repartidor->getAssociatedPubelo($idRepartidor);
+        $foundPueblo = $this->getAssociatedRepartidor($idPueblo);
+
+        if (!!$foundRepartidor || !!$foundPueblo) {
+            if ($foundRepartidor != $idRepartidor || $foundPueblo != $idPueblo) {
+                return false;
+            }
+        }
+
+        $stmt = $this->prepareStatement("INSERT INTO reparpoblacion (idRepartidor, idPoblacion) VALUES (:idRepartidor, :idPoblacion)");
+        $stmt->setParam(":idRepartidor", $idRepartidor);
+        $stmt->setParam(":idPoblacion", $idPueblo);
+        return $stmt->runStatement();
+    }
+
+    function getColumns() {
+        $stmt = $this->prepareStatement("DESCRIBE `poblacion`");
+        $stmt->runStatement();
+        $found = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach ($found as $key => $value) {
+            $found[$value["Field"]] = "";
+            unset($found[$key]);
+        }
+
+        return $found;
+    }
 }

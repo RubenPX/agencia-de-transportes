@@ -1,5 +1,5 @@
 
-{{-- inputs: $key, $value, $CTitle, $type, $readOnly --}}
+{{-- inputs: $key, $value, $CTitle, $type, $readOnly, $required --}}
 
 <div class="form-group row mb-2">
     <label for="{{ $key }}" class="col-sm-4 col-form-label text-end">{{ $CTitle ?? $key }}</label>
@@ -8,7 +8,7 @@
             @if ($readOnly)
                 <input type="{{ $type ?? "text" }}" readonly disabled class="form-control-plaintext" id="{{ $key }}" name="{{ $key }}" value="{{ $value }}">
             @else
-                <input type="{{ $type ?? "text" }}" required class="form-control" id="{{ $key }}" name="{{ $key }}" value="{{ $value }}">
+                <input type="{{ $type ?? "text" }}" @if(isset($required) && $required) required @endif class="form-control" id="{{ $key }}" name="{{ $key }}" value="{{ $value }}">
             @endif
         @endif
 
@@ -19,7 +19,7 @@
                 </div>
             @else
                 <div class="form-check form-switch mt-2">
-                    <input class="form-check-input" required type="checkbox" id="{{ $key }}" name="{{ $key }}" @if($value) checked @endif>
+                    <input class="form-check-input" @if(isset($required) && $required) required @endif type="checkbox" id="{{ $key }}" name="{{ $key }}" @if($value) checked @endif>
                 </div>
             @endif
         @endif
