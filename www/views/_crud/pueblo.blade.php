@@ -1,5 +1,3 @@
-<?php array_unshift($properties["extra"]["repartidores"], ["id" => "", "Nombre" => " ", "Apellidos" => " "]) ?>
-
 @foreach ($properties as $key => $value)
     @if ($key == "id" || substr($key, 0, 2) == "id" || $key == "extra")
         @continue

@@ -34,8 +34,23 @@ class Lista {
     }
 
     public static function getPueblos(): array {
-        $poblacion = (new Poblacion())->recuperarPoblaciones();
-        return $poblacion;
+        $poblacion = new Poblacion();
+        $repartidores = new Repartidor();
+        $found = $poblacion->recuperarPoblaciones();
+
+        foreach ($found as $key => $value) {
+            $foundRepartidor = $poblacion->getAssociatedRepartidor($value["id"]);
+
+            if (!!$foundRepartidor) {
+                $value["Repartidor"] = $repartidores->getRepartidor($foundRepartidor["idRepartidor"])["Nombre"];
+            } else {
+                $value["Repartidor"] = " ";
+            }
+
+            $found[$key] = $value;
+        }
+
+        return $found;
     }
 
     public static function getRepartidores(): array {
