@@ -21,7 +21,7 @@ sudo a2enmod rewrite
 
 # composer install dependencies
 echo "> composer install"
-composer install
+cd www && composer install && cd ..
 
 # Start apache server
 echo "> Start Apache"
