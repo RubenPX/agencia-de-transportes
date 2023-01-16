@@ -18,9 +18,7 @@ class Repartidor extends Conexion {
     }
 
     function recuperarRepartidores() {
-        $stmt = $this->prepareStatement("SELECT r.id, r.DNI, r.Nombre, r.Apellidos, p.idPoblacion 
-            FROM repartidor r,  reparpoblacion p
-            WHERE r.id=p.idRepartidor");
+        $stmt = $this->prepareStatement("SELECT * FROM repartidor");
         $stmt->runStatement();
         return $stmt->fetchAll();
     }
@@ -103,6 +101,19 @@ class Repartidor extends Conexion {
         $stmt->setParam(":idRepartidor", $id);
         $stmt->runStatement();
         return $stmt->fetch();
+    }
+
+    function getColumns() {
+        $stmt = $this->prepareStatement("DESCRIBE `envio`");
+        $stmt->runStatement();
+        $found = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach ($found as $key => $value) {
+            $found[$value] = "";
+            unset($found[$key]);
+        }
+
+        return $found;
     }
 
 }

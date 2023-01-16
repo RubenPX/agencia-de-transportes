@@ -39,15 +39,25 @@ class Lista {
     }
 
     public static function getRepartidores(): array {
-        $repartidores = (new Repartidor())->recuperarRepartidores();
-        $found = $repartidores;
+        $repartidores = new Repartidor();
+        $pueblo = new Poblacion();
+        $found = $repartidores->recuperarRepartidores();
 
-        $processArr = function ($n) {
-            unset($n["password"]);
-            return $n;
-        };
+        foreach ($found as $key => $value) {
+            unset($value["password"]);
 
-        return array_map($processArr, $found);
+            $foundPueblo = $repartidores->getAssociatedPubelo($value["id"]);
+
+            if (!!$foundPueblo) {
+                $value["Pueblo"] = $pueblo->getPoblacion($foundPueblo["idPoblacion"])["nombre"];
+            } else {
+                $value["Pueblo"] = " ";
+            }
+
+            $found[$key] = $value;
+        }
+
+        return $found;
     }
 
     public static function getEnvios(): array {
