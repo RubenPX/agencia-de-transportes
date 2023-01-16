@@ -193,7 +193,7 @@ class Envio extends Conexion {
         $found = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
         foreach ($found as $key => $value) {
-            $found[$value] = "";
+            $found[$value["Field"]] = "";
             unset($found[$key]);
         }
 
