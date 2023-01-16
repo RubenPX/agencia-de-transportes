@@ -70,7 +70,7 @@
     "readOnly" => ($STATE == "VIEW" || $STATE == "DELETE" || $STATE == "CREATE"),
     "key" => "estado",
     "CTitle" => "Estado",
-    "value" => $properties["estado"] == "" ? "6" : $properties["estado"],
+    "value" => $properties["estado"] == "" ? "2" : $properties["estado"],
     "items" => array_map(function($item) {
         return [
             "id" => $item["id"],
