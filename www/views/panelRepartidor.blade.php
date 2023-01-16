@@ -14,36 +14,10 @@ Panel de repartidor
         <div class="card border-primary col-12 m-2">
             <div class="card-body">
                 <h3 class="card-title text-center">Pueblo asignada</h3>
-                <h4 class="card-text text-center">Tenerife</h4>
+                <h4 class="card-text text-center">{{ $properties["pueblo"] }}</h4>
             </div>
         </div>
         <div class="row col-12 pl-7 ps-5 pe-0 w-100">
-            <div class="card border-primary col m-2">
-                <div class="card-body" style="position: relative">
-                    <h3 class="card-title text-center">Datos del repartidor</h3>
-
-                    <div style="position: absolute; top: 50%; width: 100%; transform: translateY(-50%)">
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-3 col-form-label">Nombre</label>
-                            <div class="col-sm-9">
-                                <input type="text" readonly="" class="form-control-plaintext" id="name" value="{{ $logedUser }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-3 col-form-label">Email</label>
-                            <div class="col-sm-9">
-                                <input type="text" readonly="" class="form-control-plaintext" id="email" value="email@example.com">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="phone" class="col-sm-3 col-form-label">telefono</label>
-                            <div class="col-sm-9">
-                                <input type="text" readonly="" class="form-control-plaintext" id="phone" value="+34 123 123 123">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="card border-primary col m-2">
                 <div class="card-body">
                     <h3 class="card-title text-center mb-3">Repartos</h3>

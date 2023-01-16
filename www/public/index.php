@@ -6,17 +6,17 @@ use Clases\SessionLogin;
 $sessionL = new SessionLogin();
 
 if (isset($_GET["LogOut"])) {
-    if ($sessionL->tryDeleteSession()) {
-        die();
-    }
+    $sessionL->tryDeleteSession();
 }
 
-if ($sessionL->verifySession()) {
-    if ($sessionL->userType == "REPAR") {
+$session = $sessionL->verifySession();
+
+if (!!$session) {
+    if ($session["type"] == "REPAR") {
         header('Location: /public/repartidor.php');
     }
 
-    if ($sessionL->userType == "ADMIN") {
+    if ($session["type"] == "ADMIN") {
         header('Location: /public/admin.php');
     }
 

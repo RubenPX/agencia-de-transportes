@@ -5,11 +5,14 @@ use Clases\SessionLogin;
 
 $sessionL = new SessionLogin();
 
-if (!$sessionL->verifySession()) {
+$foundValidSession = $sessionL->verifySession();
+
+if (!$foundValidSession) {
     if ($sessionL->tryDeleteSession()) {
         die();
     }
 }
 
-$logedUser = $sessionL->userName;
-$userType = $sessionL->userType;
+$loggedID = $foundValidSession["id"];
+$logedUser = $foundValidSession["Nombre"];
+$userType = $foundValidSession["type"];
