@@ -15,7 +15,7 @@
         "readOnly" => ($STATE == "VIEW" || $STATE == "DELETE"),
         "key" => "idRepartidor",
         "CTitle" => "Repartidor",
-        "value" => $properties["idRepartidor"],
+        "value" => $properties["idRepartidor"] == "" ? null : $properties["idRepartidor"],
         "required" => false,
         "items" => array_map(function($item) {
             return [
