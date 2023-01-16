@@ -14,9 +14,9 @@
     "license": "GNU",
     "autoload": {
         "psr-4": {
-            "Clases\\": "www/src",
-            "Crud\\": "www/src/crud",
-            "Lista\\": "www/src/list"
+            "Clases\\": "src",
+            "Crud\\": "src/crud",
+            "Lista\\": "src/list"
         }
     },
     "authors": [

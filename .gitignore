@@ -1,5 +1,5 @@
-/vendor/
 node_modules/
 .phpunit.result.cache
 .devcontainer/logs/**/*.log
+www/vendor/
 www/cache/*.php
