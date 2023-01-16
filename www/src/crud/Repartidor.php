@@ -38,7 +38,19 @@ class Repartidor extends CRUDBase {
     }
 
     public function update(array $data): array {
-        return ["!OK" => "Update recived"];
+        $repartidor = new Repartidores();
+
+        if ($data["idPoblacion"] == "") {
+            $repartidor->borrarPoblacionAsignada($data["from"]);
+        } else {
+            if (!$repartidor->asignarPoblacion($data["from"], $data["idPoblacion"])){
+                return ["!ERROR" => "Fallo al asignar el pueblo"];
+            }
+        }
+
+        $repartidor->actualizarRepartidor($data["from"], $data["DNI"], $data["Nombre"], $data["Apellidos"]);
+
+        return ["!OK" => "Información de repartidor actualizada"];
     }
 
     public function delete(string $id): array {
@@ -50,6 +62,10 @@ class Repartidor extends CRUDBase {
     }
 
     public function create(array $data): array {
-        return ["!OK" => "Create recived"];
+        $repartidor = new Repartidores();
+        if (!$repartidor->crearRepartidor($data["DNI"], $data["Nombre"], $data["Apellidos"], $data["password"])) {
+            return ["!ERROR" => "Fallo al crear el repartidor"];
+        }
+        return ["!OK" => "Repartidor creado"];
     }
 }
