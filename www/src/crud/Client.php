@@ -27,15 +27,24 @@ class Client extends CRUDBase {
 
     public function update(array $data): array {
         $cliente = new Cliente();
-        // $cliente->actualizarCliente($data["from"], $data["nombre"], $data["apellidos"], $data["telefono"], $data["mail"], "", $data["activo"])
-        return ["!OK" => "Update recived"];
+
+        $activo = $data["activo"] == "on" ? 1 : 0;
+        $result = $cliente->actualizarCliente($data["from"], $data["nombre"], $data["apellidos"], $data["telefono"], $data["mail"], $activo);
+
+        if (!$result) {
+            return ["!ERROR" => "Fallo al actualizar el cliente"];
+        }
+
+        return ["!OK" => "Cliente actualizado"];
     }
 
     public function delete(string $id): array {
         $cliente = new Cliente();
+
         if (!$cliente->borrarCliente($id)) {
             return ["!ERROR" => "Error al borrar el cliente"];
         }
+
         return ["!OK" => "Eliminación completada"];
     }
 
@@ -43,8 +52,9 @@ class Client extends CRUDBase {
         $cliente = new Cliente();
 
         $pass = hash("sha256", $data["password"]);
+        $result = $cliente->crearCliente($data["DNI"], $data["nombre"], $data["apellidos"], $data["telefono"], $data["mail"], $pass, 0);
 
-        if (!$cliente->crearCliente($data["DNI"], $data["nombre"], $data["apellidos"], $data["telefono"], $data["mail"], $pass, 0)) {
+        if (!$result) {
             return ["!ERROR" => "Fallo al crear el cliente, este ya existe"];
         }
 
