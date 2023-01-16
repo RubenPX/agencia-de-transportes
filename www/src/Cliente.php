@@ -22,12 +22,21 @@ class Cliente extends Conexion {
     }
 
     function borrarCliente($DNI) {
-        $stmt = $this->prepareStatement("DELETE FROM cliente WHERE DNI=:DNI");
+        $stmt = $this->prepareStatement("SELECT activo FROM cliente WHERE DNI=:DNI");
         $stmt->setParam(":DNI", $DNI);
-        return $stmt->runStatement();
+        $stmt->runStatement();
+
+        $consulta = $stmt->fetch();
+
+        if ($consulta == 0) {
+            $stmt2 = $this->prepareStatement("DELETE FROM cliente WHERE DNI=:DNI");
+            $stmt2->setParam(":DNI", $DNI);
+            return $stmt->runStatement();
+        }
+        return false;
     }
 
-    function crearCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password, $activo) {
+    function crearCliente($DNI, $nombre, $apellidos, $telefono, $mail, $password) {
         $stmt = $this->prepareStatement("SELECT DNI FROM cliente WHERE DNI=:DNI");
         $stmt->setParam(":DNI", $DNI);
         $stmt->runStatement();
@@ -35,6 +44,7 @@ class Cliente extends Conexion {
         $consulta = $stmt->fetch();
 
         if ($consulta == null) { //En caso de que no haya coincidencia en el campo DNI de ningún registro
+            $activo = 1;
             $stmt2 = $this->prepareStatement('INSERT INTO cliente (DNI, nombre, apellidos, telefono, mail, password, activo)
             VALUES (:dni, :nombre, :apellidos, :telefono, :mail, :password, :activo)');
 
