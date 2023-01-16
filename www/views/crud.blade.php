@@ -13,11 +13,11 @@
                 <div class="alert alert-danger mb-0 mt-0">
                     <p class="mb-0 text-center">{{ $error }}</p>
                 </div>
+                <a class="btn btn-primary btn-lg mt-3 w-100" href="lista.php?type={{ $type }}">Volver</a>
             @elseif (isset($ok) && $ok != "")
                 <div class="alert alert-success mb-0 mt-0">
                     <p class="mb-0 text-center">{{ $ok }}</p>
                 </div>
-
                 <a class="btn btn-primary btn-lg mt-3 w-100" href="lista.php?type={{ $type }}">Volver</a>
             @else
                 <div class="card border-0 rounded-3 shadow-lg">
