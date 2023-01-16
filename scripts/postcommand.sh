@@ -25,6 +25,9 @@ sudo a2enmod rewrite
 echo "> composer install"
 cd www && composer install && cd ..
 
+# Restart database
+cd scripts && bash ImportDB.sh 2023-01-16_19-37.dump.sql && cd ..
+
 # Start apache server
 echo "> Start Apache"
 apache2ctl start
