@@ -44,7 +44,7 @@ class Envio extends Conexion {
         INNER JOIN `estado` ON `envio`.estado = `estado`.id";
 
         if ($keyword) {
-            $consulta .= "WHERE `envio`.id LIKE '%" . $keyword . "%' ";
+            $consulta .= " WHERE `envio`.id LIKE '%" . $keyword . "%' ";
             $consulta .= "OR `remitente`.nombre LIKE '%" . $keyword . "%' ";
             $consulta .= "OR `remitente`.apellidos LIKE '%" . $keyword . "%' ";
             $consulta .= "OR `destinatario`.nombre LIKE '%" . $keyword . "%' ";
@@ -56,6 +56,31 @@ class Envio extends Conexion {
         $stmt = $this->prepareStatement($consulta);
         $stmt->runStatement();
         return $stmt->fetchAll();
+    }
+
+    public function recuperarEnviosByRepartidorDNI(string $DNI) {
+        $consulta = "SELECT
+        /* Envio */
+        `envio`.id as Envio_ID,
+        /* Remitente */
+        CONCAT(`remitente`.nombre,' ', `remitente`.apellidos) as Remitente,
+        /* Destinatario */
+        CONCAT(`destinatario`.nombre,' ', `destinatario`.apellidos) as Destinatario,
+        /* Fecha */
+        `envio`.fecha as Envio_Fecha,
+        /* Estado */
+        `estado`.tipo as Estado
+        /* FROM */
+        FROM `envio`
+        /* mezclamos el destinatario */
+        INNER JOIN `destinatario` ON `envio`.idDestinatario = `destinatario`.id
+        /* mezclamos el remitente */
+        INNER JOIN `remitente` ON `envio`.`idRemitente` = `remitente`.`id`
+        /* Mezclamos el estado de envio */
+        INNER JOIN `estado` ON `envio`.estado = `estado`.id
+        
+        WHERE 
+        ";
     }
 
     function detallesEnvio($id) {
