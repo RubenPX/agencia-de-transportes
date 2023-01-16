@@ -135,7 +135,7 @@ class Envio extends Conexion {
     function crearEnvio($idDestinatario, $idRemitente, $DNICliente, $fecha, $peso, $ancho,
         $largo, $alto, $tarifa) {
 
-        $estado = 'entregado';
+        $estado = '6'; // entregado
         $stmt = $this->prepareStatement("INSERT INTO envio (idDestinatario, idRemitente,
                 DNICliente, fecha, peso, ancho, largo, alto, estado, tarifa) VALUES (:idDestinatario, :idRemitente,
                 :DNICliente, :fecha, :peso, :ancho, :largo, :alto, :estado, :tarifa)");
@@ -157,7 +157,7 @@ class Envio extends Conexion {
     function actualizarEnvio($id, $idDestinatario, $idRemitente, $DNICliente, $fecha, $peso, $ancho,
         $largo, $alto, $estado, $tarifa) {
         $stmt = $this->prepareStatement("UPDATE envio SET idDestinatario=:idDestinatario, idRemitente=:idRemitente,
-                DNICliente=:DNICliente, fecha=:fecha, peso=:peso, ancho=:ancho, largo=:largo, alto=:alto estado=:estado,
+                DNICliente=:DNICliente, fecha=:fecha, peso=:peso, ancho=:ancho, largo=:largo, alto=:alto, estado=:estado,
                 tarifa=:tarifa WHERE id=$id");
 
         $stmt->setParam(":idDestinatario", $idDestinatario);
@@ -185,6 +185,19 @@ class Envio extends Conexion {
         $stmt = $this->prepareStatement("SELECT * FROM estado");
         $stmt->runStatement();
         return $stmt->fetchAll();
+    }
+
+    function getColumns() {
+        $stmt = $this->prepareStatement("DESCRIBE `envio`");
+        $stmt->runStatement();
+        $found = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach ($found as $key => $value) {
+            $found[$value] = "";
+            unset($found[$key]);
+        }
+
+        return $found;
     }
 
 }

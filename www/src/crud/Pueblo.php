@@ -10,7 +10,13 @@ class Pueblo extends CRUDBase {
         $poblacion = new Poblacion();
         if ($id == "-1") {
             $found = $poblacion->recuperarPoblaciones();
-            return $found[0];
+            $found = $found[0];
+
+            $repartidor = new Repartidores();
+            $found["extra"] = [];
+            $found["extra"]["repartidores"] = $repartidor->recuperarRepartidores();
+
+            return $found;
         } else {
             $found = $poblacion->getPoblacion($id);
 

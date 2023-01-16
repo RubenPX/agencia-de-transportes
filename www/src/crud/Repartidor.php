@@ -12,6 +12,9 @@ class Repartidor extends CRUDBase {
         if ($id == "-1") {
             $found = $repartidor->recuperarRepartidores();
             $found = $found[0];
+
+            $found["extra"] = [];
+            $found["extra"]["pueblos"] = (new Poblacion())->recuperarPoblaciones();
         } else {
             $found = $repartidor->getRepartidor($id);
 
@@ -27,8 +30,6 @@ class Repartidor extends CRUDBase {
 
             $found["extra"] = [];
             $found["extra"]["pueblos"] = (new Poblacion())->recuperarPoblaciones();
-    
-            $found = $found;
         }
 
         unset($found["password"]);
