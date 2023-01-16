@@ -33,14 +33,6 @@
                                 <label for="pass">Contraseña</label>
                             </div>
 
-                            <div class="form-floating mb-3">
-                                <select class="form-select" id="userType" name="userType">
-                                    <option value="ADMIN">administrador</option>
-                                    <option value="REPAR">repartidor</option>
-                                </select>
-                                <label for="userType">Tipo de usuario</label>
-                            </div>
-
                             <!-- Submit button -->
                             <div class="text-center">
                                 <button class="btn btn-primary btn-lg" name='login' id="submitButton" type="submit">Acceder</button>

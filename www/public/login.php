@@ -5,7 +5,7 @@ use Clases\SessionLogin;
 $error = "";
 
 if (isset($_POST["login"])) {
-    if (isset($_POST["user"]) && isset($_POST["pass"]) && isset($_POST["userType"])) {
+    if (isset($_POST["user"]) && isset($_POST["pass"])) {
         $sLogin = new SessionLogin();
         if (!$sLogin->tryCreateSession(trim($_POST["user"]), trim($_POST["pass"]), trim($_POST["userType"]))) {
             $error = "Fallo al iniciar sesión";
