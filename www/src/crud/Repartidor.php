@@ -63,7 +63,10 @@ class Repartidor extends CRUDBase {
 
     public function create(array $data): array {
         $repartidor = new Repartidores();
-        if (!$repartidor->crearRepartidor($data["DNI"], $data["Nombre"], $data["Apellidos"], $data["password"])) {
+
+        $pass = hash("sha256", $data["password"]);
+
+        if (!$repartidor->crearRepartidor($data["DNI"], $data["Nombre"], $data["Apellidos"], $pass)) {
             return ["!ERROR" => "Fallo al crear el repartidor"];
         }
         return ["!OK" => "Repartidor creado"];
