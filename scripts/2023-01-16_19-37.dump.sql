@@ -75,7 +75,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES ('98765432C','Sara','Sanz','948550412','ssanzl@educacion.navarra.es','3a6d64c24cf80b69ccda37650406467e8266667b50cfd0b984beb3651b129ed7',0);
+INSERT INTO `cliente` VALUES ('98765432A','Sara','Sanz','948550412','ssanzl@educacion.navarra.es','3a6d64c24cf80b69ccda37650406467e8266667b50cfd0b984beb3651b129ed7',0);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
