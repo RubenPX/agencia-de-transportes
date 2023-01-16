@@ -17,8 +17,6 @@ class Client extends CRUDBase {
             if (!$found) {
                 throw new CRUDException("No se ha encontrado el cliente con el id " . $id);
             }
-    
-            $found = $found;
         }
         
         unset($found["password"]);
