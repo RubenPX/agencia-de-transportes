@@ -46,7 +46,7 @@ class Pueblo extends CRUDBase {
 
         $poblacion->actualizarPoblacion($data["from"], $data["nombre"], $data["cp"]);
 
-        return ["!OK" => "Información actualizada"];
+        return ["!OK" => "Información de pueblo actualizada"];
     }
 
     public function delete(string $id): array {
