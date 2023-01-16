@@ -54,7 +54,7 @@ class Pueblo extends CRUDBase {
         if (!$poblacion->borrarPoblacion($id)) {
             return ["!ERROR" => "Fallo al borrar la población"];
         }
-        return ["!OK" => "Pueblo borrado"];
+        return ["!OK" => "Población borrada"];
 
     }
 
@@ -63,6 +63,6 @@ class Pueblo extends CRUDBase {
         if (!$poblacion->crearPoblacion($data["nombre"], intval($data["cp"]))) {
             return ["!ERROR" => "Fallo al crear el pueblo"];
         }
-        return ["!OK" => "Pueblo creado"];
+        return ["!OK" => "Población creada"];
     }
 }
