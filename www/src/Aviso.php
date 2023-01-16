@@ -1,6 +1,7 @@
 <?php
 
 namespace Clases;
+use PDO;
 
 class Aviso extends Conexion {
     private $id;
@@ -54,5 +55,18 @@ class Aviso extends Conexion {
         $stmt->setParam(":id", $id);
         $stmt->runStatement();
         return $stmt->fetchAll();
+    }
+
+    function getColumns() {
+        $stmt = $this->prepareStatement("DESCRIBE `aviso`");
+        $stmt->runStatement();
+        $found = $stmt->fetchAll();
+
+        foreach ($found as $key => $value) {
+            $found[$value["Field"]] = "";
+            unset($found[$key]);
+        }
+
+        return $found;
     }
 }

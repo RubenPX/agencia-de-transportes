@@ -190,7 +190,7 @@ class Envio extends Conexion {
     function getColumns() {
         $stmt = $this->prepareStatement("DESCRIBE `envio`");
         $stmt->runStatement();
-        $found = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $found = $stmt->fetchAll();
 
         foreach ($found as $key => $value) {
             $found[$value["Field"]] = "";

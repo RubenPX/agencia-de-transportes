@@ -105,12 +105,12 @@ class Repartidor extends Conexion {
     }
 
     function getColumns() {
-        $stmt = $this->prepareStatement("DESCRIBE `envio`");
+        $stmt = $this->prepareStatement("DESCRIBE `repartidor`");
         $stmt->runStatement();
-        $found = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $found = $stmt->fetchAll();
 
         foreach ($found as $key => $value) {
-            $found[$value] = "";
+            $found[$value["Field"]] = "";
             unset($found[$key]);
         }
 
