@@ -9,19 +9,19 @@ class Client extends CRUDBase {
         $cliente = new Cliente();
 
         if ($id == "-1") {
-            $found = $cliente->recuperarClientes();
-            $found = $found[0];
+            $found = $cliente->getColumns();
+            unset($found["activo"]);
         } else {
             $found = $cliente->getCliente($id);
 
             if (!$found) {
                 throw new CRUDException("No se ha encontrado el cliente con el id " . $id);
             }
+
+            $found["activo"] = $found["activo"] == 1 ? true : false;
         }
         
         unset($found["password"]);
-        $found["activo"] = $found["activo"] == 1 ? true : false;
-
         return $found;
     }
 

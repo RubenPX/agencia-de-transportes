@@ -1,6 +1,7 @@
 <?php
 
 namespace Clases;
+use PDO;
 
 class Cliente extends Conexion {
     private $DNI;
@@ -86,6 +87,19 @@ class Cliente extends Conexion {
         $stmt->setParam(":DNI", $DNI);
         $stmt->setParam(":password", $password);
         $stmt->runStatement();
+    }
+
+    function getColumns() {
+        $stmt = $this->prepareStatement("DESCRIBE `cliente`");
+        $stmt->runStatement();
+        $found = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach ($found as $key => $value) {
+            $found[$value["Field"]] = "";
+            unset($found[$key]);
+        }
+
+        return $found;
     }
 
 }
