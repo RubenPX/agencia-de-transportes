@@ -29,7 +29,7 @@ switch ($_GET["type"]) {
         $title .= "envios";
         break;
     case "Pueblo":
-        $title .= "pueblos";
+        $title .= "poblaciones";
         break;
     default:
         $title = "Lista no encontrada";
