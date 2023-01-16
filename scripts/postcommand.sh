@@ -2,6 +2,8 @@
 
 # This file is created to set some VM config
 
+apache2ctl stop
+
 # Link "/var/www/html" to src folder
 echo "> Link /var/www/html to /www"
 sudo chmod a+x "$(pwd)/www/" && sudo rm -rf /var/www/html && sudo ln -s "$(pwd)/www/" /var/www/html
