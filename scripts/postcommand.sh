@@ -1,7 +1,7 @@
 # /bin/bash
 
 # This file is created to set some VM config
-
+echo "> Stop apache"
 apache2ctl stop
 
 # Link "/var/www/html" to src folder
@@ -26,6 +26,7 @@ echo "> composer install"
 cd www && composer install && cd ..
 
 # Restart database
+echo "> Setup database"
 cd scripts && bash ImportDB.sh 2023-01-16_19-37.dump.sql && cd ..
 
 # Start apache server
@@ -33,4 +34,5 @@ echo "> Start Apache"
 apache2ctl start
 
 # Register post command run
-date >> .devcontainer/logs/PostCommandRuns.log
+echo "> Register run"
+date >> PostCommandRuns.log

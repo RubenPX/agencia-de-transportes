@@ -4,4 +4,4 @@ if [ -z "$1" ]
     echo "Syntax: ImprtDB.sh sql-file"
 fi
 
-mysql -u agencia -pagencia -h db < $1
+mysql -u agencia -pagencia -h db -w < $1

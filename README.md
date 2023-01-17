@@ -7,3 +7,24 @@
 [Develop with DockerContainer](./README.docker.md)
 
 ---
+
+## How to open website and mariadb website
+
+- There have a tab named "ports" ("puertos" en español)
+- When you hover in any post, there wil be apear a world icon (Just press it an it will open a new web browser tab)
+
+![](./OpenPort.png)
+
+## Acess MariaDB
+
+| User | Password |
+| ---- | -------- |
+| root | mariadb  |
+
+## Troubleshooting
+
+if web page is not working, run this following command
+
+```
+bash scripts/postcommand.sh
+```
