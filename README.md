@@ -11,7 +11,7 @@
 ## How to open website and mariadb website
 
 - There have a tab named "ports" ("puertos" en español)
-- When you hover in any post, there wil be apear a world icon (Just press it an it will open a new web browser tab)
+- When you hover in any port, there wil be apear a world icon (Just press it an it will open a new web browser tab)
 
 ![](./OpenPort.png)
 
