@@ -8,6 +8,8 @@ require_once "./shared/SessionLogin.php";
 $error = "";
 $title = "Editar ";
 $properties = [];
+$id = "";
+$ok = "";
 
 // Load state
 $STATE = "UPDATE";

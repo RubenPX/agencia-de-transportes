@@ -6,7 +6,7 @@
     "items" => array_map(function($item) {
         return [
             "id" => $item["id"],
-            "value" => $item["nombre"] . " " . $item["apellidos"] . $properties["idRemitente"]
+            "value" => $item["nombre"] . " " . $item["apellidos"]
         ];
     }, $properties["extra"]["remitentes"]),
 ])

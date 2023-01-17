@@ -7,7 +7,7 @@ require_once "./shared/SessionLogin.php";
 
 $repartidor = new Repartidor();
 $properties = $repartidor->getRepartidor($loggedID);
-$assocPueblo = $repartidor->getAssociatedPubelo($properties["id"]);
+$assocPueblo = $repartidor->getAssociatedPubelo($properties["id"])["id"];
 
 $pueblo = new Poblacion();
 $properties["pueblo"] = !$assocPueblo ? "Ninguno" : $pueblo->getPoblacion($assocPueblo);
